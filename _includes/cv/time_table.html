@@ -1,0 +1,76 @@
+<ul class="card-text font-weight-light list-group list-group-flush">
+    {% for content in entry.contents %}
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-10 cl-sm-10 col-md-10 mt-2 mt-md-0">
+            {% if content.institution %}
+              <strong>{{content.institution}}</strong>, {{content.city}}<br>
+            {% endif %}
+            {% if content.title %}
+              <strong>{{content.title}}</strong>
+              {% if content.grade %} [ {{content.grade}} ]{% endif %}<br>
+            {% endif %}
+          </div>
+          {% if content.year %}
+            <div class="col-xs-2 cl-sm-2 col-md-2 text-center" style="width: 75px;">
+              <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px;">
+                {{ content.year }}
+              </span>
+            </div>
+          {% endif %}
+        </div>
+
+        {% if content.text %}
+        <br>{{ content.text }}
+        {% endif %}
+        {% if content.description %}
+          <ul class="items">
+            {% for item in content.description %}<br>
+              <li>
+                {% if item.contents %}
+                  <div class="row">
+                    <div class="col-xs-10 cl-sm-10 col-md-10 mt-2 mt-md-0">
+                      <strong>{{item.institution}}</strong>, {{item.city}}<br>
+                      <strong>{{ item.title }}</strong>
+                    </div>
+                    {% if item.year %}
+                      <div class="col-xs-2 cl-sm-2 col-xs-2 text-center" style="width: 75px;">
+                        <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px;">
+                          {{ item.year }}
+                        </span>
+                      </div>
+                    {% endif %}
+                    <ul class="subitems">
+                    {% for subitem in item.contents %}
+                      <br><li><span class="subitem">{{ subitem }}</span></li>
+                    {% endfor %}
+                    </ul>
+                  </div>
+                {% else %}
+                  <span class="item">{{ item }}</span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% if content.items %}
+          <ul class="items">
+            {% for item in content.items %}
+              <li>
+                {% if item.contents %}
+                  <span class="item-title">{{ item.title }}</span>
+                  <ul class="subitems">
+                  {% for subitem in item.contents %}
+                    <li><span class="subitem">{{ subitem }}</span></li>
+                  {% endfor %}
+                  </ul>
+                {% else %}
+                  <span class="item">{{ item }}</span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
