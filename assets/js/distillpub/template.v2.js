@@ -305,18 +305,6 @@
       }));
     }
 
-    set bibliography(bibliography) {
-      if (bibliography instanceof Map) {
-        this._bibliography = bibliography;
-      } else if (typeof bibliography === 'object') {
-        this._bibliography = mapFromObject(bibliography);
-      }
-    }
-
-    get bibliography() {
-      return this._bibliography;
-    }
-
     static fromObject(source) {
       const frontMatter = new FrontMatter();
       Object.assign(frontMatter, source);
