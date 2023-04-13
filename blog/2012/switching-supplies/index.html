@@ -138,9 +138,7 @@
   <article class="post-content">
     <p>Whenever we want to design a new circuit or a new PCB, the first thing which we usually start with is getting that 5V or 3.3V. For many of us, a simple 7805 or LM317 will do the job, but when you need higher current (anything above 200-300mA) it’s time to go for a switching supply.</p>
 
-<!-- <div class="float-left mr-3 w-25"> -->
-<div class="row">
-  <div class="col-4">
+<div class="float-left mr-3 w-50">
     <figure>
 
   <picture>
@@ -157,14 +155,11 @@
 
 </figure>
 
-  </div>
-  <div class="col-8">
-    I know at first it might sound like a difficult task, but with all the software out there, it does not take much time to design a switching supply. At first I thought about ways in which I can use that simple circuitry of a 7805. Maybe add a transistor like shown here.<br><br>
-
-    But then to get current like 2A, I would need a BIG transistor. Also, the voltage would not be exactly 5V, it would be 5-Vbe (forward voltage drop at the base emitter junction). Of course you can use a diode between the 7805 ground and circuit ground to cancel this effect but well  that doesn’t reduce the transistor size.
-  </div>
 </div>
-<!-- </div> -->
+
+<p>I know at first it might sound like a difficult task, but with all the software out there, it does not take much time to design a switching supply. At first I thought about ways in which I can use that simple circuitry of a 7805. Maybe add a transistor like shown here.<br><br></p>
+
+<p>But then to get current like 2A, I would need a BIG transistor. Also, the voltage would not be exactly 5V, it would be 5-Vbe (forward voltage drop at the base emitter junction). Of course you can use a diode between the 7805 ground and circuit ground to cancel this effect but well  that doesn’t reduce the transistor size.</p>
 
 <p>Another alternative would be to use those pretty heat sinks which you saw at the electronic shop. They come with a small nut and bolt so that you can mount it on your 7805. Well that’s what I did initially and the circuit still got hot. Besides, since 7805 is a LDO, once your input voltage starts going beyond 9V, you will feel the heat 🙂 .</p>
 
