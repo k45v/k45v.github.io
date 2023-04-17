@@ -2,48 +2,50 @@
 <html lang="en">
 
   <!-- Head -->
-  <head>    <!-- Metadata, OpenGraph and Schema.org -->
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    <!-- Metadata, OpenGraph and Schema.org -->
     
     <!-- Website verification -->
-    <meta name="google-site-verification" content="xRlThgNzCzfRY8XKsahsru2gLV-Cc284pbsdHHnr2oY" /><meta name="msvalidate.01" content="" /><!-- Avoid warning on Google Chrome
+    <meta name="google-site-verification" content="xRlThgNzCzfRY8XKsahsru2gLV-Cc284pbsdHHnr2oY">
+<meta name="msvalidate.01" content="">
+<!-- Avoid warning on Google Chrome
         Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'interest-cohort'.
         see https://stackoverflow.com/a/75119417
     -->
-    <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 
     <!-- Standard metadata -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>
-        blog | FirstName  LastName</title>
-    <meta name="author" content="FirstName  LastName" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website" />
+    <title>The MOESISm (MOESIF) cache coherence protocol | FirstName  LastName</title>
+    <meta name="author" content="FirstName  LastName">
+    <meta name="description" content="">
+    <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website">
 
 
     <!-- Bootstrap & MDB -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous">
 
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700%7CRoboto+Slab:100,300,400,500,700%7CMaterial+Icons">
 
     <!-- Code Syntax Highlighting -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="" id="highlight_theme_light" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="" id="highlight_theme_light">
 
     <!-- Styles -->
     
-    <link rel="shortcut icon" href="/assets/img/pcb.jpg"/>
+    <link rel="shortcut icon" href="/assets/img/pcb.jpg">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://k45v.github.io/blog/">
+    <link rel="canonical" href="https://k45v.github.io/blog/2012/MOESISm/">
     
     <!-- Dark Mode -->
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark">
 
     <script src="/assets/js/theme.js"></script>
     <script src="/assets/js/dark_mode.js"></script>
@@ -60,7 +62,7 @@
       <!-- Nav Bar -->
       <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
         <div class="container">
-          <a class="navbar-brand title font-weight-lighter" href="/"><span class="font-weight-bold">FirstName&nbsp;</span>LastName</a>
+          <a class="navbar-brand title font-weight-lighter" href="/"><span class="font-weight-bold">FirstName </span>LastName</a>
           <!-- Navbar Toggle -->
           <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -110,149 +112,87 @@
 
     <!-- Content -->
     <div class="container mt-5">
-      <div class="post">
+      <!-- _layouts/post.html -->
 
-  
-  <div class="category-list">
-    <ul class="p-0 m-0">
-      
-        <li>
-          <i class="fas fa-tag fa-sm"></i> <a href="/blog/category/circuit-design">Circuit Design</a>
-        </li>
-        
-          <p>&bull;</p>
-        
-      
-        <li>
-          <i class="fas fa-tag fa-sm"></i> <a href="/blog/category/parallel-computing">Parallel computing</a>
-        </li>
-        
-          <p>&bull;</p>
-        
-      
-        <li>
-          <i class="fas fa-tag fa-sm"></i> <a href="/blog/category/fsae">FSAE</a>
-        </li>
-        
-          <p>&bull;</p>
-        
-      
-        <li>
-          <i class="fas fa-tag fa-sm"></i> <a href="/blog/category/linux">Linux</a>
-        </li>
-        
-      
-    </ul>
-  </div>
-  
+<div class="post">
 
-  <ul class="post-list">
+  <header class="post-header">
+    <h1 class="post-title">The MOESISm (MOESIF) cache coherence protocol</h1>
+    <p class="post-meta">December 16, 2012</p>
+       
+  </header>
+
+  <article class="post-content">
+    <p>In one of the courses I took this semester, we were asked to modify an existing invalidation based cache coherence protocol to reduce the off-chip Bandwidth usage. The motivation for this problem statement was limited off-chip bandwidth due to constrained number of pins that a chip can have.</p>
+
+<p>Initially I had used the given benchmarks to determine off-chip bandwidth usage for MSI, MESI and MOESI protocols and among them, MESI seemed to perform the best. The MOESI protocol, in spite of having fewer writebacks (because it allows dirty sharing) lost out on cache-to-cache transfers because the shared state is not allowed to Flush. Hence, although MOESI accounts for Flush in a read after write operation ( ‘M’ to ‘O’ state transition and ‘O’ can Flush), a read after read will cause a block to be brought in from memory (on a miss) even if the cache on same level has a copy. In order to accommodate this request I decided to introduce a new state namely ‘Sm’ (shared master, which I later found to be similar to the Forward state in Intel MESIF protocol) and the results were quite interesting. Below is the explanation for the MOESISm protocol: (the terminology is based on what had been taught in class)</p>
+
+<p>Processor requests to the cache:</p>
+<ul>
+  <li>PrRd: Processor request to read to a cache block</li>
+  <li>PrWr: Processor request to write to a cache block</li>
+</ul>
+
+<p>Bus-side requests:</p>
+<ul>
+  <li>BusRd: Snooped request that some other processor has requested to read a cache block</li>
+  <li>BusRdX: Snooped request that some other processor has requested a read exclusive (write) to a cache block. The requesting processor does not have the block yet.</li>
+  <li>BusUpgr: Snooped request that some other processor has requested a write to a cache block that it already has.</li>
+  <li>Flush: Snooped request that indicates that entire cache block has been placed on the bus for cache to cache transfer</li>
+  <li>FlushOpt: Snooped request that indicates that entire cache block has been placed on the bus for cache to cache transfer. It’s called FlushOpt because  it offers performance enhancement and it is not really a correctness requirement.</li>
+</ul>
+
+<p><strong>NOTE:</strong> For a BusRd transaction, if a copy is found by other snoopers, they assert the COPIES-EXIST line (C) else the line is low (!C).</p>
+
+<div class="text-center">
+  <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/proc_init-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/proc_init-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/proc_init-1400.webp"></source>
     
 
-    
-    
-    
-    
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/proc_init.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
 
-    <li>
-      <h3>
-        
-          <a class="post-title" href="/blog/2012/wiring-diagrams/">Wiring diagrams for a FSAE race car (ORI2010)</a>
-        
-      </h3>
-      <p></p>
-      <p class="post-meta">
-        4 min read &nbsp; &middot; &nbsp;
-        December 23, 2012
-      </p>
-      <p class="post-tags">
-        <a href="/blog/2012">
-          <i class="fas fa-calendar fa-sm"></i> 2012 </a>
+  </picture><figcaption class="caption">Processor Side</figcaption>
 
-          
+</figure>
 
-          
-          &nbsp; &middot; &nbsp;
-            
-            <a href="/blog/category/fsae">
-              <i class="fas fa-tag fa-sm"></i> FSAE</a> &nbsp;
-              
-          
-    </p>
-    </li>
+  <figure>
 
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/bus_init-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/bus_init-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/bus_init-1400.webp"></source>
     
 
-    
-    
-    
-    
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/bus_init.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
 
-    <li>
-      <h3>
-        
-          <a class="post-title" href="/blog/2012/MOESISm/">The MOESISm (MOESIF) cache coherence protocol</a>
-        
-      </h3>
-      <p></p>
-      <p class="post-meta">
-        5 min read &nbsp; &middot; &nbsp;
-        December 16, 2012
-      </p>
-      <p class="post-tags">
-        <a href="/blog/2012">
-          <i class="fas fa-calendar fa-sm"></i> 2012 </a>
+  </picture><figcaption class="caption">Bus Side</figcaption>
 
-          
+</figure>
 
-          
-          &nbsp; &middot; &nbsp;
-            
-            <a href="/blog/category/parallel-computing">
-              <i class="fas fa-tag fa-sm"></i> Parallel computing</a> &nbsp;
-              
-          
-    </p>
-    </li>
+</div>
 
+<p>For the processor side, the state diagram uses the notation Processor_request/Resulting_bus_transaction and for the bus side it is snooped_transaction/resulting_action.</p>
+
+<p>The advantages of this protocol??? Well it allows dirty sharing and reduces traffic due to writebacks. It saves power when compared to MESI protocol. How? Well in case of MESI, the FlushOpt is generated by multiple caches in ‘S’ state, but only one is selected for cache-to-cache transfer. So, power is spent in reading the cache, trying to obtain bus access and then cancelling it when a cache senses that someone else has supplied the block earlier. This is avoided because FlushOpt will only be sent by the cache block in ‘Sm’ state. Hence, read after read requests will also get cache-to-cache transfers. The resulting off-chip bandwidth usage was the least for the same benchmark using MOESISm protocol.Yayyy!!!</p>
+
+<p>The only drawback which I can notice for this protocol is that, for MESIF the ‘F’ state migrates to a newer copy as mentioned here and the newer copy has lesser chances of getting evicted (temporal locality). However, in the protocol I have suggested, the migration of ‘Sm’ state is not possible because with the current hardware we only have one Copies exists line. Now, if the newer copy has to go into ‘Sm’ state, then the older copy may either be in ‘E’ state OR in ‘O’ state OR in ‘Sm’ state. Here, all these intial states should transition into ‘S’ state but if the ‘O’ state moves into ‘S’ state then what happens to the writeback??? Well, I guess if we change the protocol so that the ‘O’ state performs a writeback when it moves into ‘S’ state, then this can be achieved. I just thought of this last part now 😀 I guess blogging really helps!!!</p>
+
+  </article>
+  <p class="post-tags">
+    <a href="/blog/2012"> <i class="fas fa-calendar fa-sm"></i> 2012 </a>
+      ·  
+    <a href="/blog/category/parallel-computing">
+      <i class="fas fa-tag fa-sm"></i> Parallel computing</a>
     
-
-    
-    
-    
-    
-
-    <li>
-      <h3>
-        
-          <a class="post-title" href="/blog/2012/switching-supplies/">Designing switching supplies for embedded electronics with circuit protection</a>
-        
-      </h3>
-      <p></p>
-      <p class="post-meta">
-        5 min read &nbsp; &middot; &nbsp;
-        December 14, 2012
-      </p>
-      <p class="post-tags">
-        <a href="/blog/2012">
-          <i class="fas fa-calendar fa-sm"></i> 2012 </a>
-
-          
-
-          
-          &nbsp; &middot; &nbsp;
-            
-            <a href="/blog/category/circuit-design">
-              <i class="fas fa-tag fa-sm"></i> Circuit Design</a> &nbsp;
-              
-          
-    </p>
-    </li>
-
-    
-  </ul>
-
-  
+  </p>
 
 </div>
 

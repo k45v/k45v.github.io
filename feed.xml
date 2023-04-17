@@ -1,7 +1,380 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://k45v.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://k45v.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-04-14T06:11:42+00:00</updated><id>https://k45v.github.io/feed.xml</id><title type="html">blank</title><entry><title type="html">Designing switching supplies for embedded electronics with circuit protection</title><link href="https://k45v.github.io/blog/2012/switching-supplies/" rel="alternate" type="text/html" title="Designing switching supplies for embedded electronics with circuit protection" /><published>2012-12-14T00:00:00+00:00</published><updated>2012-12-14T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2012/switching-supplies</id><content type="html" xml:base="https://k45v.github.io/blog/2012/switching-supplies/"><![CDATA[<p>Whenever we want to design a new circuit or a new PCB, the first thing which we usually start with is getting that 5V or 3.3V. For many of us, a simple 7805 or LM317 will do the job, but when you need higher current (anything above 200-300mA) it’s time to go for a switching supply.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://k45v.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://k45v.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-04-17T06:03:08+00:00</updated><id>https://k45v.github.io/feed.xml</id><title type="html">blank</title><entry><title type="html">Top 10 things I did after installing Ubuntu 12.04 LTS alongside Windows7</title><link href="https://k45v.github.io/blog/2013/ubuntu/" rel="alternate" type="text/html" title="Top 10 things I did after installing Ubuntu 12.04 LTS alongside Windows7" /><published>2013-01-18T00:00:00+00:00</published><updated>2013-01-18T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/ubuntu</id><content type="html" xml:base="https://k45v.github.io/blog/2013/ubuntu/"><![CDATA[<p>I installed Ubuntu on my computer a few years ago, and then… I installed it again 🙂</p>
+
+<p>I like to have both Ubuntu and Windows on my system (Dual boot). Here is the list of things I usually do to setup Ubuntu, on a computer which already has a Windows OS :-</p>
+
+<ol>
+  <li>
+    <p>While logged in Windows, create disk space for Ubuntu using <a href="http://www.partition-tool.com/download.htm">EaseUs partition Manager</a> (anywhere between 25-40GB of disk space should be good). The free space will be shown as unallocated space.</p>
+  </li>
+  <li>
+    <p>Create a <a href="http://www.ubuntu.com/download/help/create-a-usb-stick-on-windows">bootable USB stick</a> for the version on Ubuntu which you want to install. Boot from it  (restart windows and hit ESC or F12 to select USB as your boot device) and select “Install beside Windows7”. (it will automatically detect the unallocated space you had created)</p>
+  </li>
+  <li>Now run the following commands from terminal (launch terminal using ctrl+alt+t):
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get upgrade
+</code></pre></div>    </div>
+    <p>This updates the Ubuntu repositories.</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>vim
+</code></pre></div>    </div>
+    <p>This installs Vim text editor (extremely powerful tool to use while coding)</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository <span class="s2">"deb http://archive.canonical.com/ </span><span class="si">$(</span>lsb_release <span class="nt">-sc</span><span class="si">)</span><span class="s2"> partner"</span>
+<span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>skype
+</code></pre></div>    </div>
+    <p>This installs Skype</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>p7zip-full
+</code></pre></div>    </div>
+    <p>This installs 7zip (compression/uncompression tool)</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>gparted
+</code></pre></div>    </div>
+    <p>The gparted partition tool</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>ubuntu-restricted-extras
+</code></pre></div>    </div>
+    <p>This allows Ubuntu to play file formats like mp3, avi, etc.</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>lo-menubar
+</code></pre></div>    </div>
+    <p>This gives global menu for Libre office</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:diesch/testing
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>unsettings
+</code></pre></div>    </div>
+    <p>An application to tweak the Ubuntu 12.04 which has Reset to Default option.</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:ubuntu-wine/ppa
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>wine1.4
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>winetricks
+</code></pre></div>    </div>
+    <p>This installs Wine 1.4 (stable) which allows you to use windows applications.</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:mozillateam/thunderbird-stable
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>thunderbird
+</code></pre></div>    </div>
+    <p>Install the Mozilla Thunderbird email client</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:yannubuntu/boot-repair
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> boot-repair
+</code></pre></div>    </div>
+    <p>This installs boot-repair, a handy tool to fix any bootloader problems</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>gedit-plugins
+</code></pre></div>    </div>
+    <p>Now you may launch gedit and go to → edit → preferences → plugins → now select the plugins as per your requirement.</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>openjdk-7-jdk icedtea-7-plugin
+</code></pre></div>    </div>
+    <p>JDK is needed for applications requiring Java support</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>nautilus-open-terminal
+nautilus <span class="nt">-q</span> <span class="o">&amp;&amp;</span> <span class="nb">sleep </span>1 <span class="o">&amp;&amp;</span> nautilus <span class="nt">-n</span>
+</code></pre></div>    </div>
+    <p>This installs the nautilus open in terminal feature, which you’ll find useful once you start frequently using Ubuntu.
+If using a laptop:</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:webupd8team/jupiter
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>jupiter
+</code></pre></div>    </div>
+    <p>Install Jupiter, the power management client which can help enhance your battery life!</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>powertop
+</code></pre></div>    </div>
+    <p>Another utility for power management, launch after install using</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>powertop
+</code></pre></div>    </div>
+    <p>Then use arrow keys to move to the tunable tab and use ENTER key to adjust parameters to good, then exit using ESC.</p>
+  </li>
+  <li>
+    <p>Launch the Ubuntu Software Center from Unity Dash and search and install the following: GIMP Image Editor, VLC media player, Synaptic Package Manager, Wine, Okular (similar to Foxit pdf reader for windows, allows comments and highlighting), redshift.</p>
+  </li>
+  <li>
+    <p>Launch firefox and search and install (using double click) <a href="https://www.google.com/intl/en/chrome/browser/">Google chrome</a> since Flash is not supported in firefox.</p>
+  </li>
+  <li>Re-enable hibernate using following commands (note that your swap memory should be equal to RAM):
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudoedit /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
+</code></pre></div>    </div>
+    <p>Right click and paste the following in the file opened:</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Re-enable hibernate by default]
+<span class="nv">Identity</span><span class="o">=</span>unix-user:<span class="k">*</span>
+<span class="nv">Action</span><span class="o">=</span>org.freedesktop.upower.hibernate
+<span class="nv">ResultActive</span><span class="o">=</span><span class="nb">yes</span>
+</code></pre></div>    </div>
+    <p>Hit ESC to go into command mode and then type :wq to save and quit. Restart your computer and you should see Hibernate as one of the options.</p>
+  </li>
+  <li>
+    <p>Open your Home folder and then do → view → status bar</p>
+  </li>
+  <li>
+    <p>Modify privacy under system settings, then change Icon size and wallpaper under appearance.</p>
+  </li>
+  <li>
+    <p>Under System Settings select Keyboard → Shortcuts → custom shortcuts → +
+Name: Kill Processes     Command: gnome-system-monitor
+Click apply. Now click on disabled and then ctrl + alt + k . This is your shortcut to launch the system monitor.</p>
+  </li>
+  <li>(For Acer aspire 5738z) In your chrome browser go to <a href="https://help.ubuntu.com/community/AspireTimeline/Fixes">https://help.ubuntu.com/community/AspireTimeline/Fixes</a> and apply Touchpad On/Off fix given for 9.10. Then add acpi_backlight=vendor after splash to enable brightness control, change timeout, save and do sudo update-grub.</li>
+</ol>
+
+<p>[Advanced] For displaying only current directory in terminal and not the entire path:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim ~/.bashrc
+</code></pre></div></div>
+<p>Find the lines</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">else
+    </span><span class="nv">PS1</span><span class="o">=</span><span class="s1">'${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '</span>
+<span class="k">fi</span>
+</code></pre></div></div>
+<p>and change the w to W.</p>
+
+<p>If you are installing Ubuntu as a VM and need to share folders then <a href="http://ubuntuexperiment.wordpress.com/2008/11/12/sharing-folders-between-host-and-guest-os-in-virtualbox/">this is a good link</a> to refer. Also install guest utils using before attempting to mount.</p>
+
+<p>sudo apt-get install virtualbox-ose-guest-utils</p>
+
+<p>P.S: Some information drawn from <a href="http://www.techdrivein.com/2012/06/25-things-i-did-after-installing-ubuntu.html">techdrivein</a> and <a href="http://www.noobslab.com/2012/04/important-things-to-do-after-install_26.html">noobslab</a></p>]]></content><author><name></name></author><category term="Linux" /><summary type="html"><![CDATA[I installed Ubuntu on my computer a few years ago, and then… I installed it again 🙂]]></summary></entry><entry><title type="html">Wiring diagrams for a FSAE race car (ORI2010)</title><link href="https://k45v.github.io/blog/2012/wiring-diagrams/" rel="alternate" type="text/html" title="Wiring diagrams for a FSAE race car (ORI2010)" /><published>2012-12-23T00:00:00+00:00</published><updated>2012-12-23T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2012/wiring-diagrams</id><content type="html" xml:base="https://k45v.github.io/blog/2012/wiring-diagrams/"><![CDATA[<p>In the year 2010, I was the electronics team captain for <a href="http://www.orion-racing.com/">Orion Racing India</a> (A student team which designs a formula style race car to compete in an international design competition: <a href="http://www.formulastudent.de/">Formula Student Germany</a>). Among the many responsibilities which came with being an electronics team member (apart from fixing the lighting and fans in the workshop), a very basic yet extremely important was laying the wiring for the car. Me and my teammates: Nikhil, Nathanael, Hemen, Gaurang and Anup initially tried to look for some software for making the wiring diagrams. However, a pen and a paper proved to be the best tools.</p>
+
+<p>I am sharing below the final wiring diagrams and block descriptions for the <a href="http://www.orion-racing.com/ori-2010/">ORI2010</a>. Before arriving at the final layout, we had to go through multiple revisions. At each stage of the revision we were able to reduce/re-route many wires. Additionally, wiring diagrams helped us in quick troubleshooting and hassle free insertion/removal of sensors/modules.</p>
+
+<div class="text-center">
+  <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/25012008059-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/25012008059-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/25012008059-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/25012008059.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture><figcaption class="caption">ORI2010 component placement</figcaption>
+
+</figure>
+
+</div>
+
+<p>You may find many acronyms being used in the component placement as well as the wiring layouts. Their descriptions are provided in the images that follow. (Open images in a new tab for better resolution)</p>
+
+<div class="row row-cols-3">
+  <div class="col">
+    <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/25012008060-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/25012008060-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/25012008060-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/25012008060.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+  </div>
+  <div class="col">
+    <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/25012008061-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/25012008061-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/25012008061-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/25012008061.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+  </div>
+  <div class="col">
+    <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/25012008062-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/25012008062-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/25012008062-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/25012008062.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+  </div>
+  <div class="col">
+    <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/25012008063-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/25012008063-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/25012008063-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/25012008063.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+  </div>
+  <div class="col">
+    <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/25012008064-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/25012008064-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/25012008064-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/25012008064.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+  </div>
+  <div class="col">
+    <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/25012008065-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/25012008065-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/25012008065-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/25012008065.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+  </div>
+  <div class="col">
+    <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/25012008066-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/25012008066-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/25012008066-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/25012008066.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+  </div>
+  <div class="col">
+    <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/25012008067-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/25012008067-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/25012008067-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/25012008067.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+  </div>
+  <div class="col">
+    <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/25012008068-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/25012008068-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/25012008068-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/25012008068.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+  </div>
+</div>
+
+<p>Tie wires proved to be quite useful when we were laying the wiring. One could easily unwind them and add/remove wires. Once the layout on the car was complete, we replaced the tie wires with <a href="http://en.wikipedia.org/wiki/Cable_tie">cable ties</a>.</p>]]></content><author><name></name></author><category term="FSAE" /><summary type="html"><![CDATA[In the year 2010, I was the electronics team captain for Orion Racing India (A student team which designs a formula style race car to compete in an international design competition: Formula Student Germany). Among the many responsibilities which came with being an electronics team member (apart from fixing the lighting and fans in the workshop), a very basic yet extremely important was laying the wiring for the car. Me and my teammates: Nikhil, Nathanael, Hemen, Gaurang and Anup initially tried to look for some software for making the wiring diagrams. However, a pen and a paper proved to be the best tools.]]></summary></entry><entry><title type="html">The MOESISm (MOESIF) cache coherence protocol</title><link href="https://k45v.github.io/blog/2012/MOESISm/" rel="alternate" type="text/html" title="The MOESISm (MOESIF) cache coherence protocol" /><published>2012-12-16T00:00:00+00:00</published><updated>2012-12-16T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2012/MOESISm</id><content type="html" xml:base="https://k45v.github.io/blog/2012/MOESISm/"><![CDATA[<p>In one of the courses I took this semester, we were asked to modify an existing invalidation based cache coherence protocol to reduce the off-chip Bandwidth usage. The motivation for this problem statement was limited off-chip bandwidth due to constrained number of pins that a chip can have.</p>
+
+<p>Initially I had used the given benchmarks to determine off-chip bandwidth usage for MSI, MESI and MOESI protocols and among them, MESI seemed to perform the best. The MOESI protocol, in spite of having fewer writebacks (because it allows dirty sharing) lost out on cache-to-cache transfers because the shared state is not allowed to Flush. Hence, although MOESI accounts for Flush in a read after write operation ( ‘M’ to ‘O’ state transition and ‘O’ can Flush), a read after read will cause a block to be brought in from memory (on a miss) even if the cache on same level has a copy. In order to accommodate this request I decided to introduce a new state namely ‘Sm’ (shared master, which I later found to be similar to the Forward state in Intel MESIF protocol) and the results were quite interesting. Below is the explanation for the MOESISm protocol: (the terminology is based on what had been taught in class)</p>
+
+<p>Processor requests to the cache:</p>
+<ul>
+  <li>PrRd: Processor request to read to a cache block</li>
+  <li>PrWr: Processor request to write to a cache block</li>
+</ul>
+
+<p>Bus-side requests:</p>
+<ul>
+  <li>BusRd: Snooped request that some other processor has requested to read a cache block</li>
+  <li>BusRdX: Snooped request that some other processor has requested a read exclusive (write) to a cache block. The requesting processor does not have the block yet.</li>
+  <li>BusUpgr: Snooped request that some other processor has requested a write to a cache block that it already has.</li>
+  <li>Flush: Snooped request that indicates that entire cache block has been placed on the bus for cache to cache transfer</li>
+  <li>FlushOpt: Snooped request that indicates that entire cache block has been placed on the bus for cache to cache transfer. It’s called FlushOpt because  it offers performance enhancement and it is not really a correctness requirement.</li>
+</ul>
+
+<p><strong>NOTE:</strong> For a BusRd transaction, if a copy is found by other snoopers, they assert the COPIES-EXIST line (C) else the line is low (!C).</p>
+
+<div class="text-center">
+  <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/proc_init-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/proc_init-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/proc_init-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/proc_init.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture><figcaption class="caption">Processor Side</figcaption>
+
+</figure>
+
+  <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/bus_init-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/bus_init-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/bus_init-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/bus_init.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture><figcaption class="caption">Bus Side</figcaption>
+
+</figure>
+
+</div>
+
+<p>For the processor side, the state diagram uses the notation Processor_request/Resulting_bus_transaction and for the bus side it is snooped_transaction/resulting_action.</p>
+
+<p>The advantages of this protocol??? Well it allows dirty sharing and reduces traffic due to writebacks. It saves power when compared to MESI protocol. How? Well in case of MESI, the FlushOpt is generated by multiple caches in ‘S’ state, but only one is selected for cache-to-cache transfer. So, power is spent in reading the cache, trying to obtain bus access and then cancelling it when a cache senses that someone else has supplied the block earlier. This is avoided because FlushOpt will only be sent by the cache block in ‘Sm’ state. Hence, read after read requests will also get cache-to-cache transfers. The resulting off-chip bandwidth usage was the least for the same benchmark using MOESISm protocol.Yayyy!!!</p>
+
+<p>The only drawback which I can notice for this protocol is that, for MESIF the ‘F’ state migrates to a newer copy as mentioned here and the newer copy has lesser chances of getting evicted (temporal locality). However, in the protocol I have suggested, the migration of ‘Sm’ state is not possible because with the current hardware we only have one Copies exists line. Now, if the newer copy has to go into ‘Sm’ state, then the older copy may either be in ‘E’ state OR in ‘O’ state OR in ‘Sm’ state. Here, all these intial states should transition into ‘S’ state but if the ‘O’ state moves into ‘S’ state then what happens to the writeback??? Well, I guess if we change the protocol so that the ‘O’ state performs a writeback when it moves into ‘S’ state, then this can be achieved. I just thought of this last part now 😀 I guess blogging really helps!!!</p>]]></content><author><name></name></author><category term="Parallel computing" /><summary type="html"><![CDATA[In one of the courses I took this semester, we were asked to modify an existing invalidation based cache coherence protocol to reduce the off-chip Bandwidth usage. The motivation for this problem statement was limited off-chip bandwidth due to constrained number of pins that a chip can have.]]></summary></entry><entry><title type="html">Designing switching supplies for embedded electronics with circuit protection</title><link href="https://k45v.github.io/blog/2012/switching-supplies/" rel="alternate" type="text/html" title="Designing switching supplies for embedded electronics with circuit protection" /><published>2012-12-14T00:00:00+00:00</published><updated>2012-12-14T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2012/switching-supplies</id><content type="html" xml:base="https://k45v.github.io/blog/2012/switching-supplies/"><![CDATA[<p>Whenever we want to design a new circuit or a new PCB, the first thing which we usually start with is getting that 5V or 3.3V. For many of us, a simple 7805 or LM317 will do the job, but when you need higher current (anything above 200-300mA) it’s time to go for a switching supply.</p>
 
 <div class="float-left mr-3 w-50">
-    <figure>
+  <figure>
 
   <picture>
     
@@ -32,11 +405,12 @@
 <p>Now let’s talk about the protection circuitry. Below is the list of various methods in which you can provide different types of circuit protection:</p>
 
 <ul>
-  <li>Reverse Voltage protection: Use a p-channel MOSFET on the positive supply line of the load like shown below. You can refer more material <a href="http://hackaday.com/2011/12/06/reverse-voltage-protection-with-a-p-fet/">here</a>. I used an RRH100P03 for my circuit</li>
+  <li>Reverse Voltage protection: Use a p-channel MOSFET on the positive supply line of the load like 
+shown below. You can refer more material <a href="http://hackaday.com/2011/12/06/reverse-voltage-protection-with-a-p-fet/">here</a>. I used an RRH100P03 for my circuit</li>
 </ul>
 
 <div class="text-center">
-<figure>
+  <figure>
 
   <picture>
     
@@ -59,7 +433,7 @@
 </ul>
 
 <div class="text-center">
-<figure>
+  <figure>
 
   <picture>
     
@@ -72,7 +446,7 @@
     <img src="/assets/img/transorb.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
 
   </picture><figcaption class="caption">
-Transil with PPTC fuse</figcaption>
+  Transil with PPTC fuse</figcaption>
 
 </figure>
 
@@ -83,4 +457,23 @@ Transil with PPTC fuse</figcaption>
   <li>Surge voltage protection: Using MOV (Metal oxide Varistors) is a good way to provide surge voltage protection for your circuit. However, they are quite big and mostly used if your input source is from a AC line. Read more about them <a href="http://electronics.howstuffworks.com/everyday-tech/surge-protector1.htm">here</a></li>
 </ul>
 
-<p>The configuration which I prefer is a p-channel MOSFET (RRH100P03) with a DC/DC switching voltage regulator (TPS5450 which has inbuilt over-current and over-voltage protection).</p>]]></content><author><name></name></author><category term="Circuit Design" /><summary type="html"><![CDATA[Whenever we want to design a new circuit or a new PCB, the first thing which we usually start with is getting that 5V or 3.3V. For many of us, a simple 7805 or LM317 will do the job, but when you need higher current (anything above 200-300mA) it’s time to go for a switching supply.]]></summary></entry></feed>
+<p>The configuration which I prefer is a p-channel MOSFET (RRH100P03) with a DC/DC switching voltage regulator (TPS5450 which has inbuilt over-current and over-voltage protection).</p>
+
+<div class="text-center">
+  <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/01012008004-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/01012008004-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/01012008004-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/01012008004.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+</div>]]></content><author><name></name></author><category term="Circuit Design" /><summary type="html"><![CDATA[Whenever we want to design a new circuit or a new PCB, the first thing which we usually start with is getting that 5V or 3.3V. For many of us, a simple 7805 or LM317 will do the job, but when you need higher current (anything above 200-300mA) it’s time to go for a switching supply.]]></summary></entry></feed>

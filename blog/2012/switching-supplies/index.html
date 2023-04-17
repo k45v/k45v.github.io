@@ -38,7 +38,7 @@
 
     <!-- Styles -->
     
-    <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;">
+    <link rel="shortcut icon" href="/assets/img/pcb.jpg">
     
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="canonical" href="https://k45v.github.io/blog/2012/switching-supplies/">
@@ -126,7 +126,7 @@
     <p>Whenever we want to design a new circuit or a new PCB, the first thing which we usually start with is getting that 5V or 3.3V. For many of us, a simple 7805 or LM317 will do the job, but when you need higher current (anything above 200-300mA) it’s time to go for a switching supply.</p>
 
 <div class="float-left mr-3 w-50">
-    <figure>
+  <figure>
 
   <picture>
     
@@ -157,11 +157,12 @@
 <p>Now let’s talk about the protection circuitry. Below is the list of various methods in which you can provide different types of circuit protection:</p>
 
 <ul>
-  <li>Reverse Voltage protection: Use a p-channel MOSFET on the positive supply line of the load like shown below. You can refer more material <a href="http://hackaday.com/2011/12/06/reverse-voltage-protection-with-a-p-fet/" rel="external nofollow noopener" target="_blank">here</a>. I used an RRH100P03 for my circuit</li>
+  <li>Reverse Voltage protection: Use a p-channel MOSFET on the positive supply line of the load like 
+shown below. You can refer more material <a href="http://hackaday.com/2011/12/06/reverse-voltage-protection-with-a-p-fet/" rel="external nofollow noopener" target="_blank">here</a>. I used an RRH100P03 for my circuit</li>
 </ul>
 
 <div class="text-center">
-<figure>
+  <figure>
 
   <picture>
     
@@ -184,7 +185,7 @@
 </ul>
 
 <div class="text-center">
-<figure>
+  <figure>
 
   <picture>
     
@@ -197,7 +198,7 @@
     <img src="/assets/img/transorb.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
 
   </picture><figcaption class="caption">
-Transil with PPTC fuse</figcaption>
+  Transil with PPTC fuse</figcaption>
 
 </figure>
 
@@ -211,6 +212,25 @@ Transil with PPTC fuse</figcaption>
 </ul>
 
 <p>The configuration which I prefer is a p-channel MOSFET (RRH100P03) with a DC/DC switching voltage regulator (TPS5450 which has inbuilt over-current and over-voltage protection).</p>
+
+<div class="text-center">
+  <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/01012008004-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/01012008004-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/01012008004-1400.webp"></source>
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/01012008004.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+
+  </picture>
+
+</figure>
+
+</div>
 
   </article>
   <p class="post-tags">
