@@ -18,7 +18,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>The MOESISm (MOESIF) cache coherence protocol | FirstName  LastName</title>
+    <title>GPGPU simulator installation on Ubuntu 12.04 for a system without NVIDIA Graphics card | FirstName  LastName</title>
     <meta name="author" content="FirstName  LastName">
     <meta name="description" content="">
     <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website">
@@ -41,7 +41,7 @@
     <link rel="shortcut icon" href="/assets/img/pcb.jpg">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://k45v.github.io/blog/2012/MOESISm/">
+    <link rel="canonical" href="https://k45v.github.io/blog/2013/gpuocelot/">
     
     <!-- Dark Mode -->
     
@@ -117,77 +117,96 @@
 <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">The MOESISm (MOESIF) cache coherence protocol</h1>
-    <p class="post-meta">December 16, 2012</p>
+    <h1 class="post-title">GPGPU simulator installation on Ubuntu 12.04 for a system without NVIDIA Graphics card</h1>
+    <p class="post-meta">January 28, 2013</p>
        
   </header>
 
   <article class="post-content">
-    <p>In one of the courses I took this semester, we were asked to modify an existing invalidation based cache coherence protocol to reduce the off-chip Bandwidth usage. The motivation for this problem statement was limited off-chip bandwidth due to constrained number of pins that a chip can have.</p>
+    <p>Computation intensive applications which have high degree of data-level parallelism can very well harness the hardware capabilities provided a GPU. Enter the term <a href="http://en.wikipedia.org/wiki/GPGPU" rel="external nofollow noopener" target="_blank">GPGPU</a>.</p>
 
-<p>Initially I had used the given benchmarks to determine off-chip bandwidth usage for MSI, MESI and MOESI protocols and among them, MESI seemed to perform the best. The MOESI protocol, in spite of having fewer writebacks (because it allows dirty sharing) lost out on cache-to-cache transfers because the shared state is not allowed to Flush. Hence, although MOESI accounts for Flush in a read after write operation ( ‘M’ to ‘O’ state transition and ‘O’ can Flush), a read after read will cause a block to be brought in from memory (on a miss) even if the cache on same level has a copy. In order to accommodate this request I decided to introduce a new state namely ‘Sm’ (shared master, which I later found to be similar to the Forward state in Intel MESIF protocol) and the results were quite interesting. Below is the explanation for the MOESISm protocol: (the terminology is based on what had been taught in class)</p>
+<p>You might want to try out the Parallel Computing platform <a href="http://www.nvidia.com/object/cuda_home_new.html" rel="external nofollow noopener" target="_blank">CUDA</a> to gauge what kind of speed-up you can achieve in you current code by running it on a GPU. I wanted to use CUDA for one of my class projects but I do not have a compatible graphics card. Mine is an Intel Mobile 4 Series Chipset Integrated Graphics Controller, you can check yours using the command:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lspci | <span class="nb">grep </span>VGA
+</code></pre></div></div>
+<p>I spent a lot of time trying to install a GPU emulator but either I got stuck in some library dependency, or some of the downloaded packages were dependent on older gcc versions. The documentation online for installing emulators in systems which do not have a graphics card was insufficient. Finally, using few magical keywords in my Google search I located this <a href="http://barefeg.wordpress.com/2012/06/16/how-to-install-gpuocelot-in-ubuntu-12-04/" rel="external nofollow noopener" target="_blank">blog entry</a> which provided detailed installation procedure for the <a href="http://code.google.com/p/gpuocelot/" rel="external nofollow noopener" target="_blank">gpuocelot</a>.</p>
 
-<p>Processor requests to the cache:</p>
-<ul>
-  <li>PrRd: Processor request to read to a cache block</li>
-  <li>PrWr: Processor request to write to a cache block</li>
-</ul>
+<p>Here, I provide my version of the installation procedure to get a simple “Hello World” program up and running using GPGPU emulator.</p>
 
-<p>Bus-side requests:</p>
-<ul>
-  <li>BusRd: Snooped request that some other processor has requested to read a cache block</li>
-  <li>BusRdX: Snooped request that some other processor has requested a read exclusive (write) to a cache block. The requesting processor does not have the block yet.</li>
-  <li>BusUpgr: Snooped request that some other processor has requested a write to a cache block that it already has.</li>
-  <li>Flush: Snooped request that indicates that entire cache block has been placed on the bus for cache to cache transfer</li>
-  <li>FlushOpt: Snooped request that indicates that entire cache block has been placed on the bus for cache to cache transfer. It’s called FlushOpt because  it offers performance enhancement and it is not really a correctness requirement.</li>
-</ul>
+<ol>
+  <li>Download the “CUDA Toolkit for Ubuntu Linux 10.10” from <a href="https://developer.nvidia.com/cuda-toolkit-40" rel="external nofollow noopener" target="_blank">here</a> (v 4.0). Now start terminal (using ctrl + alt + t) and navigate to your Downloads directory. Change permissions for the installation file (mine was for 32bit) and install it. Hit enter if it asks for a change of destination directory.
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +x ./cudatoolkit_4.0.17_linux_32_ubuntu10.10.run
+<span class="nb">sudo</span> ./cudatoolkit_4.0.17_linux_32_ubuntu10.10.run
+</code></pre></div>    </div>
+  </li>
+  <li>Next install gcc and g++ v4.4 and update alternatives and priorities for gcc versions
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>gcc-4.4
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>g++-4.4
+<span class="nb">sudo </span>update-alternatives <span class="se">\</span>
+<span class="nt">--install</span> /usr/bin/gcc gcc /usr/bin/gcc-4.6 40 <span class="se">\</span>
+<span class="nt">--slave</span> /usr/bin/g++ g++ /usr/bin/g++-4.6
+<span class="nb">sudo </span>update-alternatives <span class="se">\</span>
+<span class="nt">--install</span> /usr/bin/gcc gcc /usr/bin/gcc-4.4 60 <span class="se">\</span>
+<span class="nt">--slave</span> /usr/bin/g++ g++ /usr/bin/g++-4.4
+<span class="nb">sudo </span>update-alternatives <span class="nt">--config</span> gcc
+</code></pre></div>    </div>
+    <p>Now select the version 4.4 (usually item 0). Check the current version using</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>gcc <span class="nt">--version</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Now you need to update the paths in your bashrc file
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>vi ~/.bashrc
+</code></pre></div>    </div>
+    <p>In vi editor enter “G” to go to the end of file, then “i” to add data. Copy paste the lines below</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/local/cuda/bin
+<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:/usr/local/cuda/lib:/usr/local/lib
+<span class="nb">export </span><span class="nv">CPLUS_INCLUDE_PATH</span><span class="o">=</span>/usr/local/cuda/include
+</code></pre></div>    </div>
+    <p>Now enter “:wq” to save and exit. Update the sources using</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
+</code></pre></div>    </div>
+    <p>The CUDA setup is completed now and you can check using the command</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>nvcc <span class="nt">--version</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Next download the following files:<br>
+libboost-filesystem1.42.0_1.42.0-4ubuntu2_i386.deb from <a href="https://launchpad.net/ubuntu/oneiric/+package/libboost-filesystem1.42.0" rel="external nofollow noopener" target="_blank">here</a><br>
+libboost-system1.42.0_1.42.0-4ubuntu2_i386.deb from <a href="https://launchpad.net/ubuntu/precise/+package/libboost-system1.42.0" rel="external nofollow noopener" target="_blank">here</a> and<br>
+libboost-thread1.42.0_1.42.0-4ubuntu2_i386.deb from <a href="https://launchpad.net/ubuntu/oneiric/+package/libboost-thread1.42.0" rel="external nofollow noopener" target="_blank">here</a>.<br>
+I selected libboost-* in i386 (Release) and then downloaded the *.deb file below the Downloadable files section. Install by double clicking (it should open in the ubuntu software center, select install there).</p>
+  </li>
+  <li>Finally, download gpuocelot from <a href="http://code.google.com/p/gpuocelot/downloads/list" rel="external nofollow noopener" target="_blank">here</a>. I chose ocelot_2.1.1272_i386.deb. Install by double clicking.</li>
+</ol>
 
-<p><strong>NOTE:</strong> For a BusRd transaction, if a copy is found by other snoopers, they assert the COPIES-EXIST line (C) else the line is low (!C).</p>
-
-<div class="text-center">
-  <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/proc_init-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/proc_init-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/proc_init-1400.webp"></source>
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/proc_init.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
-
-  </picture><figcaption class="caption">Processor Side</figcaption>
-
-</figure>
-
-  <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/bus_init-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/bus_init-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/bus_init-1400.webp"></source>
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/bus_init.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
-
-  </picture><figcaption class="caption">Bus Side</figcaption>
-
-</figure>
-
-</div>
-
-<p>For the processor side, the state diagram uses the notation Processor_request/Resulting_bus_transaction and for the bus side it is snooped_transaction/resulting_action.</p>
-
-<p>The advantages of this protocol??? Well it allows dirty sharing and reduces traffic due to writebacks. It saves power when compared to MESI protocol. How? Well in case of MESI, the FlushOpt is generated by multiple caches in ‘S’ state, but only one is selected for cache-to-cache transfer. So, power is spent in reading the cache, trying to obtain bus access and then cancelling it when a cache senses that someone else has supplied the block earlier. This is avoided because FlushOpt will only be sent by the cache block in ‘Sm’ state. Hence, read after read requests will also get cache-to-cache transfers. The resulting off-chip bandwidth usage was the least for the same benchmark using MOESISm protocol.Yayyy!!!</p>
-
-<p>The only drawback which I can notice for this protocol is that, for MESIF the ‘F’ state migrates to a newer copy as mentioned here and the newer copy has lesser chances of getting evicted (temporal locality). However, in the protocol I have suggested, the migration of ‘Sm’ state is not possible because with the current hardware we only have one Copies exists line. Now, if the newer copy has to go into ‘Sm’ state, then the older copy may either be in ‘E’ state OR in ‘O’ state OR in ‘Sm’ state. Here, all these intial states should transition into ‘S’ state but if the ‘O’ state moves into ‘S’ state then what happens to the writeback??? Well, I guess if we change the protocol so that the ‘O’ state performs a writeback when it moves into ‘S’ state, then this can be achieved. I just thought of this last part now 😀 I guess blogging really helps!!!</p>
+<h2 id="hello-world">Hello World</h2>
+<ol>
+  <li>
+    <p>Navigate to your home directory and create a folder hellocuda. Download the configuration file from <a href="https://docs.google.com/file/d/0B5Ve5IFK3KWxeHdsQzM2MGdtOW8/edit" rel="external nofollow noopener" target="_blank">here</a> and the Hello World program from <a href="https://docs.google.com/file/d/0B5Ve5IFK3KWxY0dWMXZ6b0hoZWc/edit" rel="external nofollow noopener" target="_blank">here</a>. Place both these files in the hellocuda directory. You may go through <a href="http://code.google.com/p/gpuocelot/wiki/OcelotConfigFile" rel="external nofollow noopener" target="_blank">this page</a> to understand the configuration file.</p>
+  </li>
+  <li>
+    <p>Now compile the code</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>nvcc <span class="nt">-c</span> hello.cu <span class="nt">-arch</span><span class="o">=</span>sm_20
+g++ <span class="nt">-o</span> hello.out hello.o <span class="sb">`</span>OcelotConfig <span class="nt">-l</span><span class="sb">`</span>
+</code></pre></div>    </div>
+    <p>Next run it using</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>./hello.out
+</code></pre></div>    </div>
+    <p>This code computes the dot product of two vectors a and b using the GPU (in our case on the CPU using emulation) and stores the result in c. The final output shows the result of the computation performed using GPU and CPU respectively.</p>
+  </li>
+</ol>
 
   </article>
   <p class="post-tags">
-    <a href="/blog/2012"> <i class="fas fa-calendar fa-sm"></i> 2012 </a>
+    <a href="/blog/2013"> <i class="fas fa-calendar fa-sm"></i> 2013 </a>
       ·  
     <a href="/blog/category/parallel-computing">
       <i class="fas fa-tag fa-sm"></i> Parallel Computing</a>

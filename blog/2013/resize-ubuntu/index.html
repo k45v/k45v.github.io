@@ -18,7 +18,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>The MOESISm (MOESIF) cache coherence protocol | FirstName  LastName</title>
+    <title>Resizing the Ubuntu paritition in a Dual Boot Windows7 and Ubuntu 12.04 system | FirstName  LastName</title>
     <meta name="author" content="FirstName  LastName">
     <meta name="description" content="">
     <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website">
@@ -41,7 +41,7 @@
     <link rel="shortcut icon" href="/assets/img/pcb.jpg">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://k45v.github.io/blog/2012/MOESISm/">
+    <link rel="canonical" href="https://k45v.github.io/blog/2013/resize-ubuntu/">
     
     <!-- Dark Mode -->
     
@@ -117,80 +117,93 @@
 <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">The MOESISm (MOESIF) cache coherence protocol</h1>
-    <p class="post-meta">December 16, 2012</p>
+    <h1 class="post-title">Resizing the Ubuntu paritition in a Dual Boot Windows7 and Ubuntu 12.04 system</h1>
+    <p class="post-meta">February 4, 2013</p>
        
   </header>
 
   <article class="post-content">
-    <p>In one of the courses I took this semester, we were asked to modify an existing invalidation based cache coherence protocol to reduce the off-chip Bandwidth usage. The motivation for this problem statement was limited off-chip bandwidth due to constrained number of pins that a chip can have.</p>
+    <p>I have a Dual boot system (Ubuntu 12.04 LTS and Windows7) with the GRUB as my bootloader. Lately, I have been using a lot of tools offered for Linux and I wanted to expand the partition size for my Ubuntu. I remember the last time when I tried to do this, using a partition manager in Windows; It did not end well. So this time I tried a different approach and it proved to be so easy that I decided to document it.</p>
 
-<p>Initially I had used the given benchmarks to determine off-chip bandwidth usage for MSI, MESI and MOESI protocols and among them, MESI seemed to perform the best. The MOESI protocol, in spite of having fewer writebacks (because it allows dirty sharing) lost out on cache-to-cache transfers because the shared state is not allowed to Flush. Hence, although MOESI accounts for Flush in a read after write operation ( ‘M’ to ‘O’ state transition and ‘O’ can Flush), a read after read will cause a block to be brought in from memory (on a miss) even if the cache on same level has a copy. In order to accommodate this request I decided to introduce a new state namely ‘Sm’ (shared master, which I later found to be similar to the Forward state in Intel MESIF protocol) and the results were quite interesting. Below is the explanation for the MOESISm protocol: (the terminology is based on what had been taught in class)</p>
-
-<p>Processor requests to the cache:</p>
-<ul>
-  <li>PrRd: Processor request to read to a cache block</li>
-  <li>PrWr: Processor request to write to a cache block</li>
-</ul>
-
-<p>Bus-side requests:</p>
-<ul>
-  <li>BusRd: Snooped request that some other processor has requested to read a cache block</li>
-  <li>BusRdX: Snooped request that some other processor has requested a read exclusive (write) to a cache block. The requesting processor does not have the block yet.</li>
-  <li>BusUpgr: Snooped request that some other processor has requested a write to a cache block that it already has.</li>
-  <li>Flush: Snooped request that indicates that entire cache block has been placed on the bus for cache to cache transfer</li>
-  <li>FlushOpt: Snooped request that indicates that entire cache block has been placed on the bus for cache to cache transfer. It’s called FlushOpt because  it offers performance enhancement and it is not really a correctness requirement.</li>
-</ul>
-
-<p><strong>NOTE:</strong> For a BusRd transaction, if a copy is found by other snoopers, they assert the COPIES-EXIST line (C) else the line is low (!C).</p>
-
+<ol>
+  <li>Boot into your Ubuntu OS. Then download the Ubuntu image file from <a href="http://www.ubuntu.com/download/desktop" rel="external nofollow noopener" target="_blank">here</a>. It would be an “ISO” file.</li>
+</ol>
 <div class="text-center">
   <figure>
 
   <picture>
     
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/proc_init-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/proc_init-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/proc_init-1400.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/download_ubuntu-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/download_ubuntu-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/download_ubuntu-1400.webp"></source>
     
 
     <!-- Fallback to the original file -->
-    <img src="/assets/img/proc_init.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+    <img src="/assets/img/download_ubuntu.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
 
-  </picture><figcaption class="caption">Processor Side</figcaption>
+  </picture>
 
 </figure>
 
-  <figure>
+  </div>
+
+<ol start="2">
+  <li>
+    <p>Create a bootable USB stick using the instructions given <a href="http://www.ubuntu.com/download/help/create-a-usb-stick-on-ubuntu" rel="external nofollow noopener" target="_blank">here</a></p>
+  </li>
+  <li>
+    <p>Restart your PC and hit Esc or F12 (whatever takes you into boot menu) and select boot from USB device.</p>
+  </li>
+  <li>Click on Try Ubuntu. Now install gparted using the command below:
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nb">sudo </span>apt-get <span class="nb">install </span>gparted
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Resize the windows partition which is at the end of the Windows file system to create un-allocated free space(in my case the partition did not hold the OS).</p>
+  </li>
+  <li>
+    <p>Resize the Ubuntu partition to use the created free space. (Now, GRUB stage 1 is no longer at the beginning of the parition).</p>
+  </li>
+  <li>
+    <p>Apply changes. It should take roughly 1.5min per GB of space allotted.</p>
+  </li>
+  <li>Now use Boot repair to fix the problems in the GRUB Bootloader (Instructions were borrowed from <a href="http://www.howtogeek.com/114884/how-to-repair-grub2-when-ubuntu-wont-boot/" rel="external nofollow noopener" target="_blank">How-To Geek</a>) :
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:yannubuntu/boot-repair
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> boot-repair
+boot-repair
+</code></pre></div>    </div>
+    <p>Click on recommended repair.</p>
+  </li>
+  <li>Restart your computer and enjoy the expanded disk space in your Ubuntu OS.</li>
+</ol>
+<div class="text-center">
+<figure>
 
   <picture>
     
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/bus_init-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/bus_init-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/bus_init-1400.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/resize_ubuntu-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/resize_ubuntu-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/resize_ubuntu-1400.webp"></source>
     
 
     <!-- Fallback to the original file -->
-    <img src="/assets/img/bus_init.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+    <img src="/assets/img/resize_ubuntu.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
 
-  </picture><figcaption class="caption">Bus Side</figcaption>
+  </picture>
 
 </figure>
 
 </div>
 
-<p>For the processor side, the state diagram uses the notation Processor_request/Resulting_bus_transaction and for the bus side it is snooped_transaction/resulting_action.</p>
-
-<p>The advantages of this protocol??? Well it allows dirty sharing and reduces traffic due to writebacks. It saves power when compared to MESI protocol. How? Well in case of MESI, the FlushOpt is generated by multiple caches in ‘S’ state, but only one is selected for cache-to-cache transfer. So, power is spent in reading the cache, trying to obtain bus access and then cancelling it when a cache senses that someone else has supplied the block earlier. This is avoided because FlushOpt will only be sent by the cache block in ‘Sm’ state. Hence, read after read requests will also get cache-to-cache transfers. The resulting off-chip bandwidth usage was the least for the same benchmark using MOESISm protocol.Yayyy!!!</p>
-
-<p>The only drawback which I can notice for this protocol is that, for MESIF the ‘F’ state migrates to a newer copy as mentioned here and the newer copy has lesser chances of getting evicted (temporal locality). However, in the protocol I have suggested, the migration of ‘Sm’ state is not possible because with the current hardware we only have one Copies exists line. Now, if the newer copy has to go into ‘Sm’ state, then the older copy may either be in ‘E’ state OR in ‘O’ state OR in ‘Sm’ state. Here, all these intial states should transition into ‘S’ state but if the ‘O’ state moves into ‘S’ state then what happens to the writeback??? Well, I guess if we change the protocol so that the ‘O’ state performs a writeback when it moves into ‘S’ state, then this can be achieved. I just thought of this last part now 😀 I guess blogging really helps!!!</p>
-
   </article>
   <p class="post-tags">
-    <a href="/blog/2012"> <i class="fas fa-calendar fa-sm"></i> 2012 </a>
+    <a href="/blog/2013"> <i class="fas fa-calendar fa-sm"></i> 2013 </a>
       ·  
-    <a href="/blog/category/parallel-computing">
-      <i class="fas fa-tag fa-sm"></i> Parallel Computing</a>
+    <a href="/blog/category/linux">
+      <i class="fas fa-tag fa-sm"></i> Linux</a>
     
   </p>
 
