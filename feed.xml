@@ -1,4 +1,491 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://k45v.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://k45v.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-04-18T06:09:03+00:00</updated><id>https://k45v.github.io/feed.xml</id><title type="html">blank</title><entry><title type="html">Soldering Pointers</title><link href="https://k45v.github.io/blog/2013/soldering/" rel="alternate" type="text/html" title="Soldering Pointers" /><published>2013-02-17T00:00:00+00:00</published><updated>2013-02-17T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/soldering</id><content type="html" xml:base="https://k45v.github.io/blog/2013/soldering/"><![CDATA[<p>Pointers to keep in mind while soldering:</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://k45v.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://k45v.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-04-20T06:26:32+00:00</updated><id>https://k45v.github.io/feed.xml</id><title type="html">blank</title><entry><title type="html">Designing a DAQ for a formula student race car</title><link href="https://k45v.github.io/blog/2013/daq/" rel="alternate" type="text/html" title="Designing a DAQ for a formula student race car" /><published>2013-07-14T00:00:00+00:00</published><updated>2013-07-14T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/daq</id><content type="html" xml:base="https://k45v.github.io/blog/2013/daq/"><![CDATA[<p>Formula SAE is a student design competition in which a prototype race car is evaluated for its potential as a production item. In 2010, I got the chance to lead the electronics team of Orion Racing India (the FSAE team from K. J. Somaiya College of Engineering). Our joint efforts resulted in a DAQ (Data Acquisition System) and a Color LCD driver interface which was selected among the top 8 out of 78 international teams for the “Most Innovative use of Electronics Award” at FSG 2010.</p>
+
+<p>DAQ+LCD</p>
+
+<p>The DAQ could log data from 18 sensors @36Hz (we were initially looking at 2Hz with the GPS on-board! More on that later) and could control the coolant pump and radiator fan based on sensor readings. Crucial data was relayed to the Color LCD screen mounted on the steering wheel. A lot of DAQ systems do exist in the market and you can call this re-inventing the wheel, but when one is young, the learning experience is worth the effort. In this blog post I’ll discuss the tech details of the DAQ, some useful tools/approaches and the problems we faced.</p>
+
+<p>A well defined design procedure always helps you reduce the overall development time. We had learn’t this first hand from our tronics seniors @Orion. The first stage involved simulation and modeling. In comes Proteus ISIS, a tool which we used extensively to test everything, right from basic fundae of voltage drop on open resistor terminals to differential amplifier gains and serial bus communication protocols.</p>
+
+<p>ftov1Next we tested these circuits on breadboard. Apart from verifying the operation, breadboard testing also helps to visualize circuit design since most of the components we were using would be going on our final PCBs. We then fabricated low cost prototype PCBs to test the more crucial components like GPS receivers and micro-controllers.</p>
+
+<p>prototype</p>
+
+<p>Finally, we got the shiny green DAQ PCB boards made. Smiles smiles ^__^</p>
+
+<p>SENSOR REQUIREMENTS, CALIBRATION
+Sensors are responsible for conversion of various mechanical parameters into measurable electrical quantities. The sensor selection for every team changes with its design goals. Typical sensors implemented by most teams include three axis accelerometers and sensors to detect wheel speed, shock travel, steering angle, manifold air pressure, coolant temperature, throttle position and gear position.</p>
+
+<p>Accelerometer:
+The MMA7260Q, low cost three axis capacitive micro machined accelerometer was selected to monitor the vehicle accelerations. It features signal conditioning, a single-pole low pass filter, temperature compensation and selectable sensitivity (1.5g/2g/4g/6g). Its capacitive approach offers several benefits when compared to the piezoresistive sensors used in many other accelerometers, notably a wider temperature range and response to DC as well as dynamic vibrations. The sensor outputs voltages proportional to the experienced g-force.</p>
+
+<p>Wheel speed sensor:
+Wheel speed is sensed using an NPN type inductive proximity sensor. As a tooth on the wheel passes by the sensor, a pulse is generated in a recurring manner. The pulse train will increase in frequency as the vehicle speeds up and decrease as the vehicle slows down. Therefore, a frequency to voltage converter, LM2907 was used to convert the generated frequency into a corresponding output voltage.</p>
+
+<p>wheelspeed1Low cost inductive proximity sensors have a maximum switching frequency of approximately 600Hz. Assuming maximum vehicle speed to be 120km/hr, the number of teeth in the toothed wheel was selected to be 30.</p>
+
+<p>Shock travel sensor:
+Suspensions play a key role in the vehicle dynamics of a race car. Knowledge of the linear displacement of the shocks for a particular damping setting is critical in evaluating the damping performance in various loading scenarios. Shock travel sensors used to measure these linear displacements are available in two types: wire wound and conductive plastic. Conductive Plastic (CP) displacement sensors are free from hysteresis and hence recommended. We got the wire wound ones (cheaper 😛 ).</p>
+
+<p>Steering angle sensors:
+A rotary potentiometer was housed inside the steering rack housing and attached to the steering column to measure the steering angle. Yeah we did use a lot of potentiomenters (cheaper!). If possible, I would recommend using non-contact based sensors (LVDT, capacitive, etc.) so that they won’t be worn out over time.</p>
+
+<p>Gear position sensor:
+For the purpose of gear position indication, a small gear is meshed with the gear drum in the engine. A high quality potentiometer shaft is rotated accordingly by the gear drum using this arrangement. Distinct voltage levels can be obtained for each position.</p>
+
+<p>Fuel level sensor:
+A typical fuel gauge comprising of a float that is mounted on the end of a pivot arm was used as a fuel level sensor. The resistance of the fuel gauge changes as the float moves up and down with the fuel level. Errors introduced in the readings due to fuel slosh were reduced by implementing a moving average filter with a window size of 15.</p>
+
+<p>Coolant temperature sensor:
+Two negative temperature co-efficient thermistors with brass housing and a temperature range of -40 degree C to 135 degree C were used to measure the coolant temperature.</p>
+
+<p>thermistor
+A potential divider network was implemented to get the required output voltage swing. A second order logarithmic curve was fitted to the response of this sensor. (MATLAB).</p>
+
+<p>All of the sensors mentioned above need to be calibrated. By that I mean the sensors should be taken from the minimum to maximum reading possible and other way round (to account for hysteresis) over multiple iterations. The procedure should be well documented, so that every iteration is exactly the same as previous one. Only then the resultant data should be used for translating sensor reading to derived units.</p>
+
+<p>SUPPORTING HARDWARE
+Cooling control board:
+Every engine is designed to work at maximum efficiency in a certain temperature range. The devices which can be controlled to maintain the engine in the specified temperature range are the coolant pump and the radiator fan. The cooling team provided us with three temperature set-points: 75, 80 and 85 degree C, which can be selected by the driver.</p>
+
+<p>ccb</p>
+
+<p>The hardware used to regulate the engine temperature comprises of a Goodsky GU-SH-112DM relay, used to control the radiator fan and an IRFZ48 power MOSFET, used to control the coolant pump. The control signals generated based on the set point are as shown.</p>
+
+<p>coolgraph</p>
+
+<p>Power card:
+A noise free, light weight power supply is an essential requirement of a portable DAQ System. We designed a power Card based on low cost linear voltage regulators and equipped with features like surge voltage protection (using Metal Oxide Varistors), over current protection (using Polymeric Positive Temperature Coefficient fuses), reverse voltage and over voltage protection (using silicon avalanche diodes). However, I would recommend using switching supplies. I talk more about this in my other blog post.</p>
+
+<p>DAQ v1:
+The DAQ v1 was built around a PIC18F4680 microcontroller. It was designed as a stand-alone system, so as to be exempted from the cost report at the competition. The PIC18F4680 runs in HSPLL (High Speed Phase Locked Loop) mode under which a PLL multiplies the oscillator output frequency of 10MHz by 4 to get maximum possible operating frequency of 40MHz. The10bit ADC channels on PIC were expanded using analog multiplexers (CD4052). A temperature sensor in the form of LM-35 was included to ascertain that the operating temperature was within the hardware limits. CAN interface was provided using MCP2551 CAN transceiver. The firmware for DAQ v1 was developed using embedded C.</p>
+
+<p>01012008015</p>
+
+<p>The CP3838 GPS (Global Positioning System) module was selected (rather sponsored, so selected 🙂 ) to satisfy the vehicle tracking requirements. Data recorded from the GPS receiver played a significant role in validating sensor data. The track shown was plotted using co-ordinates recorded from the GPS receiver. Interface to an MMC/SD card for logging sensor and GPS data was provided via SPI (Serial Peripheral Interface). The data is stored in as comma separated value file format which can be easily imported into MATLAB for analysis. A logging rate of 33Hz was recorded for 14 sensors interfaced to the module.</p>
+
+<p>gps track</p>
+
+<p>I mentioned before that we had a logging rate of 2Hz initially. This was because we were doing all conversions from sensor ADC values to derived parameters on the micro-controller before logging into SD card. Floating point operations require computational power and this translates into conversion time for a slower 8-bit micro-controller. A simple software change to log readings directly helped us notch up the logging rate! Batching of data would have helped improve this even more (but I realised that 2 years later! 😛 ).</p>
+
+<p>DAQ v2:
+The DAQ v1, although a fully functional stand alone system, was reliant on GPS for generating time-stamps. The 10bit ADC of PIC18F4680 could not provide the degree of precision required by the team. In addition, the analog multiplexer introduced a series resistance of 270ohm and a delay varying from 500-1000ns (nanosecond) on the signal acquisition line. Hence, a real time clock (DS1307) was introduced on-board to get time-stamps at higher frequency and three 12-bit ADCs (TLV2553) were interfaced via SPI to get a higher resolution of the sensor data. The DAQ v2 also features fourth order Sallen-key based low pass filters and transient voltage suppressors for noise suppression and anti-aliasing. A logging rate of 36Hz was recorded for 18 sensors.</p>
+
+<p>filter</p>
+
+<p>Analog filtering was used to remove extraneous noise from the signal lines (thanks Mr. Claude Rouelle for his suggestions). In the absence of an analog filter, signals outside half of the sampling bandwidth of the ADC are aliased back into the signal path. Once a signal is aliased during the digitalization process, it is impossible to differentiate between noise with frequencies in band and out of band. The signal-to-noise ratio of the 12-bit ADC is 74dB and the bandwidth of interest for the analog signal is DC to 1 kHz. Hence, a 4-pole low pass filter was designed to provide an attenuation of 80dB/decade with a cut-off frequency of 1 kHz.</p>
+
+<p>We also tried to spend some time on telemetry but the transcievers we selected did not have sufficient range. For all the readers I would recommend using Maxstream 9XTend or Microhard n920 if they wish to have telemetry. We used MATLAB to develop GUI for analyzing the logged data, but with the car manufacturing being delayed we did not have much time to record/analyze/tune vehicle performance. From my experience I now feel that a benchmark DAQ would have been useful to test and tune the module better because whatever data we captured, there was no way of concluding that it was accurate enough. You can find the wiring layouts for these modules here.</p>]]></content><author><name></name></author><category term="Embedded Systems" /><category term="FSAE" /><summary type="html"><![CDATA[Formula SAE is a student design competition in which a prototype race car is evaluated for its potential as a production item. In 2010, I got the chance to lead the electronics team of Orion Racing India (the FSAE team from K. J. Somaiya College of Engineering). Our joint efforts resulted in a DAQ (Data Acquisition System) and a Color LCD driver interface which was selected among the top 8 out of 78 international teams for the “Most Innovative use of Electronics Award” at FSG 2010.]]></summary></entry><entry><title type="html">The eXtreme Computer Design Competition 2013</title><link href="https://k45v.github.io/blog/2013/xcdc/" rel="alternate" type="text/html" title="The eXtreme Computer Design Competition 2013" /><published>2013-04-05T00:00:00+00:00</published><updated>2013-04-05T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/xcdc</id><content type="html" xml:base="https://k45v.github.io/blog/2013/xcdc/"><![CDATA[<p>It has been quite some time since I participated in a competition (2010 was the last time @ <a href="/blog/2013/daq/">FSG</a>). I had been waiting for the <a href="https://sites.google.com/a/ncsu.edu/xcdc2013/home">XCDC2013</a> and what an amazing experience it was!!!</p>
+
+<p>I learn’t a lot and thoroughly enjoyed the team work. It was like a symphony. Spending hours with my team mates Bharat and Roshan, sprouting new approaches and bouncing ideas off each other. I can never forget that moment when at 2am in the Hunt library we managed to Overclock the Snapdragon S3 (APQ8060) on the <a href="https://developer.qualcomm.com/mobile-development/development-devices/snapdragon-mdp-legacy-devices">MSM8660</a> (Dragonboard) and there were high fives all around. In this blog post I will try to cover everything what we did/tried for this event. (The <a href="#appendix">Appendix section</a> has all the detailed procedures)</p>
+
+<p><strong>Problem Statement:</strong> Optimize the Page load speed of a web browser on the platform previously mentioned. We had to improve both performance and energy efficiency.</p>
+
+<p>Before we begin the optimizations/changes we need to know how to measure the performance and energy efficiency. So, we decided to rely on the following tools:</p>
+
+<ul>
+  <li><strong>Browser benchmarks:</strong> Use the benchmarks mentioned <a href="http://wikis.lib.ncsu.edu/index.php/XCDC_Android_Development#Browser_Benchmarks">here</a> to check page load times for your browser. Okay now go use <a href="http://www.webkit.org/perf/sunspider-0.9.1/sunspider-0.9.1/driver.html">this link</a> to see which out of Chrome, IE and Firefox is fastest on your PC… No seriously, try it out.</li>
+  <li><strong>DDMS/Traceview:</strong> Dalvik Debug Monitor Server (DDMS) is accessible via Eclipse and is present in the <a href="http://developer.android.com/sdk/index.html">ADT bundle</a> tools section. It can be used to generate trace logs for applications/processes running on the target device. Use this to determine the costliest sections of the application.</li>
+  <li><strong>Perf:</strong> The <a href="https://perf.wiki.kernel.org/index.php/Tutorial">perf</a> tool can be used for recording process activity information. Most of the frequently invoked code is written in native C. This is where perf comes in. The names of functions in perf reports are generated by JNI and they can be correlated with the corresponding “.so” (shared object files) shown in perf report. You can look for these functions in the source code for modifications. Additionally, you may check the hardware counters using perf (if enabled).</li>
+  <li><strong>Trepn Profiler:</strong> This tool has been designed by Qualcomm to measure effects of an application on the mobile device’s power, data and CPU. The MDP (Mobile development platform) has embedded sensors which are used by <a href="https://developer.qualcomm.com/mobile-development/development-devices/trepn-profiler">trepn</a> to gather the required information and it allows saving all gathered data to a csv file.</li>
+  <li><strong>AnTuTu Benchmark:</strong> The AnTuTu benchmark is an android app which gauges performance based on different tests. Though this does not measure browser performance, it is useful to determine general purpose performance.</li>
+</ul>
+
+<p>The MDP came with a stock gingerbread image. We ran the stock Android browser through the <a href="#perf-based-profiling">Profiling procedure</a> and collected data. Next we <a href="#flash-ics-stock-image-provided-by-bsquare-using-windows7">flashed Ice cream sandwich</a> on the MDP so that we can work on the Browser in the latest Android flavor compatible with the MDP. Then we profiled again to collect baseline data on ICS. Just upgrading to ICS gave a speedup of around 2 (compared to gingerbread baseline). We <a href="#compiling-ics-from-source"></a> ( had some snacks, took a break, fixed some errors…this part over and over again) on 32-bit Ubuntu 12.04  and a MAC OSX 10.8.3.</p>
+
+<p>Now came the interesting part OPTIMIZATIONS!!!</p>
+
+<p>A look at the Sunspider trace collected from DDMS showed that the browser package is nowhere near the costliest sections. The major chunk of time is spent in Timer handling code which belongs to the Webcore package. Time to do a grep in the Kernel source. The outcome: we located frameworks/base/core/java/android/webkit/JWebCoreJavaBridge.java (Note that for all paths hereon we are in the ICS source directory that was pulled) where the method code was present. Then Surpiiissseee, the file is a bridge which provides interface for functions implemented in native C. Okay so now to look for the C code and we ended up at external/webkit/Source/WebKit/android/jni/JavaBridge.cpp . The code is small, the underlying functions are small and offer no avenues for the optimizations we had in mind (removing dependencies, vectorizing code for the Neon SIMD unit). Back to hunting for places to optimize. Next we found the code responsible for triggering shared timers. We reduced the max duration of firing timers at external/webkit/Source/WebCore/platform/ThreadTimers.cpp  in the webkit code. This just slowed the benchmarks down and we later figured out that this timer changes the interval at which next computation will be processed by Webkit <a href="http://homes.cs.washington.edu/~burg/projects/timelapse/articles/webkit-event-implementation/">(details here)</a>.</p>
+
+<p>At this point we were going nowhere and just jumping from one function to another to find a small piece of code in every one of them. That’s when Bharat said let’s do kernel modifications. But where would we start? He proposed using a kernel module to overclock the processor <a href="http://forum.xda-developers.com/showthread.php?t=1158951">(refer this link)</a>. <a href="#permitting-apps-to-use-root">(Here is how we set up the needed apps)</a>. Well it was a new approach, we thought it’s worth a shot and began compiling the KMOD <a href="#makefile-to-compile-kmod-for-android-ics-source">(makefile here)</a>. Locating the kernel source directory and fixing the makefile was another challenge. We pulled Linux kernel and used that directory as source but it asked for configurations. Then we tried default configurations using “make menuconfig” and “make oldconfig”. No luck. A modinfo showed inconsistency in the vermagic. Finally found the exact source directory and did insmod successfully. The MDP rebooted! Tried another set of configurations another reboot and no messages using dmesg or logcat. Finally found kernel messages by doing “cat /proc/kmsg”. The module simply looked for for the voltage setting and replaced any entry in memory that matched the unsigned long value 1250000 with an appropriately different value. There was a illegal memory access which causes the Kernel oops, so we moved the start address for the lookup. Luckily the module got inserted for 1.5GHz setting (max frequency previously was 1.2GHz) and we ran the benchmark. We expected a speedup but instead the performance dropped by half. Maybe there was a mismatch in the L2, RAM and CPU frequency or the module replaced values in some other locations as well which had adverse affects on the system.</p>
+
+<p>Down but not out, we decided to look into the kernel source to find matching functions and located the tables responsible for the clock setup and PLL (kernel/arch/arm/mach-msm/acpuclock-8×60.c). Bingo, went through the code, added entries, compiled and flashed. Checked the MDP. Yes! the changes reflected. Ran the benchmarks. Did it work? See for yourself:</p>
+
+<div class="text-center">
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/performance_speedup-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/performance_speedup-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/performance_speedup-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/performance_speedup.png" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture><figcaption class="caption">Browser speedup for benchmarks</figcaption>
+
+</figure>
+
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/results_antutu-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/results_antutu-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/results_antutu-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/results_antutu.png" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture><figcaption class="caption">Antutu scores (higher means better)</figcaption>
+
+</figure>
+
+</div>
+
+<p>We presented out results and bagged the 3rd spot at the competition. Why not 1st? Well we overclocked the MDP, but then that reduces battery life. The scheduler and high-low frequencies at kernel level have been designed to give the best experience both in terms of performance and energy consumption. So, if we had concentrated more on the browser source (Chrome or <a href="https://wiki.mozilla.org/Mobile/Fennec/Android">Fennec</a>; we did compile source for Fennec which took about 7 hours on my system) maybe the results would have been different. Well, in that case we wouldn’t have overclocked the system right? In short what we did was definitely worth it!</p>
+
+<p>With that ended our attempt at XCDC 2013 !!!</p>
+
+<h2 id="appendix">Appendix</h2>
+
+<h4 id="perf-based-profiling">Perf based profiling</h4>
+<p>We used the precompiled perf made available on <a href="http://www.spencerpages.com/wiki/index.php?title=Dragonboard_8060_Development#Using_pre-compiled_perf">spencerpages wiki</a>.</p>
+<ol>
+  <li>Manually start the browser and note pid using:-
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$:</span> adb shell ps | <span class="nb">grep </span>browser
+</code></pre></div>    </div>
+  </li>
+  <li>Start the desired web page through adb shell
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$:</span> am start <span class="nt">-a</span> android.intent.action.VIEW <span class="nt">-d</span> <span class="se">\</span>
+http://www.webkit.org/perf/sunspider-0.9.1/sunspider-0.9.1/driver.html <span class="se">\</span>
+<span class="nt">-n</span> com.android.browser/.BrowserActivity
+</code></pre></div>    </div>
+  </li>
+  <li>Steps to initialize ‘perf’
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#: export PERF_PAGER=/system/bin/cat</span>
+</code></pre></div>    </div>
+    <p>for Gingerbread image use <code class="language-plaintext highlighter-rouge">#: perf record -p</code><br />
+for ICS use (since hardware events not enabled) <code class="language-plaintext highlighter-rouge">#: perf record -e cpu-clock -F 500 -p</code></p>
+  </li>
+  <li>Run the Benchmark through the device</li>
+  <li>When the benchmark run completes, kill ‘perf’ using ‘ctrl+c’</li>
+  <li>Note the benchmark result that is being shown on the device</li>
+  <li>The collected perf data can be viewed by using the command
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#: perf report</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="trepn-profiling">Trepn profiling</h4>
+<ol>
+  <li>Install Trepn using the instructions provided at the <a href="https://developer.qualcomm.com/mobile-development/development-devices/trepn-profiler">official site</a>.</li>
+  <li>After installation, open the Trepn Profiler App and in settings select the parameters that you wish to record. Then select “Profile an app” -&gt; select “Browser”.</li>
+  <li>This will open the browser and the profiler will start collecting data.</li>
+  <li>Open the various sites that are to be tested using the adb shell.</li>
+  <li>After the benchmarks have completed, open Trepn Profiler again and select “Stop Profiling”. At this point, it will ask you whether you want to save the data collected in the current session. The data can be saved as a .csv and ‘pull’ed to your machine for further analysis.</li>
+</ol>
+
+<h4 id="ddms-profiling">DDMS profiling</h4>
+<ol>
+  <li>Follow the next few steps just to make sure that you are monitoring the correct method using DDMS.
+    <ul>
+      <li>Start the browser</li>
+      <li>Check PID using
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#: adb shell ps</span>
+</code></pre></div>        </div>
+      </li>
+      <li>Look for the same PID in the DDMS ‘Device’ tab.</li>
+      <li>This is the method (Browser) you will be profiling.</li>
+    </ul>
+  </li>
+  <li>Click on “Start method profiling”.</li>
+  <li>Run the benchmarks.</li>
+  <li>Click on “Stop method profiling”.</li>
+  <li>This opens traceview which shows the ‘Exclusive’ and ‘Inclusive’ execution time of each method in the browser.</li>
+  <li>This trace file can be saved for later reference.</li>
+</ol>
+
+<h4 id="flash-ics-stock-image-provided-by-bsquare-using-windows7">Flash ICS stock image provided by Bsquare using Windows7</h4>
+<p>Refer procedure <a href="http://www.spencerpages.com/wiki/index.php?title=Dragonboard_8060_Development#Upgrading_to_the_Bsquare_Ice_Cream_Sandwich_Image_.28Windows_only.29">here</a> with the following changes:</p>
+
+<p>After downloading ADT bundle start SDKManager.exe. It should load android sdk manager and show Install 1 package. Click install.</p>
+
+<p>Usb driver will be installed in adt-bundle-windows-x86-20130219\sdk\extras\google\usb_driver
+The folder .android is not in “documents and settings”. It is in C:\Users\.android
+adb has moved to platform-tools.</p>
+
+<h4 id="making-android-stock-browser-modifications">Making Android Stock browser modifications</h4>
+<p>Once you have the source you may make changes and recompile source, then flash images or alternatively:</p>
+
+<p>Pull stock browser for backup</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb pull /system/app/Browser.apk
+</code></pre></div></div>
+<p>Remove/Uninstall the stock browser using:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb remount
+adb shell <span class="nb">rm</span> /system/app/Browser.apk
+</code></pre></div></div>
+<p>Do “adb reboot”
+Install your browser using:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>APQ8060_ICS/out/target/product/msm8660_surf/system/app
+adb push ./Browser.apk /system/app/
+</code></pre></div></div>
+
+<p>Profiling sunspider with DDMS/traceview will show major chunk on time being spent in sharedTimerFired which belongs in webkit package. The WebKit Java Bridge is in frameworks/base/core/java/android/webkit/Jwebcorejavabridge and in external/webkit/Source/WebKit/android/jni/JavaBridge.cpp. Changes to the timers are in external/webkit/Source/WebCore/platform/ThreadTimers.cpp.</p>
+
+<p>The libraries, once compiled, will be found in out/target/product/msm8660_surf/system/lib. The perf tool showed major time being used by libv8.so and libwebcore.so. But a “ls -la” in the above directory shows libwebcore.so being updated after making changes to shared timer code. Hence push this file to /system/lib and also push the app Browser.apk</p>
+
+<h4 id="makefile-to-compile-kmod-for-android-ics-source">Makefile to compile KMOD for Android ICS source</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>KERNEL_BUILD :<span class="o">=</span> out/target/product/msm8660_surf/obj/KERNEL_OBJ/
+KERNEL_CROSS_COMPILE :<span class="o">=</span> prebuilt/darwin-x86/toolchain/arm-eabi-4.4.3/bin/arm-eabi-
+
+obj-m +<span class="o">=</span> 8x60_oc.o
+
+all:
+	make <span class="nt">-C</span> <span class="si">$(</span>KERNEL_BUILD<span class="si">)</span> <span class="nv">ARCH</span><span class="o">=</span>arm <span class="nv">CROSS_COMPILE</span><span class="o">=</span><span class="si">$(</span>KERNEL_CROSS_COMPILE<span class="si">)</span> <span class="nv">M</span><span class="o">=</span><span class="si">$(</span>PWD<span class="si">)</span> modules
+
+clean:
+	make <span class="nt">-C</span> <span class="si">$(</span>KERNEL_BUILD<span class="si">)</span> <span class="nv">M</span><span class="o">=</span><span class="si">$(</span>PWD<span class="si">)</span> clean 2&gt; /dev/null
+	<span class="nb">rm</span> <span class="nt">-f</span> modules.order <span class="k">*</span>~
+</code></pre></div></div>
+
+<h4 id="monitor-kernel-oops">Monitor Kernel oops</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#: adb shell</span>
+<span class="c">#: cat /proc/kmsg</span>
+</code></pre></div></div>
+
+<h4 id="reboot-in-fastboot-if-mdp-refuses-to-boot-up">Reboot in fastboot if MDP refuses to boot up</h4>
+
+<p>Disconnect all power and keep the 5 key pressed when you connect the power. Do “fastboot devices” to check for the MDP.</p>
+
+<h4 id="permitting-apps-to-use-root">Permitting apps to use root</h4>
+<p>Download SuperSU (the broker app which allows user apps to gain root access)</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://download.chainfire.eu/315/SuperSU/UPDATE-SuperSU-v1.25.zip
+</code></pre></div></div>
+<p>Extract the zip file</p>
+
+<p>Push the Superuser.apk to /system/app</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb push Superuser.apk /system/app
+</code></pre></div></div>
+<p>Push the su binary to /system/bin</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb push su /system/bin
+</code></pre></div></div>
+<p>Make the binary owned by root</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell <span class="nb">chown </span>0.0 /system/bin/su
+</code></pre></div></div>
+<p>Make the binary executable, setuid, and setgid</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell <span class="nb">chmod </span>6755 /system/bin/su
+</code></pre></div></div>
+<p>Reboot the phone</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb reboot
+</code></pre></div></div>
+<p>Start SuperSU from the launcher</p>
+
+<p>Launch SetCPU app and grant it su permissions. Then use it to increase CPU frequency or alternatively use:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#: adb shell</span>
+<span class="c">#: echo "performance" &gt; /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor</span>
+</code></pre></div></div>
+
+<h4 id="mount-ntfs-filesystem-on-ubuntu-with-read-writeexecution-permissions-in-case-you-wish-to-compile-on-external-drive">Mount NTFS filesystem on Ubuntu with read-write/execution permissions (In case you wish to compile on external drive)</h4>
+
+<p>Insert/mount your do “sudo blkid” and note the device file for your disk “/dev/sdc1” (in my case).
+unmount the disk</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo mkdir</span> /media/harddisk
+<span class="nb">sudo </span>mount <span class="nt">-t</span> ntfs <span class="nt">-o</span> <span class="nv">fmask</span><span class="o">=</span>0022,dmask<span class="o">=</span>0000,uid<span class="o">=</span>1000,gid<span class="o">=</span>1000 /dev/sdc1 /media/harddisk
+</code></pre></div></div>
+
+<h4 id="compiling-ics-from-source">Compiling ICS from source</h4>
+<p>Follow all of the steps mentioned <a href="http://source.android.com/source/initializing.html">here</a>. Specifically the ones under Branch 4.0.x and previous since you will be compiling ICS.</p>
+
+<p>Also follow the steps given at <a href="http://www.spencerpages.com/wiki/index.php?title=Dragonboard_8060_Development#Recreating_the_Ice_Cream_Sandwich_Source">Spencerpages</a> (do not use the fixes mentioned for errors in case you are on MAC)</p>
+
+<p>We managed to compile the ICS source on two different platforms, Ubuntu 12.04 LTS (32-bit) and Mac OS X (10.8.3).</p>
+
+<h4 id="compile-android-ics-on-ubuntu-1204-lts-32-bit">Compile Android ICS on Ubuntu 12.04 LTS (32-bit)</h4>
+
+<p>Changes specific to Ubuntu 12.04 LTS (32-bit) are as follows:
+After the Step 8 mentioned in “ Recreating the Ice Cream Sandwich” section in spencer pages, you might encounter the following errors:</p>
+
+<p>Error occurred during initialization of VM
+make: <em>** [out/target/common/obj/JAVA_LIBRARIES/core_intermediates/noproguard.classes-with-local.dex] Error 1
+OR
+Could not create the Java virtual machine.
+ERROR: signapk.jar failed: return code 1
+make: **</em> [out/target/product/msm8660_surf/msm8660_surf-ota-eng.falcon.zip] Error 1</p>
+
+<p>Fix:</p>
+
+<p>Modify build/core/definitions.mk
+On Line 1528 change Xmx to 1024M
+$(if $(findstring windows,$(HOST_OS)),,-JXms16M -JXmx1024M)
+In build/tools/releasetools/common.py
+change Xmx2048m to Xmx1024m at all occurrences</p>
+
+<h4 id="compile-android-ics-on-mac-os-x-1083">Compile Android ICS on Mac OS X (10.8.3)</h4>
+
+<p>The changes specific to compiling on OS X and those not presented in the two links at the top are mentioned here:</p>
+
+<ol>
+  <li>Grab the Mac OS X 10.5 SDK.
+Most of the tools that are required will be installed when you grab the latest version of Xcode that is available. Also, do install the “Command Line Tools” from within Xcode.
+For the 10.5 SDK, you need to register as an Apple Developer and Download an older version of Xcode that has the 10.5 SDK.
+To add the SDK, I re-installed the MacOSX10.5.pkg from the Xcode 3.2.6 download. It is in a hidden folder named “Packages” on the disk image. After mounting the .dmg file, you can open it from the command line with open /Volumes/Xcode\ and\ iOS\ SDK/Packages/. When installing the package, choose change install location and option-click on the drive you want to install to, so that you can specify a folder. The target folder should be /Developer or the base of your Xcode 4 install if you have put it in a non-standard location.</li>
+  <li>Get the “real” gcc.
+You’ll get a llvm version of gcc with the Xcode Command Line tools install. But that doesn’t seem to like Cross Compilation too much. So, I would suggest get a gcc through macports and make it your default. I used gcc 4.7.</li>
+  <li>Errors and their specific fixes:
+Error:
+/external/elfutils/config-compat-darwin.h:42: error: static declaration of ‘strnlen’ follows non-static declaration
+/usr/include/string.h:143: error: previous declaration of ‘strnlen’ was here
+In file included from :0:</li>
+</ol>
+
+<p>Fix:
+In external/elfutils/config-compat-darwin.h, the following built-in gcc preprocessor macro should take care of the strnlen redefinition problem from /usr/include/string.h on OS X &gt;=
+10.7.
+#if <strong>ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED</strong> &lt; 1070
+static inline strneln(…) …
+#endif</p>
+
+<p>Error:
+make: *** [out/host/darwin-x86/obj/EXECUTABLES/qemu-android-x86_intermediates/qemu-android-x86] Error 1</p>
+
+<p>Fix:
+Commenting out all lines in external/qemu/Android.mk
+Error:
+host Executable: sqlite3 (out/host/darwin-x86/obj/EXECUTABLES/sqlite3_intermediates/sqlite3)
+Undefined symbols for architecture i386:
+“_sqlite3_androidopt_handle_pragma”, referenced from:
+_sqlite3Pragma in sqlite3.o
+_sqlite3Pragma in sqlite3.o
+“_sqlite3_androidopt_open”, referenced from:
+_openDatabase in sqlite3.o
+_openDatabase in sqlite3.o
+ld: symbol(s) not found for architecture i386
+collect2: ld returned 1 exit status
+make: *** [out/host/darwin-x86/obj/EXECUTABLES/sqlite3_intermediates/sqlite3] Error 1</p>
+
+<p>Fix:
+Patch the file android.mk using the patch attached. Android.mk is present in the folder external/sqlite/dist/Android.mk
+Error:
+Context<em>, void const</em>, unsigned long)in libRS.a(rsgApiReplay.o)
+ld: symbol(s) not found for architecture i386
+collect2: ld returned 1 exit status
+make: *** [out/host/darwin-x86/obj/EXECUTABLES/a3dconvert_intermediates/a3dconvert] Error 1
+Fix:
+Patch the rsAllocation.cpp file using the supplied patch. rsAllocation.cpp is present in the folder
+frameworks/base/libs/rs/rsAllocation.cpp</p>
+
+<p>Error:
+elf.h file not found in two files</p>
+<ol>
+  <li>APQ8060_ICS/kernel/scripts/mod/mk_elfconfig.c:4:17: fatal error: elf.h: No such file or directory</li>
+  <li>APQ8060_ICS/kernel/scripts/mod/modpost.h:10:17: fatal error: elf.h: No such file or directory</li>
+</ol>
+
+<p>Fix:<br />
+Follow Elefant – <a href="http://blog.csdn.net/elefant/article/details/7698586">http://blog.csdn.net/elefant/article/details/7698586</a><br />
+Manually download elf.h from <a href="http://www.rockbox.org/tracker/9006?getfile=16683">http://www.rockbox.org/tracker/9006?getfile=16683</a></p>
+
+<p>Place it in the directory “kernel/scripts/mod”
+Include the correct header file in the two files mk_elfconfig.c and modpost.h.
+Do include “elf.h” instead of <elh.h></elh.h></p>]]></content><author><name></name></author><category term="Embedded Systems" /><summary type="html"><![CDATA[It has been quite some time since I participated in a competition (2010 was the last time @ FSG). I had been waiting for the XCDC2013 and what an amazing experience it was!!!]]></summary></entry><entry><title type="html">Install TinyOS 2.1.2 on Ubuntu 12.04 and blink LEDs on TelosB mote</title><link href="https://k45v.github.io/blog/2013/tinyos/" rel="alternate" type="text/html" title="Install TinyOS 2.1.2 on Ubuntu 12.04 and blink LEDs on TelosB mote" /><published>2013-02-22T00:00:00+00:00</published><updated>2013-02-22T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/tinyos</id><content type="html" xml:base="https://k45v.github.io/blog/2013/tinyos/"><![CDATA[<p>Recently I got my hands on the TelosB mote and as the tradition goes, I had to test blinking LEDs on it. (If you want to compare this mote with few others out there then this is a <a href="http://www.vsrdjournals.com/EEC/Issue/2012_02_Feb/Web/3_Vini_Madan_582_Review_Article_Feb_2012.pdf">good paper to refer</a>).</p>
+
+<p>Initially, I went to the TinyOS <a href="http://docs.tinyos.net/tinywiki/index.php/Getting_started">getting started</a> page which provides instructions for <a href="http://docs.tinyos.net/tinywiki/index.php/Installing_TinyOS_2.1.1#Two-step_install_on_your_host_OS_with_Debian_packages">installing TinyOS 2.1.1</a>. It had few steps missing and one can run “tos-check-env” and google for the errors which show up. However, when I went on to make the blinking LED project (make telosb), it spewed out a host of errors similar to this line “/opt/tinyos-2.1.1/tos/platforms/telosa/PlatformLedsC.nc:54: cannot find `Port56′”. Apparently the msp430 packages did not jive with this TinyOS version 2.1.1 and multiple posts online suggested rolling back to legacy versions.</p>
+
+<p>I decided to give TinyOS 2.1.2 a shot and it worked!!! So well here is the entire procedure for you:</p>
+
+<ol>
+  <li>Remove brltty package to avoid FTDI to serial conflicts
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get autoremove brltty
+</code></pre></div>    </div>
+    <p>Make sure you have the build-essentials package</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>build-essential
+</code></pre></div>    </div>
+  </li>
+  <li>Execute the following command,
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi /etc/apt/sources.list
+</code></pre></div>    </div>
+    <p>Hit “G” to go to end of file and then hit “A”. Paste the line given below at the end of this file</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>add deb http://tinyos.stanford.edu/tinyos/dists/ubuntu lucid main
+</code></pre></div>    </div>
+    <p>In case you had previous repositories for TinyOS in source, then remove them.
+Hit ESC, then enter “:wq” to save and quit</p>
+  </li>
+  <li>Now install TinyOS 2.1.2 using
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>tinyos-2.1.2
+</code></pre></div>    </div>
+  </li>
+  <li>Now you need to configure the environment for TinyOS. Do
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi ~/.bashrc
+</code></pre></div>    </div>
+    <p>Add the lines given below at the end of this file</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Sourcing the tinyos environment variable setup script</span>
+<span class="nb">source</span> /opt/tinyos-2.1.2/tinyos.sh
+<span class="nb">export </span><span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$CLASSPATH</span>:.
+</code></pre></div>    </div>
+    <p>Create the setup script using:</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi /opt/tinyos-2.1.2/tinyos.sh
+</code></pre></div>    </div>
+    <p>Now enter the following contents into this file (use “i” to insert, ctrl+shift+v to paste)</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /usr/bin/env bash</span>
+<span class="c"># Here we setup the environment</span>
+<span class="c"># variables needed by the tinyos </span>
+<span class="c"># make system</span>
+   
+<span class="c"># echo "Setting up for TinyOS 2.1.2"</span>
+<span class="nb">export </span><span class="nv">TOSROOT</span><span class="o">=</span>
+<span class="nb">export </span><span class="nv">TOSDIR</span><span class="o">=</span>
+<span class="nb">export </span><span class="nv">MAKERULES</span><span class="o">=</span>
+   
+<span class="nv">TOSROOT</span><span class="o">=</span><span class="s2">"/opt/tinyos-2.1.2"</span>
+<span class="nv">TOSDIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TOSROOT</span><span class="s2">/tos"</span>
+<span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$CLASSPATH</span>:<span class="nv">$TOSROOT</span>/support/sdk/java:<span class="nv">$TOSROOT</span>/support/sdk/java/tinyos.jar
+<span class="nv">MAKERULES</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TOSROOT</span><span class="s2">/support/make/Makerules"</span>
+   
+<span class="nb">export </span>TOSROOT
+<span class="nb">export </span>TOSDIR
+<span class="nb">export </span>CLASSPATH
+<span class="nb">export </span>MAKERULES
+</code></pre></div>    </div>
+    <p>Run the command below to allow this script to execute</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>755 /opt/tinyos-2.1.2/tinyos.sh
+</code></pre></div>    </div>
+  </li>
+  <li>Now close and start a new terminal or alternatively
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
+</code></pre></div>    </div>
+  </li>
+  <li>Run the command
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tos-check-env
+</code></pre></div>    </div>
+    <p>If it gives warnings related to Java version then do</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-version</span>
+</code></pre></div>    </div>
+    <p>If your version is above 1.5, then ignore this warning else upgrade to a newer java version. Ignore the warning related to graphviz.</p>
+  </li>
+  <li>Now insert Telos mote in your USB slot. You may run the command
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>motelist
+</code></pre></div>    </div>
+    <p>to check if it was detected. The output will be</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$motelist</span>
+Reference  Device           Description
+<span class="nt">----------</span> <span class="nt">----------------</span> <span class="nt">---------------------------------------------</span>
+M49WC0OT   /dev/ttyUSB0     Moteiv tmote sky
+</code></pre></div>    </div>
+    <p>Allow writing to the USB port using (substitute your device name as per the previous output)</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>666 /dev/ttyUSB0
+</code></pre></div>    </div>
+    <p>Navigate to the blinking led project folder</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>bash
+<span class="nb">cd</span> /opt/tinyos-2.1.2/apps/Blink
+</code></pre></div>    </div>
+    <p>Execute the command below and the code should get compiled</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make telosb
+</code></pre></div>    </div>
+    <p>Install the blinking LED application on the mote using</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make telosb reinstall
+</code></pre></div>    </div>
+    <p>The command above assumes you have only one Telos mote on USB. Else use the command</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make telosb reinstall bsl,/dev/ttyUSB0
+</code></pre></div>    </div>
+    <p>You should see the LEDs come to life.</p>
+  </li>
+</ol>
+
+<p>References: <a href="http://docs.tinyos.net/tinywiki/index.php/Main_Page">TinyOS Documentation</a></p>]]></content><author><name></name></author><category term="Embedded Systems" /><summary type="html"><![CDATA[Recently I got my hands on the TelosB mote and as the tradition goes, I had to test blinking LEDs on it. (If you want to compare this mote with few others out there then this is a good paper to refer).]]></summary></entry><entry><title type="html">Soldering Pointers</title><link href="https://k45v.github.io/blog/2013/soldering/" rel="alternate" type="text/html" title="Soldering Pointers" /><published>2013-02-17T00:00:00+00:00</published><updated>2013-02-17T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/soldering</id><content type="html" xml:base="https://k45v.github.io/blog/2013/soldering/"><![CDATA[<p>Pointers to keep in mind while soldering:</p>
 
 <ol>
   <li>
@@ -22,8 +509,7 @@ clean the tip and check for damages. The sponge also helps in thermally shocking
 next usage. You may leave a lump of solder on the tip, this helps the tip last much longer.</p>
   </li>
   <li>
-    <p>If the tip shows dis-figuration or has rust on it. Change the tip.
-<br /><br /></p>
+    <p>If the tip shows dis-figuration or has rust on it. Change the tip.</p>
   </li>
 </ol>
 <div class="float-left mr-3 w-25">

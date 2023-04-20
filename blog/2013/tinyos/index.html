@@ -18,7 +18,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Soldering Pointers | FirstName  LastName</title>
+    <title>Install TinyOS 2.1.2 on Ubuntu 12.04 and blink LEDs on TelosB mote | FirstName  LastName</title>
     <meta name="author" content="FirstName  LastName">
     <meta name="description" content="">
     <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website">
@@ -41,7 +41,7 @@
     <link rel="shortcut icon" href="/assets/img/pcb.jpg">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://k45v.github.io/blog/2013/soldering/">
+    <link rel="canonical" href="https://k45v.github.io/blog/2013/tinyos/">
     
     <!-- Dark Mode -->
     
@@ -117,74 +117,145 @@
 <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Soldering Pointers</h1>
-    <p class="post-meta">February 17, 2013</p>
+    <h1 class="post-title">Install TinyOS 2.1.2 on Ubuntu 12.04 and blink LEDs on TelosB mote</h1>
+    <p class="post-meta">February 22, 2013</p>
        
   </header>
 
   <article class="post-content">
-    <p>Pointers to keep in mind while soldering:</p>
+    <p>Recently I got my hands on the TelosB mote and as the tradition goes, I had to test blinking LEDs on it. (If you want to compare this mote with few others out there then this is a <a href="http://www.vsrdjournals.com/EEC/Issue/2012_02_Feb/Web/3_Vini_Madan_582_Review_Article_Feb_2012.pdf" rel="external nofollow noopener" target="_blank">good paper to refer</a>).</p>
+
+<p>Initially, I went to the TinyOS <a href="http://docs.tinyos.net/tinywiki/index.php/Getting_started" rel="external nofollow noopener" target="_blank">getting started</a> page which provides instructions for <a href="http://docs.tinyos.net/tinywiki/index.php/Installing_TinyOS_2.1.1#Two-step_install_on_your_host_OS_with_Debian_packages" rel="external nofollow noopener" target="_blank">installing TinyOS 2.1.1</a>. It had few steps missing and one can run “tos-check-env” and google for the errors which show up. However, when I went on to make the blinking LED project (make telosb), it spewed out a host of errors similar to this line “/opt/tinyos-2.1.1/tos/platforms/telosa/PlatformLedsC.nc:54: cannot find `Port56′”. Apparently the msp430 packages did not jive with this TinyOS version 2.1.1 and multiple posts online suggested rolling back to legacy versions.</p>
+
+<p>I decided to give TinyOS 2.1.2 a shot and it worked!!! So well here is the entire procedure for you:</p>
 
 <ol>
-  <li>
-    <p>Set temperature to 320°C (608°F). (if you have some experience, else bring it down to about 270°C)</p>
+  <li>Remove brltty package to avoid FTDI to serial conflicts
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get autoremove brltty
+</code></pre></div>    </div>
+    <p>Make sure you have the build-essentials package</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>build-essential
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>After real temperature reaches the set temperature, use a damp sponge to
-clean the tip and check for damages. The sponge also helps in thermally shocking the iron, i.e. forces the iron into maximum heat cycle.</p>
+  <li>Execute the following command,
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi /etc/apt/sources.list
+</code></pre></div>    </div>
+    <p>Hit “G” to go to end of file and then hit “A”. Paste the line given below at the end of this file</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>add deb http://tinyos.stanford.edu/tinyos/dists/ubuntu lucid main
+</code></pre></div>    </div>
+    <p>In case you had previous repositories for TinyOS in source, then remove them.
+Hit ESC, then enter “:wq” to save and quit</p>
   </li>
-  <li>
-    <p>If you have brass wool or metal brushes on your solder stand then use them for cleaning instead of the sponge, since tiny blobs of solder might get trapped in the sponge and start accumulating at the bottom.</p>
+  <li>Now install TinyOS 2.1.2 using
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>tinyos-2.1.2
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>If the tip has oxidation, apply solder and wipe using the damp sponge, repeat these steps until oxidation is removed.</p>
+  <li>Now you need to configure the environment for TinyOS. Do
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi ~/.bashrc
+</code></pre></div>    </div>
+    <p>Add the lines given below at the end of this file</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="c"># Sourcing the tinyos environment variable setup script</span>
+<span class="nb">source</span> /opt/tinyos-2.1.2/tinyos.sh
+<span class="nb">export </span><span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$CLASSPATH</span>:.
+</code></pre></div>    </div>
+    <p>Create the setup script using:</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi /opt/tinyos-2.1.2/tinyos.sh
+</code></pre></div>    </div>
+    <p>Now enter the following contents into this file (use “i” to insert, ctrl+shift+v to paste)</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="c">#! /usr/bin/env bash</span>
+<span class="c"># Here we setup the environment</span>
+<span class="c"># variables needed by the tinyos </span>
+<span class="c"># make system</span>
+   
+<span class="c"># echo "Setting up for TinyOS 2.1.2"</span>
+<span class="nb">export </span><span class="nv">TOSROOT</span><span class="o">=</span>
+<span class="nb">export </span><span class="nv">TOSDIR</span><span class="o">=</span>
+<span class="nb">export </span><span class="nv">MAKERULES</span><span class="o">=</span>
+   
+<span class="nv">TOSROOT</span><span class="o">=</span><span class="s2">"/opt/tinyos-2.1.2"</span>
+<span class="nv">TOSDIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TOSROOT</span><span class="s2">/tos"</span>
+<span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$CLASSPATH</span>:<span class="nv">$TOSROOT</span>/support/sdk/java:<span class="nv">$TOSROOT</span>/support/sdk/java/tinyos.jar
+<span class="nv">MAKERULES</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TOSROOT</span><span class="s2">/support/make/Makerules"</span>
+   
+<span class="nb">export </span>TOSROOT
+<span class="nb">export </span>TOSDIR
+<span class="nb">export </span>CLASSPATH
+<span class="nb">export </span>MAKERULES
+</code></pre></div>    </div>
+    <p>Run the command below to allow this script to execute</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>755 /opt/tinyos-2.1.2/tinyos.sh
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>Apply some soldering flux to get better finish (also useful when desoldering)</p>
+  <li>Now close and start a new terminal or alternatively
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>After cleaning, coat tip with a layer of solder and set it aside ready for the
-next usage. You may leave a lump of solder on the tip, this helps the tip last much longer.</p>
+  <li>Run the command
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>tos-check-env
+</code></pre></div>    </div>
+    <p>If it gives warnings related to Java version then do</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>java <span class="nt">-version</span>
+</code></pre></div>    </div>
+    <p>If your version is above 1.5, then ignore this warning else upgrade to a newer java version. Ignore the warning related to graphviz.</p>
   </li>
-  <li>
-    <p>If the tip shows dis-figuration or has rust on it. Change the tip.</p>
+  <li>Now insert Telos mote in your USB slot. You may run the command
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>motelist
+</code></pre></div>    </div>
+    <p>to check if it was detected. The output will be</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$motelist</span>
+Reference  Device           Description
+<span class="nt">----------</span> <span class="nt">----------------</span> <span class="nt">---------------------------------------------</span>
+M49WC0OT   /dev/ttyUSB0     Moteiv tmote sky
+</code></pre></div>    </div>
+    <p>Allow writing to the USB port using (substitute your device name as per the previous output)</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>666 /dev/ttyUSB0
+</code></pre></div>    </div>
+    <p>Navigate to the blinking led project folder</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>bash
+<span class="nb">cd</span> /opt/tinyos-2.1.2/apps/Blink
+</code></pre></div>    </div>
+    <p>Execute the command below and the code should get compiled</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>make telosb
+</code></pre></div>    </div>
+    <p>Install the blinking LED application on the mote using</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>make telosb reinstall
+</code></pre></div>    </div>
+    <p>The command above assumes you have only one Telos mote on USB. Else use the command</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>make telosb reinstall bsl,/dev/ttyUSB0
+</code></pre></div>    </div>
+    <p>You should see the LEDs come to life.</p>
   </li>
 </ol>
-<div class="float-left mr-3 w-25">
-  <figure>
 
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/soldering-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/soldering-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/soldering-1400.webp"></source>
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/soldering.jpg" class="img-fluid rounded" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
-
-  </picture>
-
-</figure>
-
-</div>
-
-<p><strong>Tinning:</strong> Tin wire NOT till the insulation but till 1.6mm before insulation as bending might cause breakage of insulation!!!</p>
-
-<p>Take care so as not to damage the meniscus of ceramic/button capacitors.</p>
-
-<p>Use wood/toothpick to hold down wires in board repair</p>
-
-<p>SMD soldering simplified <a href="http://www.sparkfun.com/tutorials/category/2" rel="external nofollow noopener" target="_blank">http://www.sparkfun.com/tutorials/category/2</a></p>
-
-<p>Always check your work using a magnifying glass (Better safe than sorry).</p>
+<p>References: <a href="http://docs.tinyos.net/tinywiki/index.php/Main_Page" rel="external nofollow noopener" target="_blank">TinyOS Documentation</a></p>
 
   </article>
   <p class="post-tags">
     <a href="/blog/2013"> <i class="fas fa-calendar fa-sm"></i> 2013 </a>
       ·  
-    <a href="/blog/category/circuit-design">
-      <i class="fas fa-tag fa-sm"></i> Circuit Design</a>
+    <a href="/blog/category/embedded-systems">
+      <i class="fas fa-tag fa-sm"></i> Embedded Systems</a>
     
   </p>
 
