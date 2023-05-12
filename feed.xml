@@ -1,80 +1,408 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://k45v.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://k45v.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-04-20T06:26:32+00:00</updated><id>https://k45v.github.io/feed.xml</id><title type="html">blank</title><entry><title type="html">Designing a DAQ for a formula student race car</title><link href="https://k45v.github.io/blog/2013/daq/" rel="alternate" type="text/html" title="Designing a DAQ for a formula student race car" /><published>2013-07-14T00:00:00+00:00</published><updated>2013-07-14T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/daq</id><content type="html" xml:base="https://k45v.github.io/blog/2013/daq/"><![CDATA[<p>Formula SAE is a student design competition in which a prototype race car is evaluated for its potential as a production item. In 2010, I got the chance to lead the electronics team of Orion Racing India (the FSAE team from K. J. Somaiya College of Engineering). Our joint efforts resulted in a DAQ (Data Acquisition System) and a Color LCD driver interface which was selected among the top 8 out of 78 international teams for the “Most Innovative use of Electronics Award” at FSG 2010.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://k45v.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://k45v.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-05-12T06:03:03+00:00</updated><id>https://k45v.github.io/feed.xml</id><title type="html">blank</title><entry><title type="html">Designing a DAQ for a formula student race car</title><link href="https://k45v.github.io/blog/2013/daq/" rel="alternate" type="text/html" title="Designing a DAQ for a formula student race car" /><published>2013-07-14T00:00:00+00:00</published><updated>2013-07-14T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/daq</id><content type="html" xml:base="https://k45v.github.io/blog/2013/daq/"><![CDATA[<p><a href="http://www.formulastudent.de/">Formula SAE</a> is a student design competition in which a prototype race car is evaluated for its potential as a production item. In 2010, I got the chance to lead the electronics team of <a href="http://www.orion-racing.com/">Orion Racing India</a> (the FSAE team from K. J. Somaiya College of Engineering). Our joint efforts resulted in a DAQ (Data Acquisition System) and a Color LCD driver interface which was selected among the top 8 out of 78 international teams for the “Most Innovative use of Electronics Award” at FSG 2010.</p>
 
-<p>DAQ+LCD</p>
+<div class="text-center">
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/lcd-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/lcd-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/lcd-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/lcd.jpg" class="img-fluid rounded" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+</div>
 
 <p>The DAQ could log data from 18 sensors @36Hz (we were initially looking at 2Hz with the GPS on-board! More on that later) and could control the coolant pump and radiator fan based on sensor readings. Crucial data was relayed to the Color LCD screen mounted on the steering wheel. A lot of DAQ systems do exist in the market and you can call this re-inventing the wheel, but when one is young, the learning experience is worth the effort. In this blog post I’ll discuss the tech details of the DAQ, some useful tools/approaches and the problems we faced.</p>
 
 <p>A well defined design procedure always helps you reduce the overall development time. We had learn’t this first hand from our tronics seniors @Orion. The first stage involved simulation and modeling. In comes Proteus ISIS, a tool which we used extensively to test everything, right from basic fundae of voltage drop on open resistor terminals to differential amplifier gains and serial bus communication protocols.</p>
 
-<p>ftov1Next we tested these circuits on breadboard. Apart from verifying the operation, breadboard testing also helps to visualize circuit design since most of the components we were using would be going on our final PCBs. We then fabricated low cost prototype PCBs to test the more crucial components like GPS receivers and micro-controllers.</p>
+<div class="text-center">
+<figure>
 
-<p>prototype</p>
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/ftov1-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/ftov1-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/ftov1-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/ftov1.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+</div>
+
+<p>Next we tested these circuits on breadboard. Apart from verifying the operation, breadboard testing also helps to visualize circuit design since most of the components we were using would be going on our final PCBs. We then fabricated low cost prototype PCBs to test the more crucial components like GPS receivers and micro-controllers.</p>
+
+<div class="text-center">
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/prototype-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/prototype-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/prototype-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/prototype.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+</div>
 
 <p>Finally, we got the shiny green DAQ PCB boards made. Smiles smiles ^__^</p>
 
-<p>SENSOR REQUIREMENTS, CALIBRATION
-Sensors are responsible for conversion of various mechanical parameters into measurable electrical quantities. The sensor selection for every team changes with its design goals. Typical sensors implemented by most teams include three axis accelerometers and sensors to detect wheel speed, shock travel, steering angle, manifold air pressure, coolant temperature, throttle position and gear position.</p>
+<h3 id="sensor-requirements-calibration">SENSOR REQUIREMENTS, CALIBRATION</h3>
+<p>Sensors are responsible for conversion of various mechanical parameters into measurable electrical quantities. The sensor selection for every team changes with its design goals. Typical sensors implemented by most teams include three axis accelerometers and sensors to detect wheel speed, shock travel, steering angle, manifold air pressure, coolant temperature, throttle position and gear position.</p>
 
-<p>Accelerometer:
-The MMA7260Q, low cost three axis capacitive micro machined accelerometer was selected to monitor the vehicle accelerations. It features signal conditioning, a single-pole low pass filter, temperature compensation and selectable sensitivity (1.5g/2g/4g/6g). Its capacitive approach offers several benefits when compared to the piezoresistive sensors used in many other accelerometers, notably a wider temperature range and response to DC as well as dynamic vibrations. The sensor outputs voltages proportional to the experienced g-force.</p>
+<h3 id="accelerometer">Accelerometer</h3>
+<p>The MMA7260Q, low cost three axis capacitive micro machined accelerometer was selected to monitor the vehicle accelerations. It features signal conditioning, a single-pole low pass filter, temperature compensation and selectable sensitivity (1.5g/2g/4g/6g). Its capacitive approach offers several benefits when compared to the piezoresistive sensors used in many other accelerometers, notably a wider temperature range and response to DC as well as dynamic vibrations. The sensor outputs voltages proportional to the experienced g-force.</p>
 
-<p>Wheel speed sensor:
-Wheel speed is sensed using an NPN type inductive proximity sensor. As a tooth on the wheel passes by the sensor, a pulse is generated in a recurring manner. The pulse train will increase in frequency as the vehicle speeds up and decrease as the vehicle slows down. Therefore, a frequency to voltage converter, LM2907 was used to convert the generated frequency into a corresponding output voltage.</p>
+<h3 id="wheel-speed-sensor">Wheel speed sensor</h3>
+<p>Wheel speed is sensed using an NPN type inductive proximity sensor. As a tooth on the wheel passes by the sensor, a pulse is generated in a recurring manner. The pulse train will increase in frequency as the vehicle speeds up and decrease as the vehicle slows down. Therefore, a frequency to voltage converter, LM2907 was used to convert the generated frequency into a corresponding output voltage.</p>
 
-<p>wheelspeed1Low cost inductive proximity sensors have a maximum switching frequency of approximately 600Hz. Assuming maximum vehicle speed to be 120km/hr, the number of teeth in the toothed wheel was selected to be 30.</p>
+<div class="text-center">
+<figure>
 
-<p>Shock travel sensor:
-Suspensions play a key role in the vehicle dynamics of a race car. Knowledge of the linear displacement of the shocks for a particular damping setting is critical in evaluating the damping performance in various loading scenarios. Shock travel sensors used to measure these linear displacements are available in two types: wire wound and conductive plastic. Conductive Plastic (CP) displacement sensors are free from hysteresis and hence recommended. We got the wire wound ones (cheaper 😛 ).</p>
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/wheelspeed1-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/wheelspeed1-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/wheelspeed1-1400.webp" />
+    
 
-<p>Steering angle sensors:
-A rotary potentiometer was housed inside the steering rack housing and attached to the steering column to measure the steering angle. Yeah we did use a lot of potentiomenters (cheaper!). If possible, I would recommend using non-contact based sensors (LVDT, capacitive, etc.) so that they won’t be worn out over time.</p>
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/wheelspeed1.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
 
-<p>Gear position sensor:
-For the purpose of gear position indication, a small gear is meshed with the gear drum in the engine. A high quality potentiometer shaft is rotated accordingly by the gear drum using this arrangement. Distinct voltage levels can be obtained for each position.</p>
+  </picture>
 
-<p>Fuel level sensor:
-A typical fuel gauge comprising of a float that is mounted on the end of a pivot arm was used as a fuel level sensor. The resistance of the fuel gauge changes as the float moves up and down with the fuel level. Errors introduced in the readings due to fuel slosh were reduced by implementing a moving average filter with a window size of 15.</p>
+</figure>
 
-<p>Coolant temperature sensor:
-Two negative temperature co-efficient thermistors with brass housing and a temperature range of -40 degree C to 135 degree C were used to measure the coolant temperature.</p>
+</div>
 
-<p>thermistor
-A potential divider network was implemented to get the required output voltage swing. A second order logarithmic curve was fitted to the response of this sensor. (MATLAB).</p>
+<p>Low cost inductive proximity sensors have a maximum switching frequency of approximately 600Hz. Assuming maximum vehicle speed to be 120km/hr, the number of teeth in the toothed wheel was selected to be 30.</p>
+
+<h3 id="shock-travel-sensor">Shock travel sensor</h3>
+<p>Suspensions play a key role in the vehicle dynamics of a race car. Knowledge of the linear displacement of the shocks for a particular damping setting is critical in evaluating the damping performance in various loading scenarios. Shock travel sensors used to measure these linear displacements are available in two types: wire wound and conductive plastic. Conductive Plastic (CP) displacement sensors are free from hysteresis and hence recommended. We got the wire wound ones (cheaper 😛 ).</p>
+
+<h3 id="steering-angle-sensors">Steering angle sensors</h3>
+<p>A rotary potentiometer was housed inside the steering rack housing and attached to the steering column to measure the steering angle. Yeah we did use a lot of potentiomenters (cheaper!). If possible, I would recommend using non-contact based sensors (LVDT, capacitive, etc.) so that they won’t be worn out over time.</p>
+
+<h3 id="gear-position-sensor">Gear position sensor</h3>
+<p>For the purpose of gear position indication, a small gear is meshed with the gear drum in the engine. A high quality potentiometer shaft is rotated accordingly by the gear drum using this arrangement. Distinct voltage levels can be obtained for each position.</p>
+
+<h3 id="fuel-level-sensor">Fuel level sensor</h3>
+<p>A typical fuel gauge comprising of a float that is mounted on the end of a pivot arm was used as a fuel level sensor. The resistance of the fuel gauge changes as the float moves up and down with the fuel level. Errors introduced in the readings due to fuel slosh were reduced by implementing a moving average filter with a window size of 15.</p>
+
+<h3 id="coolant-temperature-sensor">Coolant temperature sensor</h3>
+<p>Two negative temperature co-efficient thermistors with brass housing and a temperature range of -40 degree C to 135 degree C were used to measure the coolant temperature.</p>
+
+<div class="text-center">
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/thermistor-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/thermistor-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/thermistor-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/thermistor.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+</div>
+
+<p>A potential divider network was implemented to get the required output voltage swing. A second order logarithmic curve was fitted to the response of this sensor. (MATLAB).</p>
 
 <p>All of the sensors mentioned above need to be calibrated. By that I mean the sensors should be taken from the minimum to maximum reading possible and other way round (to account for hysteresis) over multiple iterations. The procedure should be well documented, so that every iteration is exactly the same as previous one. Only then the resultant data should be used for translating sensor reading to derived units.</p>
 
-<p>SUPPORTING HARDWARE
-Cooling control board:
-Every engine is designed to work at maximum efficiency in a certain temperature range. The devices which can be controlled to maintain the engine in the specified temperature range are the coolant pump and the radiator fan. The cooling team provided us with three temperature set-points: 75, 80 and 85 degree C, which can be selected by the driver.</p>
+<h2 id="supporting-hardware">SUPPORTING HARDWARE</h2>
+<h3 id="cooling-control-board">Cooling control board:</h3>
+<p>Every engine is designed to work at maximum efficiency in a certain temperature range. The devices which can be controlled to maintain the engine in the specified temperature range are the coolant pump and the radiator fan. The cooling team provided us with three temperature set-points: 75, 80 and 85 degree C, which can be selected by the driver.</p>
 
-<p>ccb</p>
+<div class="text-center">
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/ccb-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/ccb-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/ccb-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/ccb.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+</div>
 
 <p>The hardware used to regulate the engine temperature comprises of a Goodsky GU-SH-112DM relay, used to control the radiator fan and an IRFZ48 power MOSFET, used to control the coolant pump. The control signals generated based on the set point are as shown.</p>
 
-<p>coolgraph</p>
+<div class="text-center">
+<figure>
 
-<p>Power card:
-A noise free, light weight power supply is an essential requirement of a portable DAQ System. We designed a power Card based on low cost linear voltage regulators and equipped with features like surge voltage protection (using Metal Oxide Varistors), over current protection (using Polymeric Positive Temperature Coefficient fuses), reverse voltage and over voltage protection (using silicon avalanche diodes). However, I would recommend using switching supplies. I talk more about this in my other blog post.</p>
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/coolgraph-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/coolgraph-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/coolgraph-1400.webp" />
+    
 
-<p>DAQ v1:
-The DAQ v1 was built around a PIC18F4680 microcontroller. It was designed as a stand-alone system, so as to be exempted from the cost report at the competition. The PIC18F4680 runs in HSPLL (High Speed Phase Locked Loop) mode under which a PLL multiplies the oscillator output frequency of 10MHz by 4 to get maximum possible operating frequency of 40MHz. The10bit ADC channels on PIC were expanded using analog multiplexers (CD4052). A temperature sensor in the form of LM-35 was included to ascertain that the operating temperature was within the hardware limits. CAN interface was provided using MCP2551 CAN transceiver. The firmware for DAQ v1 was developed using embedded C.</p>
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/coolgraph.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
 
-<p>01012008015</p>
+  </picture>
+
+</figure>
+
+</div>
+
+<h3 id="power-card">Power card:</h3>
+<p>A noise free, light weight power supply is an essential requirement of a portable DAQ System. We designed a power Card based on low cost linear voltage regulators and equipped with features like surge voltage protection (using Metal Oxide Varistors), over current protection (using Polymeric Positive Temperature Coefficient fuses), reverse voltage and over voltage protection (using silicon avalanche diodes). However, I would recommend using switching supplies. I talk more about this in my <a href="/blog/2012/switching-supplies/">other blog post</a>.</p>
+
+<h3 id="daq-v1">DAQ v1:</h3>
+<p>The DAQ v1 was built around a PIC18F4680 microcontroller. It was designed as a stand-alone system, so as to be exempted from the cost report at the competition. The PIC18F4680 runs in HSPLL (High Speed Phase Locked Loop) mode under which a PLL multiplies the oscillator output frequency of 10MHz by 4 to get maximum possible operating frequency of 40MHz. The10bit ADC channels on PIC were expanded using analog multiplexers (CD4052). A temperature sensor in the form of LM-35 was included to ascertain that the operating temperature was within the hardware limits. CAN interface was provided using MCP2551 CAN transceiver. The firmware for DAQ v1 was developed using embedded C.</p>
+
+<div class="text-center">
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/01012008015-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/01012008015-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/01012008015-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/01012008015.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+</div>
 
 <p>The CP3838 GPS (Global Positioning System) module was selected (rather sponsored, so selected 🙂 ) to satisfy the vehicle tracking requirements. Data recorded from the GPS receiver played a significant role in validating sensor data. The track shown was plotted using co-ordinates recorded from the GPS receiver. Interface to an MMC/SD card for logging sensor and GPS data was provided via SPI (Serial Peripheral Interface). The data is stored in as comma separated value file format which can be easily imported into MATLAB for analysis. A logging rate of 33Hz was recorded for 14 sensors interfaced to the module.</p>
 
-<p>gps track</p>
+<div class="text-center">
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/gps-track-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/gps-track-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/gps-track-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/gps-track.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+</div>
 
 <p>I mentioned before that we had a logging rate of 2Hz initially. This was because we were doing all conversions from sensor ADC values to derived parameters on the micro-controller before logging into SD card. Floating point operations require computational power and this translates into conversion time for a slower 8-bit micro-controller. A simple software change to log readings directly helped us notch up the logging rate! Batching of data would have helped improve this even more (but I realised that 2 years later! 😛 ).</p>
 
-<p>DAQ v2:
-The DAQ v1, although a fully functional stand alone system, was reliant on GPS for generating time-stamps. The 10bit ADC of PIC18F4680 could not provide the degree of precision required by the team. In addition, the analog multiplexer introduced a series resistance of 270ohm and a delay varying from 500-1000ns (nanosecond) on the signal acquisition line. Hence, a real time clock (DS1307) was introduced on-board to get time-stamps at higher frequency and three 12-bit ADCs (TLV2553) were interfaced via SPI to get a higher resolution of the sensor data. The DAQ v2 also features fourth order Sallen-key based low pass filters and transient voltage suppressors for noise suppression and anti-aliasing. A logging rate of 36Hz was recorded for 18 sensors.</p>
+<h3 id="daq-v2">DAQ v2:</h3>
+<p>The DAQ v1, although a fully functional stand alone system, was reliant on GPS for generating time-stamps. The 10bit ADC of PIC18F4680 could not provide the degree of precision required by the team. In addition, the analog multiplexer introduced a series resistance of 270ohm and a delay varying from 500-1000ns (nanosecond) on the signal acquisition line. Hence, a real time clock (DS1307) was introduced on-board to get time-stamps at higher frequency and three 12-bit ADCs (TLV2553) were interfaced via SPI to get a higher resolution of the sensor data. The DAQ v2 also features fourth order Sallen-key based low pass filters and transient voltage suppressors for noise suppression and anti-aliasing. A logging rate of 36Hz was recorded for 18 sensors.</p>
 
-<p>filter</p>
+<div class="text-center">
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/filter-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/filter-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/filter-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/filter.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+</div>
 
 <p>Analog filtering was used to remove extraneous noise from the signal lines (thanks Mr. Claude Rouelle for his suggestions). In the absence of an analog filter, signals outside half of the sampling bandwidth of the ADC are aliased back into the signal path. Once a signal is aliased during the digitalization process, it is impossible to differentiate between noise with frequencies in band and out of band. The signal-to-noise ratio of the 12-bit ADC is 74dB and the bandwidth of interest for the analog signal is DC to 1 kHz. Hence, a 4-pole low pass filter was designed to provide an attenuation of 80dB/decade with a cut-off frequency of 1 kHz.</p>
 
-<p>We also tried to spend some time on telemetry but the transcievers we selected did not have sufficient range. For all the readers I would recommend using Maxstream 9XTend or Microhard n920 if they wish to have telemetry. We used MATLAB to develop GUI for analyzing the logged data, but with the car manufacturing being delayed we did not have much time to record/analyze/tune vehicle performance. From my experience I now feel that a benchmark DAQ would have been useful to test and tune the module better because whatever data we captured, there was no way of concluding that it was accurate enough. You can find the wiring layouts for these modules here.</p>]]></content><author><name></name></author><category term="Embedded Systems" /><category term="FSAE" /><summary type="html"><![CDATA[Formula SAE is a student design competition in which a prototype race car is evaluated for its potential as a production item. In 2010, I got the chance to lead the electronics team of Orion Racing India (the FSAE team from K. J. Somaiya College of Engineering). Our joint efforts resulted in a DAQ (Data Acquisition System) and a Color LCD driver interface which was selected among the top 8 out of 78 international teams for the “Most Innovative use of Electronics Award” at FSG 2010.]]></summary></entry><entry><title type="html">The eXtreme Computer Design Competition 2013</title><link href="https://k45v.github.io/blog/2013/xcdc/" rel="alternate" type="text/html" title="The eXtreme Computer Design Competition 2013" /><published>2013-04-05T00:00:00+00:00</published><updated>2013-04-05T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/xcdc</id><content type="html" xml:base="https://k45v.github.io/blog/2013/xcdc/"><![CDATA[<p>It has been quite some time since I participated in a competition (2010 was the last time @ <a href="/blog/2013/daq/">FSG</a>). I had been waiting for the <a href="https://sites.google.com/a/ncsu.edu/xcdc2013/home">XCDC2013</a> and what an amazing experience it was!!!</p>
+<p>We also tried to spend some time on telemetry but the transcievers we selected did not have sufficient range. For all the readers I would recommend using Maxstream 9XTend or Microhard n920 if they wish to have telemetry. We used MATLAB to develop GUI for analyzing the logged data, but with the car manufacturing being delayed we did not have much time to record/analyze/tune vehicle performance. From my experience I now feel that a benchmark DAQ would have been useful to test and tune the module better because whatever data we captured, there was no way of concluding that it was accurate enough. You can find the <a href="/blog/2012/wiring-diagrams/">wiring layouts for these modules here</a>.</p>]]></content><author><name></name></author><category term="Embedded Systems" /><category term="FSAE" /><summary type="html"><![CDATA[Formula SAE is a student design competition in which a prototype race car is evaluated for its potential as a production item. In 2010, I got the chance to lead the electronics team of Orion Racing India (the FSAE team from K. J. Somaiya College of Engineering). Our joint efforts resulted in a DAQ (Data Acquisition System) and a Color LCD driver interface which was selected among the top 8 out of 78 international teams for the “Most Innovative use of Electronics Award” at FSG 2010.]]></summary></entry><entry><title type="html">PCB design pointers/checklist</title><link href="https://k45v.github.io/blog/2013/pcb-design/" rel="alternate" type="text/html" title="PCB design pointers/checklist" /><published>2013-05-05T00:00:00+00:00</published><updated>2013-05-05T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/pcb-design</id><content type="html" xml:base="https://k45v.github.io/blog/2013/pcb-design/"><![CDATA[<p>Pointers/Checklist to keep in mind while designing a new PCB.</p>
+
+<ol>
+  <li>Include “Power ON” LED and LEDs for debug</li>
+  <li>Include critical test points and extra VCC/GND railing/points</li>
+  <li>Holes for Wire to hold xtal</li>
+  <li>One way connectors only (RMC connectors)</li>
+  <li>Easy access reset and other switch (check size of nearby components).</li>
+  <li>Check if through hole components (especially 90 degree connectors) interfere with SMD/other components.</li>
+  <li>Holes on corners for spacers (3mm-5mm dia)</li>
+  <li>Space below and above ICs for removing IC from socket (if using an IC socket). Space for soldering iron, near bigger components like inductors and capacitors of power circuit</li>
+  <li>0.1uF ceramic caps between VCC and GND</li>
+  <li>Everything on bottom layer should be mirror image (EAGLE top view)</li>
+  <li>Through hole connectors offer more strength</li>
+  <li>The rule of thumb for trace width is .010″[.0254] per 1 Amp external (normally 1.5 oz or .0021″[.0533]) and .040″[.1016] per 1 Amp internally (for 1/2 oz of copper)</li>
+  <li>Check component availability before incorporating in design</li>
+  <li>Use filled vias for heat dissipation in power circuits</li>
+  <li>Are all IC inputs terminated as required?</li>
+  <li>Do IC/components have necessary filter caps?</li>
+  <li>Are main circuit and branch circuits clearly identified?</li>
+  <li>Define board dimensions</li>
+  <li>Define top and bottom board clearance for stacked/hierarchical PCB assembly</li>
+  <li>Draw board border using .040″ line</li>
+  <li>Define/determine a fixed component direction</li>
+  <li>Add text to plane layer and to net names (GND, +5V, etc.).</li>
+  <li>Board part number in copper on bottom side. Board revision (in copper or manually marking).</li>
+  <li>For high current circuits, note current of branch circuits.</li>
+  <li>Defining branch circuits and their current requirements is important if the main branch is of very high current. If the main branch requires a .050″[1.27] trace and the branches only require a .008″[.2032] width, it makes no sense to route all branches with a .050″[1.27] trace.</li>
+</ol>
+
+<div class="text-center">
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/daq-top-view-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/daq-top-view-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/daq-top-view-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/daq-top-view.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+</div>]]></content><author><name></name></author><category term="Circuit Design" /><summary type="html"><![CDATA[Pointers/Checklist to keep in mind while designing a new PCB.]]></summary></entry><entry><title type="html">Vim, Ctags and Cscope</title><link href="https://k45v.github.io/blog/2013/vim/" rel="alternate" type="text/html" title="Vim, Ctags and Cscope" /><published>2013-04-20T00:00:00+00:00</published><updated>2013-04-20T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/vim</id><content type="html" xml:base="https://k45v.github.io/blog/2013/vim/"><![CDATA[<p>You have been given a project folder with the code spread over multiple files (maybe even nested in sub-folders). Now, you wish to add a new feature to this project. But before you can start scribbling down your algorithm and making changes, you need to understand the code. Vim coupled with Ctags and Cscope can help you do exactly that. Ctags helps you jump from function/symbol instances to their definitions and Cscope does the opposite i.e. you can see the entire call hierarchy of a particular function (where all the function is called). The tutorials for setting up Cscope were a bit tricky and I wanted to document my set of steps here. So here is how to set up your tools:</p>
+
+<ol>
+  <li>The Vim editor<br />
+Install using:
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>vim
+</code></pre></div>    </div>
+    <p>I am assuming you know how to use vim. If not then there are plenty of tutorials on the internet to get you started with vim.</p>
+  </li>
+  <li>Ctags
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>exuberant-ctags
+</code></pre></div>    </div>
+    <p>After installing ctags, navigate inside the project folder and do</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctags <span class="nt">-R</span> ./<span class="k">*</span>
+</code></pre></div>    </div>
+    <p>This will generate tags (they help you find the function definitions from their instances) for your entire code. Now from this same directory (do not change your directory), open a code file in vim</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim ./main.c
+</code></pre></div>    </div>
+    <p>Say inside your main code you see a call to function “calculate” which is defined in some other file in your current folder (or sub-folder). Then move your cursor over “calculate” and press the CTRL; while keeping CTRL pressed hit ] key. You’ll find yourself in the function definition of “calculate”. We’ll call this pressing of CTRL and then ] key while holding CTRL down as CTRL+]. To go back use CTRL+t.</p>
+  </li>
+  <li>Cscope<br />
+Install cscope
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>cscope
+</code></pre></div>    </div>
+    <p>Now open/create a “.vimrc” file in you home directory using:</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim ~/.vimrc
+</code></pre></div>    </div>
+    <p>Append the following in this file</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if </span>has<span class="o">(</span><span class="s2">"cscope"</span><span class="o">)</span>
+    <span class="nb">set </span><span class="nv">csprg</span><span class="o">=</span>/usr/bin/cscope
+    <span class="nb">set </span><span class="nv">csto</span><span class="o">=</span>0
+    <span class="nb">set </span>cst
+    <span class="nb">set </span>nocsverb
+    <span class="s2">" add any database in current directory
+        if filereadable("</span>cscope.out<span class="s2">")
+                cs add cscope.out
+                        "</span> <span class="k">else </span>add database pointed to by environment
+                            elseif <span class="nv">$CSCOPE_DB</span> <span class="o">!=</span> <span class="s2">""</span>
+        cs add <span class="nv">$CSCOPE_DB</span>
+    endif
+endif
+   
+nmap &lt;C-<span class="se">\&gt;</span>s :cs find s <span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span>
+nmap &lt;C-<span class="se">\&gt;</span>g :cs find g <span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span>
+nmap &lt;C-<span class="se">\&gt;</span>c :cs find c <span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span>
+nmap &lt;C-<span class="se">\&gt;</span>t :cs find t <span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span>
+nmap &lt;C-<span class="se">\&gt;</span>e :cs find e <span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span>
+nmap &lt;C-<span class="se">\&gt;</span>f :cs find f <span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span>
+nmap &lt;C-<span class="se">\&gt;</span>i :cs find i ^<span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span><span class="err">$</span>
+nmap &lt;C-<span class="se">\&gt;</span>d :cs find d <span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span>
+   
+<span class="nb">set </span>nohlsearch
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>In your code folder do</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cscope <span class="nt">-Rb</span>
+</code></pre></div></div>
+<p>Open a file, say main.c and take your cursor on a function name and press CTRL; while holding down CTRL press \ key, now release both and hit c. So the combo will be CTRL+\ (release both) c. It should now show you where all this function has been called. If the list is long, hit q and type the number where you want to go. To return from here use CTRL+t.
+In order to look for a symbol (variable name) use the combo CTRL+\ (release both) s. You can make out the other combos from the nmap statements in the .vimrc file.</p>
+
+<p>These tools can prove to be extremely useful in case you are working on a server or a machine with limited resources. Alternatively you can use Eclipse with the CDT bundle.</p>
+
+<p>If you wish to use Eclipse with the CDT bundle to explore/edit code which is on a remote system then you can mount the remote directory using the command:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sshfs login@remote.server.ip:/path/to/remote/directory /path/to/local/directory/or/mount/point
+fusermount <span class="nt">-u</span> /path/to/mount/point/for/unmounting
+</code></pre></div></div>
+<p>Another alternative to access remote files using eclipse would be to install the Eclipse RSE plugin. For this, simply search for eclipse RSE and download the latest stable release. Copy the contents of features and plugins directory into corresponding eclipse folder (eclipse installation folder in windows and .eclipse folder at linux home). Launch eclipse now and then Window -&gt; Show view -&gt; Other -&gt; Remote systems -&gt; remote systems. Right click local and select New -&gt; connection. Enter IP, select ssh.files, processes.shell.linux, ssh.shells, ssh.terminals. Finish. Select sftp files, My Home. Enter password when prompted! Voila, you can now access files over network. What’s more, you can right click ssh terminals and select launch terminal within eclipse to compile/test your code.</p>
+
+<h2 id="appendix">Appendix</h2>
+
+<p>My Vim cheat sheet:
+This is a list of commands which I most frequently use on vim</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>i to insert
+:wq save and quit
+:tabe path/filename to open in new tab
+:set mouse =a to use mouse
+:tabn or :tabp to move between tabs or simply click
+:wa save all open tabs
+/string to search
+gg move to top
+GG move to bottom
+A append at end of line
+yy copy/yank one line
+y3 copy 3lines
+p paste at end of current line
+Cut a section of words:- v to begin selecting, d to end and cut, p to paste
+</code></pre></div></div>]]></content><author><name></name></author><category term="Linux" /><summary type="html"><![CDATA[You have been given a project folder with the code spread over multiple files (maybe even nested in sub-folders). Now, you wish to add a new feature to this project. But before you can start scribbling down your algorithm and making changes, you need to understand the code. Vim coupled with Ctags and Cscope can help you do exactly that. Ctags helps you jump from function/symbol instances to their definitions and Cscope does the opposite i.e. you can see the entire call hierarchy of a particular function (where all the function is called). The tutorials for setting up Cscope were a bit tricky and I wanted to document my set of steps here. So here is how to set up your tools:]]></summary></entry><entry><title type="html">The eXtreme Computer Design Competition 2013</title><link href="https://k45v.github.io/blog/2013/xcdc/" rel="alternate" type="text/html" title="The eXtreme Computer Design Competition 2013" /><published>2013-04-05T00:00:00+00:00</published><updated>2013-04-05T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/xcdc</id><content type="html" xml:base="https://k45v.github.io/blog/2013/xcdc/"><![CDATA[<div class="float-left mr-3 w-50">
+  <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/img_2395-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/img_2395-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/img_2395-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/img_2395.jpg" class="img-fluid rounded" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+</div>
+<p>It has been quite some time since I participated in a competition (2010 was the last time @ <a href="/blog/2013/daq/">FSG</a>). I had been waiting for the <a href="https://sites.google.com/a/ncsu.edu/xcdc2013/home">XCDC2013</a> and what an amazing experience it was!!!</p>
 
 <p>I learn’t a lot and thoroughly enjoyed the team work. It was like a symphony. Spending hours with my team mates Bharat and Roshan, sprouting new approaches and bouncing ideas off each other. I can never forget that moment when at 2am in the Hunt library we managed to Overclock the Snapdragon S3 (APQ8060) on the <a href="https://developer.qualcomm.com/mobile-development/development-devices/snapdragon-mdp-legacy-devices">MSM8660</a> (Dragonboard) and there were high fives all around. In this blog post I will try to cover everything what we did/tried for this event. (The <a href="#appendix">Appendix section</a> has all the detailed procedures)</p>
 
@@ -90,7 +418,7 @@ The DAQ v1, although a fully functional stand alone system, was reliant on GPS f
   <li><strong>AnTuTu Benchmark:</strong> The AnTuTu benchmark is an android app which gauges performance based on different tests. Though this does not measure browser performance, it is useful to determine general purpose performance.</li>
 </ul>
 
-<p>The MDP came with a stock gingerbread image. We ran the stock Android browser through the <a href="#perf-based-profiling">Profiling procedure</a> and collected data. Next we <a href="#flash-ics-stock-image-provided-by-bsquare-using-windows7">flashed Ice cream sandwich</a> on the MDP so that we can work on the Browser in the latest Android flavor compatible with the MDP. Then we profiled again to collect baseline data on ICS. Just upgrading to ICS gave a speedup of around 2 (compared to gingerbread baseline). We <a href="#compiling-ics-from-source"></a> ( had some snacks, took a break, fixed some errors…this part over and over again) on 32-bit Ubuntu 12.04  and a MAC OSX 10.8.3.</p>
+<p>The MDP came with a stock gingerbread image. We ran the stock Android browser through the <a href="#perf-based-profiling">Profiling procedure</a> and collected data. Next we <a href="#flash-ics-stock-image-provided-by-bsquare-using-windows7">flashed Ice cream sandwich</a> on the MDP so that we can work on the Browser in the latest Android flavor compatible with the MDP. Then we profiled again to collect baseline data on ICS. Just upgrading to ICS gave a speedup of around 2 (compared to gingerbread baseline). We <a href="#compiling-ics-from-source">pulled the ICS source and compiled it</a> ( had some snacks, took a break, fixed some errors…this part over and over again) on 32-bit Ubuntu 12.04  and a MAC OSX 10.8.3.</p>
 
 <p>Now came the interesting part OPTIMIZATIONS!!!</p>
 
@@ -145,17 +473,17 @@ The DAQ v1, although a fully functional stand alone system, was reliant on GPS f
 <p>We used the precompiled perf made available on <a href="http://www.spencerpages.com/wiki/index.php?title=Dragonboard_8060_Development#Using_pre-compiled_perf">spencerpages wiki</a>.</p>
 <ol>
   <li>Manually start the browser and note pid using:-
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$:</span> adb shell ps | <span class="nb">grep </span>browser
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell ps | <span class="nb">grep </span>browser
 </code></pre></div>    </div>
   </li>
   <li>Start the desired web page through adb shell
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$:</span> am start <span class="nt">-a</span> android.intent.action.VIEW <span class="nt">-d</span> <span class="se">\</span>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>am start <span class="nt">-a</span> android.intent.action.VIEW <span class="nt">-d</span> <span class="se">\</span>
 http://www.webkit.org/perf/sunspider-0.9.1/sunspider-0.9.1/driver.html <span class="se">\</span>
 <span class="nt">-n</span> com.android.browser/.BrowserActivity
 </code></pre></div>    </div>
   </li>
   <li>Steps to initialize ‘perf’
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#: export PERF_PAGER=/system/bin/cat</span>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PERF_PAGER</span><span class="o">=</span>/system/bin/cat
 </code></pre></div>    </div>
     <p>for Gingerbread image use <code class="language-plaintext highlighter-rouge">#: perf record -p</code><br />
 for ICS use (since hardware events not enabled) <code class="language-plaintext highlighter-rouge">#: perf record -e cpu-clock -F 500 -p</code></p>
@@ -164,7 +492,7 @@ for ICS use (since hardware events not enabled) <code class="language-plaintext 
   <li>When the benchmark run completes, kill ‘perf’ using ‘ctrl+c’</li>
   <li>Note the benchmark result that is being shown on the device</li>
   <li>The collected perf data can be viewed by using the command
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#: perf report</span>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>perf report
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -184,7 +512,7 @@ for ICS use (since hardware events not enabled) <code class="language-plaintext 
     <ul>
       <li>Start the browser</li>
       <li>Check PID using
-        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#: adb shell ps</span>
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell ps
 </code></pre></div>        </div>
       </li>
       <li>Look for the same PID in the DDMS ‘Device’ tab.</li>
@@ -242,8 +570,8 @@ clean:
 </code></pre></div></div>
 
 <h4 id="monitor-kernel-oops">Monitor Kernel oops</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#: adb shell</span>
-<span class="c">#: cat /proc/kmsg</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell
+<span class="nb">cat</span> /proc/kmsg
 </code></pre></div></div>
 
 <h4 id="reboot-in-fastboot-if-mdp-refuses-to-boot-up">Reboot in fastboot if MDP refuses to boot up</h4>
@@ -254,9 +582,7 @@ clean:
 <p>Download SuperSU (the broker app which allows user apps to gain root access)</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://download.chainfire.eu/315/SuperSU/UPDATE-SuperSU-v1.25.zip
 </code></pre></div></div>
-<p>Extract the zip file</p>
-
-<p>Push the Superuser.apk to /system/app</p>
+<p>Extract the zip file. Push the Superuser.apk to /system/app</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb push Superuser.apk /system/app
 </code></pre></div></div>
 <p>Push the su binary to /system/bin</p>
@@ -274,8 +600,8 @@ clean:
 <p>Start SuperSU from the launcher</p>
 
 <p>Launch SetCPU app and grant it su permissions. Then use it to increase CPU frequency or alternatively use:</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#: adb shell</span>
-<span class="c">#: echo "performance" &gt; /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell
+<span class="nb">echo</span> <span class="s2">"performance"</span> <span class="o">&gt;</span> /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 </code></pre></div></div>
 
 <h4 id="mount-ntfs-filesystem-on-ubuntu-with-read-writeexecution-permissions-in-case-you-wish-to-compile-on-external-drive">Mount NTFS filesystem on Ubuntu with read-write/execution permissions (In case you wish to compile on external drive)</h4>
@@ -297,21 +623,21 @@ unmount the disk</p>
 
 <p>Changes specific to Ubuntu 12.04 LTS (32-bit) are as follows:
 After the Step 8 mentioned in “ Recreating the Ice Cream Sandwich” section in spencer pages, you might encounter the following errors:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error occurred during initialization of VM
+make: <span class="k">***</span> <span class="o">[</span>out/target/common/obj/JAVA_LIBRARIES/core_intermediates/noproguard.classes-with-local.dex] Error 1
+</code></pre></div></div>
+<p>OR</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Could not create the Java virtual machine.
+ERROR: signapk.jar failed: <span class="k">return </span>code 1
+make: <span class="k">***</span> <span class="o">[</span>out/target/product/msm8660_surf/msm8660_surf-ota-eng.falcon.zip] Error 1
+</code></pre></div></div>
 
-<p>Error occurred during initialization of VM
-make: <em>** [out/target/common/obj/JAVA_LIBRARIES/core_intermediates/noproguard.classes-with-local.dex] Error 1
-OR
-Could not create the Java virtual machine.
-ERROR: signapk.jar failed: return code 1
-make: **</em> [out/target/product/msm8660_surf/msm8660_surf-ota-eng.falcon.zip] Error 1</p>
+<p><strong>Fix:</strong></p>
 
-<p>Fix:</p>
-
-<p>Modify build/core/definitions.mk
-On Line 1528 change Xmx to 1024M
-$(if $(findstring windows,$(HOST_OS)),,-JXms16M -JXmx1024M)
-In build/tools/releasetools/common.py
-change Xmx2048m to Xmx1024m at all occurrences</p>
+<p>Modify <code class="language-plaintext highlighter-rouge">build/core/definitions.mk</code>. On Line 1528 change Xmx to 1024M</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$(if $(findstring windows,$(HOST_OS)),,-JXms16M -JXmx1024M)
+</code></pre></div></div>
+<p>In <code class="language-plaintext highlighter-rouge">build/tools/releasetools/common.py</code> change Xmx2048m to Xmx1024m at all occurrences</p>
 
 <h4 id="compile-android-ics-on-mac-os-x-1083">Compile Android ICS on Mac OS X (10.8.3)</h4>
 
@@ -324,27 +650,25 @@ For the 10.5 SDK, you need to register as an Apple Developer and Download an old
 To add the SDK, I re-installed the MacOSX10.5.pkg from the Xcode 3.2.6 download. It is in a hidden folder named “Packages” on the disk image. After mounting the .dmg file, you can open it from the command line with open /Volumes/Xcode\ and\ iOS\ SDK/Packages/. When installing the package, choose change install location and option-click on the drive you want to install to, so that you can specify a folder. The target folder should be /Developer or the base of your Xcode 4 install if you have put it in a non-standard location.</li>
   <li>Get the “real” gcc.
 You’ll get a llvm version of gcc with the Xcode Command Line tools install. But that doesn’t seem to like Cross Compilation too much. So, I would suggest get a gcc through macports and make it your default. I used gcc 4.7.</li>
-  <li>Errors and their specific fixes:
-Error:
-/external/elfutils/config-compat-darwin.h:42: error: static declaration of ‘strnlen’ follows non-static declaration
+  <li>Errors and their specific fixes:<br />
+<strong>Error:</strong>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/external/elfutils/config-compat-darwin.h:42: error: static declaration of ‘strnlen’ follows non-static declaration
 /usr/include/string.h:143: error: previous declaration of ‘strnlen’ was here
-In file included from :0:</li>
-</ol>
-
-<p>Fix:
-In external/elfutils/config-compat-darwin.h, the following built-in gcc preprocessor macro should take care of the strnlen redefinition problem from /usr/include/string.h on OS X &gt;=
-10.7.
-#if <strong>ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED</strong> &lt; 1070
-static inline strneln(…) …
-#endif</p>
-
-<p>Error:
-make: *** [out/host/darwin-x86/obj/EXECUTABLES/qemu-android-x86_intermediates/qemu-android-x86] Error 1</p>
-
-<p>Fix:
-Commenting out all lines in external/qemu/Android.mk
-Error:
-host Executable: sqlite3 (out/host/darwin-x86/obj/EXECUTABLES/sqlite3_intermediates/sqlite3)
+In file included from :0:
+</code></pre></div>    </div>
+    <p><strong>Fix:</strong>
+ In external/elfutils/config-compat-darwin.h, the following built-in gcc preprocessor macro should take care of the strnlen redefinition problem from /usr/include/string.h on OS X &gt;= 10.7.</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> #if __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ &lt; 1070
+ static inline strneln(…) …
+ #endif
+</code></pre></div>    </div>
+    <p><strong>Error:</strong></p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make: *** [out/host/darwin-x86/obj/EXECUTABLES/qemu-android-x86_intermediates/qemu-android-x86] Error 1
+</code></pre></div>    </div>
+    <p><strong>Fix:</strong>
+Commenting out all lines in external/qemu/Android.mk<br />
+<strong>Error:</strong></p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>host Executable: sqlite3 (out/host/darwin-x86/obj/EXECUTABLES/sqlite3_intermediates/sqlite3)
 Undefined symbols for architecture i386:
 “_sqlite3_androidopt_handle_pragma”, referenced from:
 _sqlite3Pragma in sqlite3.o
@@ -354,33 +678,52 @@ _openDatabase in sqlite3.o
 _openDatabase in sqlite3.o
 ld: symbol(s) not found for architecture i386
 collect2: ld returned 1 exit status
-make: *** [out/host/darwin-x86/obj/EXECUTABLES/sqlite3_intermediates/sqlite3] Error 1</p>
-
-<p>Fix:
-Patch the file android.mk using the patch attached. Android.mk is present in the folder external/sqlite/dist/Android.mk
-Error:
-Context<em>, void const</em>, unsigned long)in libRS.a(rsgApiReplay.o)
+make: *** [out/host/darwin-x86/obj/EXECUTABLES/sqlite3_intermediates/sqlite3] Error 1
+</code></pre></div>    </div>
+    <p><strong>Fix:</strong>
+Patch the file android.mk using the patch attached. Android.mk is present in the folder external/sqlite/dist/Android.mk<br />
+<strong>Error:</strong></p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Context*, void const*, unsigned long)in libRS.a(rsgApiReplay.o)
 ld: symbol(s) not found for architecture i386
 collect2: ld returned 1 exit status
 make: *** [out/host/darwin-x86/obj/EXECUTABLES/a3dconvert_intermediates/a3dconvert] Error 1
-Fix:
+</code></pre></div>    </div>
+    <p><strong>Fix:</strong>
 Patch the rsAllocation.cpp file using the supplied patch. rsAllocation.cpp is present in the folder
-frameworks/base/libs/rs/rsAllocation.cpp</p>
-
-<p>Error:
+frameworks/base/libs/rs/rsAllocation.cpp<br />
+<strong>Error:</strong>
 elf.h file not found in two files</p>
-<ol>
-  <li>APQ8060_ICS/kernel/scripts/mod/mk_elfconfig.c:4:17: fatal error: elf.h: No such file or directory</li>
-  <li>APQ8060_ICS/kernel/scripts/mod/modpost.h:10:17: fatal error: elf.h: No such file or directory</li>
-</ol>
+    <ol>
+      <li>APQ8060_ICS/kernel/scripts/mod/mk_elfconfig.c:4:17: fatal error: elf.h: No such file or directory</li>
+      <li>APQ8060_ICS/kernel/scripts/mod/modpost.h:10:17: fatal error: elf.h: No such file or directory</li>
+    </ol>
 
-<p>Fix:<br />
+    <p><strong>Fix:</strong>
 Follow Elefant – <a href="http://blog.csdn.net/elefant/article/details/7698586">http://blog.csdn.net/elefant/article/details/7698586</a><br />
-Manually download elf.h from <a href="http://www.rockbox.org/tracker/9006?getfile=16683">http://www.rockbox.org/tracker/9006?getfile=16683</a></p>
-
-<p>Place it in the directory “kernel/scripts/mod”
+Manually download elf.h from <a href="http://www.rockbox.org/tracker/9006?getfile=16683">http://www.rockbox.org/tracker/9006?getfile=16683</a><br />
+Place it in the directory “kernel/scripts/mod”
 Include the correct header file in the two files mk_elfconfig.c and modpost.h.
-Do include “elf.h” instead of <elh.h></elh.h></p>]]></content><author><name></name></author><category term="Embedded Systems" /><summary type="html"><![CDATA[It has been quite some time since I participated in a competition (2010 was the last time @ FSG). I had been waiting for the XCDC2013 and what an amazing experience it was!!!]]></summary></entry><entry><title type="html">Install TinyOS 2.1.2 on Ubuntu 12.04 and blink LEDs on TelosB mote</title><link href="https://k45v.github.io/blog/2013/tinyos/" rel="alternate" type="text/html" title="Install TinyOS 2.1.2 on Ubuntu 12.04 and blink LEDs on TelosB mote" /><published>2013-02-22T00:00:00+00:00</published><updated>2013-02-22T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/tinyos</id><content type="html" xml:base="https://k45v.github.io/blog/2013/tinyos/"><![CDATA[<p>Recently I got my hands on the TelosB mote and as the tradition goes, I had to test blinking LEDs on it. (If you want to compare this mote with few others out there then this is a <a href="http://www.vsrdjournals.com/EEC/Issue/2012_02_Feb/Web/3_Vini_Madan_582_Review_Article_Feb_2012.pdf">good paper to refer</a>).</p>
+Do include “elf.h” instead of &lt;elh.h&gt;</p>
+  </li>
+</ol>]]></content><author><name></name></author><category term="Embedded Systems" /><summary type="html"><![CDATA[It has been quite some time since I participated in a competition (2010 was the last time @ FSG). I had been waiting for the XCDC2013 and what an amazing experience it was!!!]]></summary></entry><entry><title type="html">Install TinyOS 2.1.2 on Ubuntu 12.04 and blink LEDs on TelosB mote</title><link href="https://k45v.github.io/blog/2013/tinyos/" rel="alternate" type="text/html" title="Install TinyOS 2.1.2 on Ubuntu 12.04 and blink LEDs on TelosB mote" /><published>2013-02-22T00:00:00+00:00</published><updated>2013-02-22T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/tinyos</id><content type="html" xml:base="https://k45v.github.io/blog/2013/tinyos/"><![CDATA[<div class="float-left mr-3 w-50">
+  <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/img_2387-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/img_2387-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/img_2387-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/img_2387.jpg" class="img-fluid rounded" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+</div>
+<p>Recently I got my hands on the TelosB mote and as the tradition goes, I had to test blinking LEDs on it. (If you want to compare this mote with few others out there then this is a <a href="http://www.vsrdjournals.com/EEC/Issue/2012_02_Feb/Web/3_Vini_Madan_582_Review_Article_Feb_2012.pdf">good paper to refer</a>).</p>
 
 <p>Initially, I went to the TinyOS <a href="http://docs.tinyos.net/tinywiki/index.php/Getting_started">getting started</a> page which provides instructions for <a href="http://docs.tinyos.net/tinywiki/index.php/Installing_TinyOS_2.1.1#Two-step_install_on_your_host_OS_with_Debian_packages">installing TinyOS 2.1.1</a>. It had few steps missing and one can run “tos-check-env” and google for the errors which show up. However, when I went on to make the blinking LED project (make telosb), it spewed out a host of errors similar to this line “/opt/tinyos-2.1.1/tos/platforms/telosa/PlatformLedsC.nc:54: cannot find `Port56′”. Apparently the msp430 packages did not jive with this TinyOS version 2.1.1 and multiple posts online suggested rolling back to legacy versions.</p>
 
@@ -993,169 +1336,4 @@ Click apply. Now click on disabled and then ctrl + alt + k . This is your shortc
   </div>
 </div>
 
-<p>Tie wires proved to be quite useful when we were laying the wiring. One could easily unwind them and add/remove wires. Once the layout on the car was complete, we replaced the tie wires with <a href="http://en.wikipedia.org/wiki/Cable_tie">cable ties</a>.</p>]]></content><author><name></name></author><category term="FSAE" /><summary type="html"><![CDATA[In the year 2010, I was the electronics team captain for Orion Racing India (A student team which designs a formula style race car to compete in an international design competition: Formula Student Germany). Among the many responsibilities which came with being an electronics team member (apart from fixing the lighting and fans in the workshop), a very basic yet extremely important was laying the wiring for the car. Me and my teammates: Nikhil, Nathanael, Hemen, Gaurang and Anup initially tried to look for some software for making the wiring diagrams. However, a pen and a paper proved to be the best tools.]]></summary></entry><entry><title type="html">The MOESISm (MOESIF) cache coherence protocol</title><link href="https://k45v.github.io/blog/2012/MOESISm/" rel="alternate" type="text/html" title="The MOESISm (MOESIF) cache coherence protocol" /><published>2012-12-16T00:00:00+00:00</published><updated>2012-12-16T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2012/MOESISm</id><content type="html" xml:base="https://k45v.github.io/blog/2012/MOESISm/"><![CDATA[<p>In one of the courses I took this semester, we were asked to modify an existing invalidation based cache coherence protocol to reduce the off-chip Bandwidth usage. The motivation for this problem statement was limited off-chip bandwidth due to constrained number of pins that a chip can have.</p>
-
-<p>Initially I had used the given benchmarks to determine off-chip bandwidth usage for MSI, MESI and MOESI protocols and among them, MESI seemed to perform the best. The MOESI protocol, in spite of having fewer writebacks (because it allows dirty sharing) lost out on cache-to-cache transfers because the shared state is not allowed to Flush. Hence, although MOESI accounts for Flush in a read after write operation ( ‘M’ to ‘O’ state transition and ‘O’ can Flush), a read after read will cause a block to be brought in from memory (on a miss) even if the cache on same level has a copy. In order to accommodate this request I decided to introduce a new state namely ‘Sm’ (shared master, which I later found to be similar to the Forward state in Intel MESIF protocol) and the results were quite interesting. Below is the explanation for the MOESISm protocol: (the terminology is based on what had been taught in class)</p>
-
-<p>Processor requests to the cache:</p>
-<ul>
-  <li>PrRd: Processor request to read to a cache block</li>
-  <li>PrWr: Processor request to write to a cache block</li>
-</ul>
-
-<p>Bus-side requests:</p>
-<ul>
-  <li>BusRd: Snooped request that some other processor has requested to read a cache block</li>
-  <li>BusRdX: Snooped request that some other processor has requested a read exclusive (write) to a cache block. The requesting processor does not have the block yet.</li>
-  <li>BusUpgr: Snooped request that some other processor has requested a write to a cache block that it already has.</li>
-  <li>Flush: Snooped request that indicates that entire cache block has been placed on the bus for cache to cache transfer</li>
-  <li>FlushOpt: Snooped request that indicates that entire cache block has been placed on the bus for cache to cache transfer. It’s called FlushOpt because  it offers performance enhancement and it is not really a correctness requirement.</li>
-</ul>
-
-<p><strong>NOTE:</strong> For a BusRd transaction, if a copy is found by other snoopers, they assert the COPIES-EXIST line (C) else the line is low (!C).</p>
-
-<div class="text-center">
-  <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/proc_init-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/proc_init-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/proc_init-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/proc_init.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture><figcaption class="caption">Processor Side</figcaption>
-
-</figure>
-
-  <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/bus_init-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/bus_init-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/bus_init-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/bus_init.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture><figcaption class="caption">Bus Side</figcaption>
-
-</figure>
-
-</div>
-
-<p>For the processor side, the state diagram uses the notation Processor_request/Resulting_bus_transaction and for the bus side it is snooped_transaction/resulting_action.</p>
-
-<p>The advantages of this protocol??? Well it allows dirty sharing and reduces traffic due to writebacks. It saves power when compared to MESI protocol. How? Well in case of MESI, the FlushOpt is generated by multiple caches in ‘S’ state, but only one is selected for cache-to-cache transfer. So, power is spent in reading the cache, trying to obtain bus access and then cancelling it when a cache senses that someone else has supplied the block earlier. This is avoided because FlushOpt will only be sent by the cache block in ‘Sm’ state. Hence, read after read requests will also get cache-to-cache transfers. The resulting off-chip bandwidth usage was the least for the same benchmark using MOESISm protocol.Yayyy!!!</p>
-
-<p>The only drawback which I can notice for this protocol is that, for MESIF the ‘F’ state migrates to a newer copy as mentioned here and the newer copy has lesser chances of getting evicted (temporal locality). However, in the protocol I have suggested, the migration of ‘Sm’ state is not possible because with the current hardware we only have one Copies exists line. Now, if the newer copy has to go into ‘Sm’ state, then the older copy may either be in ‘E’ state OR in ‘O’ state OR in ‘Sm’ state. Here, all these intial states should transition into ‘S’ state but if the ‘O’ state moves into ‘S’ state then what happens to the writeback??? Well, I guess if we change the protocol so that the ‘O’ state performs a writeback when it moves into ‘S’ state, then this can be achieved. I just thought of this last part now 😀 I guess blogging really helps!!!</p>]]></content><author><name></name></author><category term="Parallel Computing" /><summary type="html"><![CDATA[In one of the courses I took this semester, we were asked to modify an existing invalidation based cache coherence protocol to reduce the off-chip Bandwidth usage. The motivation for this problem statement was limited off-chip bandwidth due to constrained number of pins that a chip can have.]]></summary></entry><entry><title type="html">Designing switching supplies for embedded electronics with circuit protection</title><link href="https://k45v.github.io/blog/2012/switching-supplies/" rel="alternate" type="text/html" title="Designing switching supplies for embedded electronics with circuit protection" /><published>2012-12-14T00:00:00+00:00</published><updated>2012-12-14T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2012/switching-supplies</id><content type="html" xml:base="https://k45v.github.io/blog/2012/switching-supplies/"><![CDATA[<p>Whenever we want to design a new circuit or a new PCB, the first thing which we usually start with is getting that 5V or 3.3V. For many of us, a simple 7805 or LM317 will do the job, but when you need higher current (anything above 200-300mA) it’s time to go for a switching supply.</p>
-
-<div class="float-left mr-3 w-50">
-  <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/transistor-circuit-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/transistor-circuit-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/transistor-circuit-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/transistor-circuit.jpg" class="img-fluid rounded" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture><figcaption class="caption">7805 with transistor</figcaption>
-
-</figure>
-
-</div>
-
-<p>I know at first it might sound like a difficult task, but with all the software out there, it does not take much time to design a switching supply. At first I thought about ways in which I can use that simple circuitry of a 7805. Maybe add a transistor like shown here.</p>
-
-<p>But then to get current like 2A, I would need a BIG transistor. Also, the voltage would not be exactly 5V, it would be 5-Vbe (forward voltage drop at the base emitter junction). Of course you can use a diode between the 7805 ground and circuit ground to cancel this effect but well  that doesn’t reduce the transistor size.</p>
-
-<p>Another alternative would be to use those pretty heat sinks which you saw at the electronic shop. They come with a small nut and bolt so that you can mount it on your 7805. Well that’s what I did initially and the circuit still got hot. Besides, since 7805 is a LDO, once your input voltage starts going beyond 9V, you will feel the heat 🙂 .</p>
-
-<p>So what we need is a noise free supply which has a wide input voltage range and is stupid-proof (by that I mean reverse voltage protection and over-current protection).</p>
-
-<p>Solution: Go to texas instruments website and download their software <a href="http://www.ti.com/tool/switcherpro">SwitcherPro</a>. You can also use their online tool and specify the input voltage range and current you need for your target board and it will do all the work for you. Best part, just use the products for which you can get free samples (a great help when you are prototyping) delivered at your doorstep. The advantages of a switching supply when compared to a LDO are many and it is a must for all embedded applications where battery life or power efficiency is a concern. You get a wide input voltage range, &gt;90% power efficiency and inbuilt over-voltage and over-current protection.</p>
-
-<p>Now let’s talk about the protection circuitry. Below is the list of various methods in which you can provide different types of circuit protection:</p>
-
-<ul>
-  <li>Reverse Voltage protection: Use a p-channel MOSFET on the positive supply line of the load like 
-shown below. You can refer more material <a href="http://hackaday.com/2011/12/06/reverse-voltage-protection-with-a-p-fet/">here</a>. I used an RRH100P03 for my circuit</li>
-</ul>
-
-<div class="text-center">
-  <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/mosfet-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/mosfet-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/mosfet-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/mosfet.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture><figcaption class="caption">Reverse voltage protection</figcaption>
-
-</figure>
-
-</div>
-
-<ul>
-  <li>Over-voltage, over-current and reverse voltage protection: Transient voltage suppressor diode (Transil or Tranzorb) along with a PPTC fuse should do the job. The transil protects against Over-Voltage, additionally on a reverse voltage it will get forward biased causing the PPTC Fuse to trip. Circuit as shown</li>
-</ul>
-
-<div class="text-center">
-  <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/transorb-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/transorb-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/transorb-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/transorb.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture><figcaption class="caption">
-  Transil with PPTC fuse</figcaption>
-
-</figure>
-
-</div>
-
-<ul>
-  <li>Over-current protection: PPTC (Positive polymeric temperature coefficient) fuses or resettable fuses can be used to avoid the necessity of changing fuses which are blown. As the current goes up the fuse starts heating up and its impedance increases. After a certain limit or trip point, the impedance is high enough to cut off the flow of current. The fuse is now in a tripped state. As soon as the current reduces the temperature reduces and the fuse gets reset. Ambient temperature does affect operation and you can read more about it <a href="http://www.te.com/content/dam/te/global/english/products/Circuit-Protection/knowledge-center/documents/circuit-protection-psw-fundamentals.pdf">here</a></li>
-  <li>Surge voltage protection: Using MOV (Metal oxide Varistors) is a good way to provide surge voltage protection for your circuit. However, they are quite big and mostly used if your input source is from a AC line. Read more about them <a href="http://electronics.howstuffworks.com/everyday-tech/surge-protector1.htm">here</a></li>
-</ul>
-
-<p>The configuration which I prefer is a p-channel MOSFET (RRH100P03) with a DC/DC switching voltage regulator (TPS5450 which has inbuilt over-current and over-voltage protection).</p>
-
-<div class="text-center">
-  <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/01012008004-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/01012008004-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/01012008004-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/01012008004.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>]]></content><author><name></name></author><category term="Circuit Design" /><summary type="html"><![CDATA[Whenever we want to design a new circuit or a new PCB, the first thing which we usually start with is getting that 5V or 3.3V. For many of us, a simple 7805 or LM317 will do the job, but when you need higher current (anything above 200-300mA) it’s time to go for a switching supply.]]></summary></entry></feed>
+<p>Tie wires proved to be quite useful when we were laying the wiring. One could easily unwind them and add/remove wires. Once the layout on the car was complete, we replaced the tie wires with <a href="http://en.wikipedia.org/wiki/Cable_tie">cable ties</a>.</p>]]></content><author><name></name></author><category term="FSAE" /><summary type="html"><![CDATA[In the year 2010, I was the electronics team captain for Orion Racing India (A student team which designs a formula style race car to compete in an international design competition: Formula Student Germany). Among the many responsibilities which came with being an electronics team member (apart from fixing the lighting and fans in the workshop), a very basic yet extremely important was laying the wiring for the car. Me and my teammates: Nikhil, Nathanael, Hemen, Gaurang and Anup initially tried to look for some software for making the wiring diagrams. However, a pen and a paper proved to be the best tools.]]></summary></entry></feed>

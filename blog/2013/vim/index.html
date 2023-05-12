@@ -18,7 +18,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Install TinyOS 2.1.2 on Ubuntu 12.04 and blink LEDs on TelosB mote | FirstName  LastName</title>
+    <title>Vim, Ctags and Cscope | FirstName  LastName</title>
     <meta name="author" content="FirstName  LastName">
     <meta name="description" content="">
     <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website">
@@ -41,7 +41,7 @@
     <link rel="shortcut icon" href="/assets/img/pcb.jpg">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://k45v.github.io/blog/2013/tinyos/">
+    <link rel="canonical" href="https://k45v.github.io/blog/2013/vim/">
     
     <!-- Dark Mode -->
     
@@ -117,163 +117,115 @@
 <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Install TinyOS 2.1.2 on Ubuntu 12.04 and blink LEDs on TelosB mote</h1>
-    <p class="post-meta">February 22, 2013</p>
+    <h1 class="post-title">Vim, Ctags and Cscope</h1>
+    <p class="post-meta">April 20, 2013</p>
        
   </header>
 
   <article class="post-content">
-    <div class="float-left mr-3 w-50">
-  <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/img_2387-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/img_2387-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/img_2387-1400.webp"></source>
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/img_2387.jpg" class="img-fluid rounded" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
-
-  </picture>
-
-</figure>
-
-</div>
-<p>Recently I got my hands on the TelosB mote and as the tradition goes, I had to test blinking LEDs on it. (If you want to compare this mote with few others out there then this is a <a href="http://www.vsrdjournals.com/EEC/Issue/2012_02_Feb/Web/3_Vini_Madan_582_Review_Article_Feb_2012.pdf" rel="external nofollow noopener" target="_blank">good paper to refer</a>).</p>
-
-<p>Initially, I went to the TinyOS <a href="http://docs.tinyos.net/tinywiki/index.php/Getting_started" rel="external nofollow noopener" target="_blank">getting started</a> page which provides instructions for <a href="http://docs.tinyos.net/tinywiki/index.php/Installing_TinyOS_2.1.1#Two-step_install_on_your_host_OS_with_Debian_packages" rel="external nofollow noopener" target="_blank">installing TinyOS 2.1.1</a>. It had few steps missing and one can run “tos-check-env” and google for the errors which show up. However, when I went on to make the blinking LED project (make telosb), it spewed out a host of errors similar to this line “/opt/tinyos-2.1.1/tos/platforms/telosa/PlatformLedsC.nc:54: cannot find `Port56′”. Apparently the msp430 packages did not jive with this TinyOS version 2.1.1 and multiple posts online suggested rolling back to legacy versions.</p>
-
-<p>I decided to give TinyOS 2.1.2 a shot and it worked!!! So well here is the entire procedure for you:</p>
+    <p>You have been given a project folder with the code spread over multiple files (maybe even nested in sub-folders). Now, you wish to add a new feature to this project. But before you can start scribbling down your algorithm and making changes, you need to understand the code. Vim coupled with Ctags and Cscope can help you do exactly that. Ctags helps you jump from function/symbol instances to their definitions and Cscope does the opposite i.e. you can see the entire call hierarchy of a particular function (where all the function is called). The tutorials for setting up Cscope were a bit tricky and I wanted to document my set of steps here. So here is how to set up your tools:</p>
 
 <ol>
-  <li>Remove brltty package to avoid FTDI to serial conflicts
+  <li>The Vim editor<br>
+Install using:
     <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get autoremove brltty
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>vim
 </code></pre></div>    </div>
-    <p>Make sure you have the build-essentials package</p>
-    <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>build-essential
-</code></pre></div>    </div>
+    <p>I am assuming you know how to use vim. If not then there are plenty of tutorials on the internet to get you started with vim.</p>
   </li>
-  <li>Execute the following command,
+  <li>Ctags
     <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi /etc/apt/sources.list
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>exuberant-ctags
 </code></pre></div>    </div>
-    <p>Hit “G” to go to end of file and then hit “A”. Paste the line given below at the end of this file</p>
+    <p>After installing ctags, navigate inside the project folder and do</p>
     <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>add deb http://tinyos.stanford.edu/tinyos/dists/ubuntu lucid main
+<div class="highlight"><pre class="highlight"><code>ctags <span class="nt">-R</span> ./<span class="k">*</span>
 </code></pre></div>    </div>
-    <p>In case you had previous repositories for TinyOS in source, then remove them.
-Hit ESC, then enter “:wq” to save and quit</p>
+    <p>This will generate tags (they help you find the function definitions from their instances) for your entire code. Now from this same directory (do not change your directory), open a code file in vim</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>vim ./main.c
+</code></pre></div>    </div>
+    <p>Say inside your main code you see a call to function “calculate” which is defined in some other file in your current folder (or sub-folder). Then move your cursor over “calculate” and press the CTRL; while keeping CTRL pressed hit ] key. You’ll find yourself in the function definition of “calculate”. We’ll call this pressing of CTRL and then ] key while holding CTRL down as CTRL+]. To go back use CTRL+t.</p>
   </li>
-  <li>Now install TinyOS 2.1.2 using
+  <li>Cscope<br>
+Install cscope
     <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
-<span class="nb">sudo </span>apt-get <span class="nb">install </span>tinyos-2.1.2
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>cscope
 </code></pre></div>    </div>
-  </li>
-  <li>Now you need to configure the environment for TinyOS. Do
+    <p>Now open/create a “.vimrc” file in you home directory using:</p>
     <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi ~/.bashrc
+<div class="highlight"><pre class="highlight"><code>vim ~/.vimrc
 </code></pre></div>    </div>
-    <p>Add the lines given below at the end of this file</p>
+    <p>Append the following in this file</p>
     <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="c"># Sourcing the tinyos environment variable setup script</span>
-<span class="nb">source</span> /opt/tinyos-2.1.2/tinyos.sh
-<span class="nb">export </span><span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$CLASSPATH</span>:.
-</code></pre></div>    </div>
-    <p>Create the setup script using:</p>
-    <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi /opt/tinyos-2.1.2/tinyos.sh
-</code></pre></div>    </div>
-    <p>Now enter the following contents into this file (use “i” to insert, ctrl+shift+v to paste)</p>
-    <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="c">#! /usr/bin/env bash</span>
-<span class="c"># Here we setup the environment</span>
-<span class="c"># variables needed by the tinyos </span>
-<span class="c"># make system</span>
+<div class="highlight"><pre class="highlight"><code><span class="k">if </span>has<span class="o">(</span><span class="s2">"cscope"</span><span class="o">)</span>
+    <span class="nb">set </span><span class="nv">csprg</span><span class="o">=</span>/usr/bin/cscope
+    <span class="nb">set </span><span class="nv">csto</span><span class="o">=</span>0
+    <span class="nb">set </span>cst
+    <span class="nb">set </span>nocsverb
+    <span class="s2">" add any database in current directory
+        if filereadable("</span>cscope.out<span class="s2">")
+                cs add cscope.out
+                        "</span> <span class="k">else </span>add database pointed to by environment
+                            elseif <span class="nv">$CSCOPE_DB</span> <span class="o">!=</span> <span class="s2">""</span>
+        cs add <span class="nv">$CSCOPE_DB</span>
+    endif
+endif
    
-<span class="c"># echo "Setting up for TinyOS 2.1.2"</span>
-<span class="nb">export </span><span class="nv">TOSROOT</span><span class="o">=</span>
-<span class="nb">export </span><span class="nv">TOSDIR</span><span class="o">=</span>
-<span class="nb">export </span><span class="nv">MAKERULES</span><span class="o">=</span>
+nmap &lt;C-<span class="se">\&gt;</span>s :cs find s <span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span>
+nmap &lt;C-<span class="se">\&gt;</span>g :cs find g <span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span>
+nmap &lt;C-<span class="se">\&gt;</span>c :cs find c <span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span>
+nmap &lt;C-<span class="se">\&gt;</span>t :cs find t <span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span>
+nmap &lt;C-<span class="se">\&gt;</span>e :cs find e <span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span>
+nmap &lt;C-<span class="se">\&gt;</span>f :cs find f <span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span>
+nmap &lt;C-<span class="se">\&gt;</span>i :cs find i ^<span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span><span class="err">$</span>
+nmap &lt;C-<span class="se">\&gt;</span>d :cs find d <span class="o">=</span><span class="nb">expand</span><span class="o">(</span><span class="s2">""</span><span class="o">)</span>
    
-<span class="nv">TOSROOT</span><span class="o">=</span><span class="s2">"/opt/tinyos-2.1.2"</span>
-<span class="nv">TOSDIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TOSROOT</span><span class="s2">/tos"</span>
-<span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$CLASSPATH</span>:<span class="nv">$TOSROOT</span>/support/sdk/java:<span class="nv">$TOSROOT</span>/support/sdk/java/tinyos.jar
-<span class="nv">MAKERULES</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TOSROOT</span><span class="s2">/support/make/Makerules"</span>
-   
-<span class="nb">export </span>TOSROOT
-<span class="nb">export </span>TOSDIR
-<span class="nb">export </span>CLASSPATH
-<span class="nb">export </span>MAKERULES
+<span class="nb">set </span>nohlsearch
 </code></pre></div>    </div>
-    <p>Run the command below to allow this script to execute</p>
-    <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>755 /opt/tinyos-2.1.2/tinyos.sh
-</code></pre></div>    </div>
-  </li>
-  <li>Now close and start a new terminal or alternatively
-    <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
-</code></pre></div>    </div>
-  </li>
-  <li>Run the command
-    <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>tos-check-env
-</code></pre></div>    </div>
-    <p>If it gives warnings related to Java version then do</p>
-    <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>java <span class="nt">-version</span>
-</code></pre></div>    </div>
-    <p>If your version is above 1.5, then ignore this warning else upgrade to a newer java version. Ignore the warning related to graphviz.</p>
-  </li>
-  <li>Now insert Telos mote in your USB slot. You may run the command
-    <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>motelist
-</code></pre></div>    </div>
-    <p>to check if it was detected. The output will be</p>
-    <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nv">$motelist</span>
-Reference  Device           Description
-<span class="nt">----------</span> <span class="nt">----------------</span> <span class="nt">---------------------------------------------</span>
-M49WC0OT   /dev/ttyUSB0     Moteiv tmote sky
-</code></pre></div>    </div>
-    <p>Allow writing to the USB port using (substitute your device name as per the previous output)</p>
-    <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>666 /dev/ttyUSB0
-</code></pre></div>    </div>
-    <p>Navigate to the blinking led project folder</p>
-    <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>bash
-<span class="nb">cd</span> /opt/tinyos-2.1.2/apps/Blink
-</code></pre></div>    </div>
-    <p>Execute the command below and the code should get compiled</p>
-    <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>make telosb
-</code></pre></div>    </div>
-    <p>Install the blinking LED application on the mote using</p>
-    <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>make telosb reinstall
-</code></pre></div>    </div>
-    <p>The command above assumes you have only one Telos mote on USB. Else use the command</p>
-    <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>make telosb reinstall bsl,/dev/ttyUSB0
-</code></pre></div>    </div>
-    <p>You should see the LEDs come to life.</p>
   </li>
 </ol>
 
-<p>References: <a href="http://docs.tinyos.net/tinywiki/index.php/Main_Page" rel="external nofollow noopener" target="_blank">TinyOS Documentation</a></p>
+<p>In your code folder do</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cscope <span class="nt">-Rb</span>
+</code></pre></div></div>
+<p>Open a file, say main.c and take your cursor on a function name and press CTRL; while holding down CTRL press \ key, now release both and hit c. So the combo will be CTRL+\ (release both) c. It should now show you where all this function has been called. If the list is long, hit q and type the number where you want to go. To return from here use CTRL+t.
+In order to look for a symbol (variable name) use the combo CTRL+\ (release both) s. You can make out the other combos from the nmap statements in the .vimrc file.</p>
+
+<p>These tools can prove to be extremely useful in case you are working on a server or a machine with limited resources. Alternatively you can use Eclipse with the CDT bundle.</p>
+
+<p>If you wish to use Eclipse with the CDT bundle to explore/edit code which is on a remote system then you can mount the remote directory using the command:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sshfs login@remote.server.ip:/path/to/remote/directory /path/to/local/directory/or/mount/point
+fusermount <span class="nt">-u</span> /path/to/mount/point/for/unmounting
+</code></pre></div></div>
+<p>Another alternative to access remote files using eclipse would be to install the Eclipse RSE plugin. For this, simply search for eclipse RSE and download the latest stable release. Copy the contents of features and plugins directory into corresponding eclipse folder (eclipse installation folder in windows and .eclipse folder at linux home). Launch eclipse now and then Window -&gt; Show view -&gt; Other -&gt; Remote systems -&gt; remote systems. Right click local and select New -&gt; connection. Enter IP, select ssh.files, processes.shell.linux, ssh.shells, ssh.terminals. Finish. Select sftp files, My Home. Enter password when prompted! Voila, you can now access files over network. What’s more, you can right click ssh terminals and select launch terminal within eclipse to compile/test your code.</p>
+
+<h2 id="appendix">Appendix</h2>
+
+<p>My Vim cheat sheet:
+This is a list of commands which I most frequently use on vim</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>i to insert
+:wq save and quit
+:tabe path/filename to open in new tab
+:set mouse =a to use mouse
+:tabn or :tabp to move between tabs or simply click
+:wa save all open tabs
+/string to search
+gg move to top
+GG move to bottom
+A append at end of line
+yy copy/yank one line
+y3 copy 3lines
+p paste at end of current line
+Cut a section of words:- v to begin selecting, d to end and cut, p to paste
+</code></pre></div></div>
 
   </article>
   <p class="post-tags">
     <a href="/blog/2013"> <i class="fas fa-calendar fa-sm"></i> 2013 </a>
       ·  
-    <a href="/blog/category/embedded-systems">
-      <i class="fas fa-tag fa-sm"></i> Embedded Systems</a>
+    <a href="/blog/category/linux">
+      <i class="fas fa-tag fa-sm"></i> Linux</a>
     
   </p>
 

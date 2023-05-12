@@ -123,7 +123,25 @@
   </header>
 
   <article class="post-content">
-    <p>It has been quite some time since I participated in a competition (2010 was the last time @ <a href="/blog/2013/daq/">FSG</a>). I had been waiting for the <a href="https://sites.google.com/a/ncsu.edu/xcdc2013/home" rel="external nofollow noopener" target="_blank">XCDC2013</a> and what an amazing experience it was!!!</p>
+    <div class="float-left mr-3 w-50">
+  <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/img_2395-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/img_2395-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/img_2395-1400.webp"></source>
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/img_2395.jpg" class="img-fluid rounded" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+
+  </picture>
+
+</figure>
+
+</div>
+<p>It has been quite some time since I participated in a competition (2010 was the last time @ <a href="/blog/2013/daq/">FSG</a>). I had been waiting for the <a href="https://sites.google.com/a/ncsu.edu/xcdc2013/home" rel="external nofollow noopener" target="_blank">XCDC2013</a> and what an amazing experience it was!!!</p>
 
 <p>I learn’t a lot and thoroughly enjoyed the team work. It was like a symphony. Spending hours with my team mates Bharat and Roshan, sprouting new approaches and bouncing ideas off each other. I can never forget that moment when at 2am in the Hunt library we managed to Overclock the Snapdragon S3 (APQ8060) on the <a href="https://developer.qualcomm.com/mobile-development/development-devices/snapdragon-mdp-legacy-devices" rel="external nofollow noopener" target="_blank">MSM8660</a> (Dragonboard) and there were high fives all around. In this blog post I will try to cover everything what we did/tried for this event. (The <a href="#appendix">Appendix section</a> has all the detailed procedures)</p>
 
@@ -144,7 +162,7 @@
 <strong>AnTuTu Benchmark:</strong> The AnTuTu benchmark is an android app which gauges performance based on different tests. Though this does not measure browser performance, it is useful to determine general purpose performance.</li>
 </ul>
 
-<p>The MDP came with a stock gingerbread image. We ran the stock Android browser through the <a href="#perf-based-profiling">Profiling procedure</a> and collected data. Next we <a href="#flash-ics-stock-image-provided-by-bsquare-using-windows7">flashed Ice cream sandwich</a> on the MDP so that we can work on the Browser in the latest Android flavor compatible with the MDP. Then we profiled again to collect baseline data on ICS. Just upgrading to ICS gave a speedup of around 2 (compared to gingerbread baseline). We <a href="#compiling-ics-from-source"></a> ( had some snacks, took a break, fixed some errors…this part over and over again) on 32-bit Ubuntu 12.04  and a MAC OSX 10.8.3.</p>
+<p>The MDP came with a stock gingerbread image. We ran the stock Android browser through the <a href="#perf-based-profiling">Profiling procedure</a> and collected data. Next we <a href="#flash-ics-stock-image-provided-by-bsquare-using-windows7">flashed Ice cream sandwich</a> on the MDP so that we can work on the Browser in the latest Android flavor compatible with the MDP. Then we profiled again to collect baseline data on ICS. Just upgrading to ICS gave a speedup of around 2 (compared to gingerbread baseline). We <a href="#compiling-ics-from-source">pulled the ICS source and compiled it</a> ( had some snacks, took a break, fixed some errors…this part over and over again) on 32-bit Ubuntu 12.04  and a MAC OSX 10.8.3.</p>
 
 <p>Now came the interesting part OPTIMIZATIONS!!!</p>
 
@@ -200,19 +218,19 @@
 <ol>
   <li>Manually start the browser and note pid using:-
     <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nv">$:</span> adb shell ps | <span class="nb">grep </span>browser
+<div class="highlight"><pre class="highlight"><code>adb shell ps | <span class="nb">grep </span>browser
 </code></pre></div>    </div>
   </li>
   <li>Start the desired web page through adb shell
     <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nv">$:</span> am start <span class="nt">-a</span> android.intent.action.VIEW <span class="nt">-d</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight"><code>am start <span class="nt">-a</span> android.intent.action.VIEW <span class="nt">-d</span> <span class="se">\</span>
 http://www.webkit.org/perf/sunspider-0.9.1/sunspider-0.9.1/driver.html <span class="se">\</span>
 <span class="nt">-n</span> com.android.browser/.BrowserActivity
 </code></pre></div>    </div>
   </li>
   <li>Steps to initialize ‘perf’
     <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="c">#: export PERF_PAGER=/system/bin/cat</span>
+<div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PERF_PAGER</span><span class="o">=</span>/system/bin/cat
 </code></pre></div>    </div>
     <p>for Gingerbread image use <code class="language-plaintext highlighter-rouge">#: perf record -p</code><br>
 for ICS use (since hardware events not enabled) <code class="language-plaintext highlighter-rouge">#: perf record -e cpu-clock -F 500 -p</code></p>
@@ -222,7 +240,7 @@ for ICS use (since hardware events not enabled) <code class="language-plaintext 
   <li>Note the benchmark result that is being shown on the device</li>
   <li>The collected perf data can be viewed by using the command
     <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="c">#: perf report</span>
+<div class="highlight"><pre class="highlight"><code>perf report
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -243,7 +261,7 @@ for ICS use (since hardware events not enabled) <code class="language-plaintext 
       <li>Start the browser</li>
       <li>Check PID using
         <div class="language-shell highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="c">#: adb shell ps</span>
+<div class="highlight"><pre class="highlight"><code>adb shell ps
 </code></pre></div>        </div>
       </li>
       <li>Look for the same PID in the DDMS ‘Device’ tab.</li>
@@ -301,8 +319,8 @@ clean:
 </code></pre></div></div>
 
 <h4 id="monitor-kernel-oops">Monitor Kernel oops</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#: adb shell</span>
-<span class="c">#: cat /proc/kmsg</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell
+<span class="nb">cat</span> /proc/kmsg
 </code></pre></div></div>
 
 <h4 id="reboot-in-fastboot-if-mdp-refuses-to-boot-up">Reboot in fastboot if MDP refuses to boot up</h4>
@@ -313,9 +331,7 @@ clean:
 <p>Download SuperSU (the broker app which allows user apps to gain root access)</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://download.chainfire.eu/315/SuperSU/UPDATE-SuperSU-v1.25.zip
 </code></pre></div></div>
-<p>Extract the zip file</p>
-
-<p>Push the Superuser.apk to /system/app</p>
+<p>Extract the zip file. Push the Superuser.apk to /system/app</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb push Superuser.apk /system/app
 </code></pre></div></div>
 <p>Push the su binary to /system/bin</p>
@@ -333,8 +349,8 @@ clean:
 <p>Start SuperSU from the launcher</p>
 
 <p>Launch SetCPU app and grant it su permissions. Then use it to increase CPU frequency or alternatively use:</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#: adb shell</span>
-<span class="c">#: echo "performance" &gt; /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell
+<span class="nb">echo</span> <span class="s2">"performance"</span> <span class="o">&gt;</span> /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 </code></pre></div></div>
 
 <h4 id="mount-ntfs-filesystem-on-ubuntu-with-read-writeexecution-permissions-in-case-you-wish-to-compile-on-external-drive">Mount NTFS filesystem on Ubuntu with read-write/execution permissions (In case you wish to compile on external drive)</h4>
@@ -356,21 +372,21 @@ unmount the disk</p>
 
 <p>Changes specific to Ubuntu 12.04 LTS (32-bit) are as follows:
 After the Step 8 mentioned in “ Recreating the Ice Cream Sandwich” section in spencer pages, you might encounter the following errors:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error occurred during initialization of VM
+make: <span class="k">***</span> <span class="o">[</span>out/target/common/obj/JAVA_LIBRARIES/core_intermediates/noproguard.classes-with-local.dex] Error 1
+</code></pre></div></div>
+<p>OR</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Could not create the Java virtual machine.
+ERROR: signapk.jar failed: <span class="k">return </span>code 1
+make: <span class="k">***</span> <span class="o">[</span>out/target/product/msm8660_surf/msm8660_surf-ota-eng.falcon.zip] Error 1
+</code></pre></div></div>
 
-<p>Error occurred during initialization of VM
-make: <em>** [out/target/common/obj/JAVA_LIBRARIES/core_intermediates/noproguard.classes-with-local.dex] Error 1
-OR
-Could not create the Java virtual machine.
-ERROR: signapk.jar failed: return code 1
-make: **</em> [out/target/product/msm8660_surf/msm8660_surf-ota-eng.falcon.zip] Error 1</p>
+<p><strong>Fix:</strong></p>
 
-<p>Fix:</p>
-
-<p>Modify build/core/definitions.mk
-On Line 1528 change Xmx to 1024M
-$(if $(findstring windows,$(HOST_OS)),,-JXms16M -JXmx1024M)
-In build/tools/releasetools/common.py
-change Xmx2048m to Xmx1024m at all occurrences</p>
+<p>Modify <code class="language-plaintext highlighter-rouge">build/core/definitions.mk</code>. On Line 1528 change Xmx to 1024M</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$(if $(findstring windows,$(HOST_OS)),,-JXms16M -JXmx1024M)
+</code></pre></div></div>
+<p>In <code class="language-plaintext highlighter-rouge">build/tools/releasetools/common.py</code> change Xmx2048m to Xmx1024m at all occurrences</p>
 
 <h4 id="compile-android-ics-on-mac-os-x-1083">Compile Android ICS on Mac OS X (10.8.3)</h4>
 
@@ -383,27 +399,29 @@ For the 10.5 SDK, you need to register as an Apple Developer and Download an old
 To add the SDK, I re-installed the MacOSX10.5.pkg from the Xcode 3.2.6 download. It is in a hidden folder named “Packages” on the disk image. After mounting the .dmg file, you can open it from the command line with open /Volumes/Xcode\ and\ iOS\ SDK/Packages/. When installing the package, choose change install location and option-click on the drive you want to install to, so that you can specify a folder. The target folder should be /Developer or the base of your Xcode 4 install if you have put it in a non-standard location.</li>
   <li>Get the “real” gcc.
 You’ll get a llvm version of gcc with the Xcode Command Line tools install. But that doesn’t seem to like Cross Compilation too much. So, I would suggest get a gcc through macports and make it your default. I used gcc 4.7.</li>
-  <li>Errors and their specific fixes:
-Error:
-/external/elfutils/config-compat-darwin.h:42: error: static declaration of ‘strnlen’ follows non-static declaration
+  <li>Errors and their specific fixes:<br>
+<strong>Error:</strong>
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>/external/elfutils/config-compat-darwin.h:42: error: static declaration of ‘strnlen’ follows non-static declaration
 /usr/include/string.h:143: error: previous declaration of ‘strnlen’ was here
-In file included from :0:</li>
-</ol>
-
-<p>Fix:
-In external/elfutils/config-compat-darwin.h, the following built-in gcc preprocessor macro should take care of the strnlen redefinition problem from /usr/include/string.h on OS X &gt;=
-10.7.
-#if <strong>ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED</strong> &lt; 1070
-static inline strneln(…) …
-#endif</p>
-
-<p>Error:
-make: *** [out/host/darwin-x86/obj/EXECUTABLES/qemu-android-x86_intermediates/qemu-android-x86] Error 1</p>
-
-<p>Fix:
-Commenting out all lines in external/qemu/Android.mk
-Error:
-host Executable: sqlite3 (out/host/darwin-x86/obj/EXECUTABLES/sqlite3_intermediates/sqlite3)
+In file included from :0:
+</code></pre></div>    </div>
+    <p><strong>Fix:</strong>
+ In external/elfutils/config-compat-darwin.h, the following built-in gcc preprocessor macro should take care of the strnlen redefinition problem from /usr/include/string.h on OS X &gt;= 10.7.</p>
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> #if __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ &lt; 1070
+ static inline strneln(…) …
+ #endif
+</code></pre></div>    </div>
+    <p><strong>Error:</strong></p>
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>make: *** [out/host/darwin-x86/obj/EXECUTABLES/qemu-android-x86_intermediates/qemu-android-x86] Error 1
+</code></pre></div>    </div>
+    <p><strong>Fix:</strong>
+Commenting out all lines in external/qemu/Android.mk<br>
+<strong>Error:</strong></p>
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>host Executable: sqlite3 (out/host/darwin-x86/obj/EXECUTABLES/sqlite3_intermediates/sqlite3)
 Undefined symbols for architecture i386:
 “_sqlite3_androidopt_handle_pragma”, referenced from:
 _sqlite3Pragma in sqlite3.o
@@ -413,33 +431,35 @@ _openDatabase in sqlite3.o
 _openDatabase in sqlite3.o
 ld: symbol(s) not found for architecture i386
 collect2: ld returned 1 exit status
-make: *** [out/host/darwin-x86/obj/EXECUTABLES/sqlite3_intermediates/sqlite3] Error 1</p>
-
-<p>Fix:
-Patch the file android.mk using the patch attached. Android.mk is present in the folder external/sqlite/dist/Android.mk
-Error:
-Context<em>, void const</em>, unsigned long)in libRS.a(rsgApiReplay.o)
+make: *** [out/host/darwin-x86/obj/EXECUTABLES/sqlite3_intermediates/sqlite3] Error 1
+</code></pre></div>    </div>
+    <p><strong>Fix:</strong>
+Patch the file android.mk using the patch attached. Android.mk is present in the folder external/sqlite/dist/Android.mk<br>
+<strong>Error:</strong></p>
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>Context*, void const*, unsigned long)in libRS.a(rsgApiReplay.o)
 ld: symbol(s) not found for architecture i386
 collect2: ld returned 1 exit status
 make: *** [out/host/darwin-x86/obj/EXECUTABLES/a3dconvert_intermediates/a3dconvert] Error 1
-Fix:
+</code></pre></div>    </div>
+    <p><strong>Fix:</strong>
 Patch the rsAllocation.cpp file using the supplied patch. rsAllocation.cpp is present in the folder
-frameworks/base/libs/rs/rsAllocation.cpp</p>
-
-<p>Error:
+frameworks/base/libs/rs/rsAllocation.cpp<br>
+<strong>Error:</strong>
 elf.h file not found in two files</p>
-<ol>
-  <li>APQ8060_ICS/kernel/scripts/mod/mk_elfconfig.c:4:17: fatal error: elf.h: No such file or directory</li>
-  <li>APQ8060_ICS/kernel/scripts/mod/modpost.h:10:17: fatal error: elf.h: No such file or directory</li>
-</ol>
+    <ol>
+      <li>APQ8060_ICS/kernel/scripts/mod/mk_elfconfig.c:4:17: fatal error: elf.h: No such file or directory</li>
+      <li>APQ8060_ICS/kernel/scripts/mod/modpost.h:10:17: fatal error: elf.h: No such file or directory</li>
+    </ol>
 
-<p>Fix:<br>
+    <p><strong>Fix:</strong>
 Follow Elefant – <a href="http://blog.csdn.net/elefant/article/details/7698586" rel="external nofollow noopener" target="_blank">http://blog.csdn.net/elefant/article/details/7698586</a><br>
-Manually download elf.h from <a href="http://www.rockbox.org/tracker/9006?getfile=16683" rel="external nofollow noopener" target="_blank">http://www.rockbox.org/tracker/9006?getfile=16683</a></p>
-
-<p>Place it in the directory “kernel/scripts/mod”
+Manually download elf.h from <a href="http://www.rockbox.org/tracker/9006?getfile=16683" rel="external nofollow noopener" target="_blank">http://www.rockbox.org/tracker/9006?getfile=16683</a><br>
+Place it in the directory “kernel/scripts/mod”
 Include the correct header file in the two files mk_elfconfig.c and modpost.h.
-Do include “elf.h” instead of <elh.h></elh.h></p>
+Do include “elf.h” instead of &lt;elh.h&gt;</p>
+  </li>
+</ol>
 
   </article>
   <p class="post-tags">
