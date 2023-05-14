@@ -3,7 +3,8 @@
 
   <!-- Head -->
   <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    <!-- Metadata, OpenGraph and Schema.org -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="refresh" content="3; url=/">    <!-- Metadata, OpenGraph and Schema.org -->
     
     <!-- Website verification -->
     <meta name="google-site-verification" content="xRlThgNzCzfRY8XKsahsru2gLV-Cc284pbsdHHnr2oY">
@@ -18,7 +19,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>PCB design pointers/checklist | FirstName  LastName</title>
+    <title>Extending Cache Replacement Policies OF GPGPU-Sim (SRRIP, BRRIP, LFU) | FirstName  LastName</title>
     <meta name="author" content="FirstName  LastName">
     <meta name="description" content="">
     <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website">
@@ -41,7 +42,7 @@
     <link rel="shortcut icon" href="/assets/img/pcb.jpg">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://k45v.github.io/blog/2013/pcb-design/">
+    <link rel="canonical" href="https://k45v.github.io/blog/2013/gpgpusim/">
     
     <!-- Dark Mode -->
     
@@ -117,67 +118,22 @@
 <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">PCB design pointers/checklist</h1>
-    <p class="post-meta">May 5, 2013</p>
+    <h1 class="post-title">Extending Cache Replacement Policies OF GPGPU-Sim (SRRIP, BRRIP, LFU)</h1>
+    <p class="post-meta">April 28, 2013</p>
        
   </header>
 
   <article class="post-content">
-    <p>Pointers/Checklist to keep in mind while designing a new PCB.</p>
-
-<ol>
-  <li>Include “Power ON” LED and LEDs for debug</li>
-  <li>Include critical test points and extra VCC/GND railing/points</li>
-  <li>Holes for Wire to hold xtal</li>
-  <li>One way connectors only (RMC connectors)</li>
-  <li>Easy access reset and other switch (check size of nearby components).</li>
-  <li>Check if through hole components (especially 90 degree connectors) interfere with SMD/other components.</li>
-  <li>Holes on corners for spacers (3mm-5mm dia)</li>
-  <li>Space below and above ICs for removing IC from socket (if using an IC socket). Space for soldering iron, near bigger components like inductors and capacitors of power circuit</li>
-  <li>0.1uF ceramic caps between VCC and GND</li>
-  <li>Everything on bottom layer should be mirror image (EAGLE top view)</li>
-  <li>Through hole connectors offer more strength</li>
-  <li>The rule of thumb for trace width is .010″[.0254] per 1 Amp external (normally 1.5 oz or .0021″[.0533]) and .040″[.1016] per 1 Amp internally (for 1/2 oz of copper)</li>
-  <li>Check component availability before incorporating in design</li>
-  <li>Use filled vias for heat dissipation in power circuits</li>
-  <li>Are all IC inputs terminated as required?</li>
-  <li>Do IC/components have necessary filter caps?</li>
-  <li>Are main circuit and branch circuits clearly identified?</li>
-  <li>Define board dimensions</li>
-  <li>Define top and bottom board clearance for stacked/hierarchical PCB assembly</li>
-  <li>Draw board border using .040″ line</li>
-  <li>Define/determine a fixed component direction</li>
-  <li>Add text to plane layer and to net names (GND, +5V, etc.).</li>
-  <li>Board part number in copper on bottom side. Board revision (in copper or manually marking).</li>
-  <li>For high current circuits, note current of branch circuits.</li>
-  <li>Defining branch circuits and their current requirements is important if the main branch is of very high current. If the main branch requires a .050″[1.27] trace and the branches only require a .008″[.2032] width, it makes no sense to route all branches with a .050″[1.27] trace.</li>
-</ol>
-
-<div class="text-center">
-<figure>
-
-  <picture>
     
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/daq-top-view-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/daq-top-view-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/daq-top-view-1400.webp"></source>
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/daq-top-view.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
-
-  </picture>
-
-</figure>
-
-</div>
 
   </article>
   <p class="post-tags">
     <a href="/blog/2013"> <i class="fas fa-calendar fa-sm"></i> 2013 </a>
       ·  
-    <a href="/blog/category/circuit-design">
-      <i class="fas fa-tag fa-sm"></i> Circuit Design</a>
+    <a href="/blog/category/papers">
+      <i class="fas fa-tag fa-sm"></i> Papers</a>
+    <a href="/blog/category/parallel-computing">
+      <i class="fas fa-tag fa-sm"></i> Parallel Computing</a>
     
   </p>
 

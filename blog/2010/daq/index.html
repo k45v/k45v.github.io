@@ -41,7 +41,7 @@
     <link rel="shortcut icon" href="/assets/img/pcb.jpg">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://k45v.github.io/blog/2013/daq/">
+    <link rel="canonical" href="https://k45v.github.io/blog/2010/daq/">
     
     <!-- Dark Mode -->
     
@@ -118,7 +118,7 @@
 
   <header class="post-header">
     <h1 class="post-title">Designing a DAQ for a formula student race car</h1>
-    <p class="post-meta">July 14, 2013</p>
+    <p class="post-meta">July 30, 2010</p>
        
   </header>
 
@@ -303,7 +303,7 @@
 </div>
 
 <h3 id="power-card">Power card:</h3>
-<p>A noise free, light weight power supply is an essential requirement of a portable DAQ System. We designed a power Card based on low cost linear voltage regulators and equipped with features like surge voltage protection (using Metal Oxide Varistors), over current protection (using Polymeric Positive Temperature Coefficient fuses), reverse voltage and over voltage protection (using silicon avalanche diodes). However, I would recommend using switching supplies. I talk more about this in my <a href="/blog/2012/switching-supplies/">other blog post</a>.</p>
+<p>A noise free, light weight power supply is an essential requirement of a portable DAQ System. We designed a power Card based on low cost linear voltage regulators and equipped with features like surge voltage protection (using Metal Oxide Varistors), over current protection (using Polymeric Positive Temperature Coefficient fuses), reverse voltage and over voltage protection (using silicon avalanche diodes). However, I would recommend using switching supplies. I talk more about this in my <a href="/blog/2010/switching-supplies/">other blog post</a>.</p>
 
 <h3 id="daq-v1">DAQ v1:</h3>
 <p>The DAQ v1 was built around a PIC18F4680 microcontroller. It was designed as a stand-alone system, so as to be exempted from the cost report at the competition. The PIC18F4680 runs in HSPLL (High Speed Phase Locked Loop) mode under which a PLL multiplies the oscillator output frequency of 10MHz by 4 to get maximum possible operating frequency of 40MHz. The10bit ADC channels on PIC were expanded using analog multiplexers (CD4052). A temperature sensor in the form of LM-35 was included to ascertain that the operating temperature was within the hardware limits. CAN interface was provided using MCP2551 CAN transceiver. The firmware for DAQ v1 was developed using embedded C.</p>
@@ -374,11 +374,11 @@
 
 <p>Analog filtering was used to remove extraneous noise from the signal lines (thanks Mr. Claude Rouelle for his suggestions). In the absence of an analog filter, signals outside half of the sampling bandwidth of the ADC are aliased back into the signal path. Once a signal is aliased during the digitalization process, it is impossible to differentiate between noise with frequencies in band and out of band. The signal-to-noise ratio of the 12-bit ADC is 74dB and the bandwidth of interest for the analog signal is DC to 1 kHz. Hence, a 4-pole low pass filter was designed to provide an attenuation of 80dB/decade with a cut-off frequency of 1 kHz.</p>
 
-<p>We also tried to spend some time on telemetry but the transcievers we selected did not have sufficient range. For all the readers I would recommend using Maxstream 9XTend or Microhard n920 if they wish to have telemetry. We used MATLAB to develop GUI for analyzing the logged data, but with the car manufacturing being delayed we did not have much time to record/analyze/tune vehicle performance. From my experience I now feel that a benchmark DAQ would have been useful to test and tune the module better because whatever data we captured, there was no way of concluding that it was accurate enough. You can find the <a href="/blog/2012/wiring-diagrams/">wiring layouts for these modules here</a>.</p>
+<p>We also tried to spend some time on telemetry but the transcievers we selected did not have sufficient range. For all the readers I would recommend using Maxstream 9XTend or Microhard n920 if they wish to have telemetry. We used MATLAB to develop GUI for analyzing the logged data, but with the car manufacturing being delayed we did not have much time to record/analyze/tune vehicle performance. From my experience I now feel that a benchmark DAQ would have been useful to test and tune the module better because whatever data we captured, there was no way of concluding that it was accurate enough. You can find the <a href="/blog/2010/wiring-diagrams/">wiring layouts for these modules here</a>.</p>
 
   </article>
   <p class="post-tags">
-    <a href="/blog/2013"> <i class="fas fa-calendar fa-sm"></i> 2013 </a>
+    <a href="/blog/2010"> <i class="fas fa-calendar fa-sm"></i> 2010 </a>
       ·  
     <a href="/blog/category/embedded-systems">
       <i class="fas fa-tag fa-sm"></i> Embedded Systems</a>

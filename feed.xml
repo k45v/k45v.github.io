@@ -1,302 +1,74 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://k45v.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://k45v.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-05-13T02:22:04+00:00</updated><id>https://k45v.github.io/feed.xml</id><title type="html">blank</title><entry><title type="html">Designing a DAQ for a formula student race car</title><link href="https://k45v.github.io/blog/2013/daq/" rel="alternate" type="text/html" title="Designing a DAQ for a formula student race car" /><published>2013-07-14T00:00:00+00:00</published><updated>2013-07-14T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/daq</id><content type="html" xml:base="https://k45v.github.io/blog/2013/daq/"><![CDATA[<p><a href="http://www.formulastudent.de/">Formula SAE</a> is a student design competition in which a prototype race car is evaluated for its potential as a production item. In 2010, I got the chance to lead the electronics team of <a href="http://www.orion-racing.com/">Orion Racing India</a> (the FSAE team from K. J. Somaiya College of Engineering). Our joint efforts resulted in a DAQ (Data Acquisition System) and a Color LCD driver interface which was selected among the top 8 out of 78 international teams for the “Most Innovative use of Electronics Award” at FSG 2010.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://k45v.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://k45v.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-05-14T06:46:16+00:00</updated><id>https://k45v.github.io/feed.xml</id><title type="html">blank</title><entry><title type="html">Extending Cache Replacement Policies OF GPGPU-Sim (SRRIP, BRRIP, LFU)</title><link href="https://k45v.github.io/blog/2013/gpgpusim/" rel="alternate" type="text/html" title="Extending Cache Replacement Policies OF GPGPU-Sim (SRRIP, BRRIP, LFU)" /><published>2013-04-28T00:00:00+00:00</published><updated>2013-04-28T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/gpgpusim</id><content type="html" xml:base="https://k45v.github.io/blog/2013/gpgpusim/"><![CDATA[]]></content><author><name></name></author><category term="Papers" /><category term="Parallel Computing" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">GPGPU simulator installation on Ubuntu 12.04 for a system without NVIDIA Graphics card</title><link href="https://k45v.github.io/blog/2013/gpuocelot/" rel="alternate" type="text/html" title="GPGPU simulator installation on Ubuntu 12.04 for a system without NVIDIA Graphics card" /><published>2013-04-25T00:00:00+00:00</published><updated>2013-04-25T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/gpuocelot</id><content type="html" xml:base="https://k45v.github.io/blog/2013/gpuocelot/"><![CDATA[<p>Computation intensive applications which have high degree of data-level parallelism can very well harness the hardware capabilities provided a GPU. Enter the term <a href="http://en.wikipedia.org/wiki/GPGPU">GPGPU</a>.</p>
 
-<div class="text-center">
-<figure>
+<p>You might want to try out the Parallel Computing platform <a href="http://www.nvidia.com/object/cuda_home_new.html">CUDA</a> to gauge what kind of speed-up you can achieve in you current code by running it on a GPU. I wanted to use CUDA for one of my class projects but I do not have a compatible graphics card. Mine is an Intel Mobile 4 Series Chipset Integrated Graphics Controller, you can check yours using the command:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lspci | <span class="nb">grep </span>VGA
+</code></pre></div></div>
+<p>I spent a lot of time trying to install a GPU emulator but either I got stuck in some library dependency, or some of the downloaded packages were dependent on older gcc versions. The documentation online for installing emulators in systems which do not have a graphics card was insufficient. Finally, using few magical keywords in my Google search I located this <a href="http://barefeg.wordpress.com/2012/06/16/how-to-install-gpuocelot-in-ubuntu-12-04/">blog entry</a> which provided detailed installation procedure for the <a href="http://code.google.com/p/gpuocelot/">gpuocelot</a>.</p>
 
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/lcd-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/lcd-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/lcd-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/lcd.jpg" class="img-fluid rounded" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>
-
-<p>The DAQ could log data from 18 sensors @36Hz (we were initially looking at 2Hz with the GPS on-board! More on that later) and could control the coolant pump and radiator fan based on sensor readings. Crucial data was relayed to the Color LCD screen mounted on the steering wheel. A lot of DAQ systems do exist in the market and you can call this re-inventing the wheel, but when one is young, the learning experience is worth the effort. In this blog post I’ll discuss the tech details of the DAQ, some useful tools/approaches and the problems we faced.</p>
-
-<p>A well defined design procedure always helps you reduce the overall development time. We had learn’t this first hand from our tronics seniors @Orion. The first stage involved simulation and modeling. In comes Proteus ISIS, a tool which we used extensively to test everything, right from basic fundae of voltage drop on open resistor terminals to differential amplifier gains and serial bus communication protocols.</p>
-
-<div class="text-center">
-<figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/ftov1-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/ftov1-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/ftov1-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/ftov1.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>
-
-<p>Next we tested these circuits on breadboard. Apart from verifying the operation, breadboard testing also helps to visualize circuit design since most of the components we were using would be going on our final PCBs. We then fabricated low cost prototype PCBs to test the more crucial components like GPS receivers and micro-controllers.</p>
-
-<div class="text-center">
-<figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/prototype-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/prototype-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/prototype-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/prototype.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>
-
-<p>Finally, we got the shiny green DAQ PCB boards made. Smiles smiles ^__^</p>
-
-<h3 id="sensor-requirements-calibration">SENSOR REQUIREMENTS, CALIBRATION</h3>
-<p>Sensors are responsible for conversion of various mechanical parameters into measurable electrical quantities. The sensor selection for every team changes with its design goals. Typical sensors implemented by most teams include three axis accelerometers and sensors to detect wheel speed, shock travel, steering angle, manifold air pressure, coolant temperature, throttle position and gear position.</p>
-
-<h3 id="accelerometer">Accelerometer</h3>
-<p>The MMA7260Q, low cost three axis capacitive micro machined accelerometer was selected to monitor the vehicle accelerations. It features signal conditioning, a single-pole low pass filter, temperature compensation and selectable sensitivity (1.5g/2g/4g/6g). Its capacitive approach offers several benefits when compared to the piezoresistive sensors used in many other accelerometers, notably a wider temperature range and response to DC as well as dynamic vibrations. The sensor outputs voltages proportional to the experienced g-force.</p>
-
-<h3 id="wheel-speed-sensor">Wheel speed sensor</h3>
-<p>Wheel speed is sensed using an NPN type inductive proximity sensor. As a tooth on the wheel passes by the sensor, a pulse is generated in a recurring manner. The pulse train will increase in frequency as the vehicle speeds up and decrease as the vehicle slows down. Therefore, a frequency to voltage converter, LM2907 was used to convert the generated frequency into a corresponding output voltage.</p>
-
-<div class="text-center">
-<figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/wheelspeed1-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/wheelspeed1-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/wheelspeed1-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/wheelspeed1.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>
-
-<p>Low cost inductive proximity sensors have a maximum switching frequency of approximately 600Hz. Assuming maximum vehicle speed to be 120km/hr, the number of teeth in the toothed wheel was selected to be 30.</p>
-
-<h3 id="shock-travel-sensor">Shock travel sensor</h3>
-<p>Suspensions play a key role in the vehicle dynamics of a race car. Knowledge of the linear displacement of the shocks for a particular damping setting is critical in evaluating the damping performance in various loading scenarios. Shock travel sensors used to measure these linear displacements are available in two types: wire wound and conductive plastic. Conductive Plastic (CP) displacement sensors are free from hysteresis and hence recommended. We got the wire wound ones (cheaper 😛 ).</p>
-
-<h3 id="steering-angle-sensors">Steering angle sensors</h3>
-<p>A rotary potentiometer was housed inside the steering rack housing and attached to the steering column to measure the steering angle. Yeah we did use a lot of potentiomenters (cheaper!). If possible, I would recommend using non-contact based sensors (LVDT, capacitive, etc.) so that they won’t be worn out over time.</p>
-
-<h3 id="gear-position-sensor">Gear position sensor</h3>
-<p>For the purpose of gear position indication, a small gear is meshed with the gear drum in the engine. A high quality potentiometer shaft is rotated accordingly by the gear drum using this arrangement. Distinct voltage levels can be obtained for each position.</p>
-
-<h3 id="fuel-level-sensor">Fuel level sensor</h3>
-<p>A typical fuel gauge comprising of a float that is mounted on the end of a pivot arm was used as a fuel level sensor. The resistance of the fuel gauge changes as the float moves up and down with the fuel level. Errors introduced in the readings due to fuel slosh were reduced by implementing a moving average filter with a window size of 15.</p>
-
-<h3 id="coolant-temperature-sensor">Coolant temperature sensor</h3>
-<p>Two negative temperature co-efficient thermistors with brass housing and a temperature range of -40 degree C to 135 degree C were used to measure the coolant temperature.</p>
-
-<div class="text-center">
-<figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/thermistor-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/thermistor-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/thermistor-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/thermistor.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>
-
-<p>A potential divider network was implemented to get the required output voltage swing. A second order logarithmic curve was fitted to the response of this sensor. (MATLAB).</p>
-
-<p>All of the sensors mentioned above need to be calibrated. By that I mean the sensors should be taken from the minimum to maximum reading possible and other way round (to account for hysteresis) over multiple iterations. The procedure should be well documented, so that every iteration is exactly the same as previous one. Only then the resultant data should be used for translating sensor reading to derived units.</p>
-
-<h2 id="supporting-hardware">SUPPORTING HARDWARE</h2>
-<h3 id="cooling-control-board">Cooling control board:</h3>
-<p>Every engine is designed to work at maximum efficiency in a certain temperature range. The devices which can be controlled to maintain the engine in the specified temperature range are the coolant pump and the radiator fan. The cooling team provided us with three temperature set-points: 75, 80 and 85 degree C, which can be selected by the driver.</p>
-
-<div class="text-center">
-<figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/ccb-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/ccb-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/ccb-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/ccb.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>
-
-<p>The hardware used to regulate the engine temperature comprises of a Goodsky GU-SH-112DM relay, used to control the radiator fan and an IRFZ48 power MOSFET, used to control the coolant pump. The control signals generated based on the set point are as shown.</p>
-
-<div class="text-center">
-<figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/coolgraph-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/coolgraph-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/coolgraph-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/coolgraph.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>
-
-<h3 id="power-card">Power card:</h3>
-<p>A noise free, light weight power supply is an essential requirement of a portable DAQ System. We designed a power Card based on low cost linear voltage regulators and equipped with features like surge voltage protection (using Metal Oxide Varistors), over current protection (using Polymeric Positive Temperature Coefficient fuses), reverse voltage and over voltage protection (using silicon avalanche diodes). However, I would recommend using switching supplies. I talk more about this in my <a href="/blog/2012/switching-supplies/">other blog post</a>.</p>
-
-<h3 id="daq-v1">DAQ v1:</h3>
-<p>The DAQ v1 was built around a PIC18F4680 microcontroller. It was designed as a stand-alone system, so as to be exempted from the cost report at the competition. The PIC18F4680 runs in HSPLL (High Speed Phase Locked Loop) mode under which a PLL multiplies the oscillator output frequency of 10MHz by 4 to get maximum possible operating frequency of 40MHz. The10bit ADC channels on PIC were expanded using analog multiplexers (CD4052). A temperature sensor in the form of LM-35 was included to ascertain that the operating temperature was within the hardware limits. CAN interface was provided using MCP2551 CAN transceiver. The firmware for DAQ v1 was developed using embedded C.</p>
-
-<div class="text-center">
-<figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/01012008015-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/01012008015-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/01012008015-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/01012008015.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>
-
-<p>The CP3838 GPS (Global Positioning System) module was selected (rather sponsored, so selected 🙂 ) to satisfy the vehicle tracking requirements. Data recorded from the GPS receiver played a significant role in validating sensor data. The track shown was plotted using co-ordinates recorded from the GPS receiver. Interface to an MMC/SD card for logging sensor and GPS data was provided via SPI (Serial Peripheral Interface). The data is stored in as comma separated value file format which can be easily imported into MATLAB for analysis. A logging rate of 33Hz was recorded for 14 sensors interfaced to the module.</p>
-
-<div class="text-center">
-<figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/gps-track-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/gps-track-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/gps-track-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/gps-track.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>
-
-<p>I mentioned before that we had a logging rate of 2Hz initially. This was because we were doing all conversions from sensor ADC values to derived parameters on the micro-controller before logging into SD card. Floating point operations require computational power and this translates into conversion time for a slower 8-bit micro-controller. A simple software change to log readings directly helped us notch up the logging rate! Batching of data would have helped improve this even more (but I realised that 2 years later! 😛 ).</p>
-
-<h3 id="daq-v2">DAQ v2:</h3>
-<p>The DAQ v1, although a fully functional stand alone system, was reliant on GPS for generating time-stamps. The 10bit ADC of PIC18F4680 could not provide the degree of precision required by the team. In addition, the analog multiplexer introduced a series resistance of 270ohm and a delay varying from 500-1000ns (nanosecond) on the signal acquisition line. Hence, a real time clock (DS1307) was introduced on-board to get time-stamps at higher frequency and three 12-bit ADCs (TLV2553) were interfaced via SPI to get a higher resolution of the sensor data. The DAQ v2 also features fourth order Sallen-key based low pass filters and transient voltage suppressors for noise suppression and anti-aliasing. A logging rate of 36Hz was recorded for 18 sensors.</p>
-
-<div class="text-center">
-<figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/filter-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/filter-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/filter-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/filter.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>
-
-<p>Analog filtering was used to remove extraneous noise from the signal lines (thanks Mr. Claude Rouelle for his suggestions). In the absence of an analog filter, signals outside half of the sampling bandwidth of the ADC are aliased back into the signal path. Once a signal is aliased during the digitalization process, it is impossible to differentiate between noise with frequencies in band and out of band. The signal-to-noise ratio of the 12-bit ADC is 74dB and the bandwidth of interest for the analog signal is DC to 1 kHz. Hence, a 4-pole low pass filter was designed to provide an attenuation of 80dB/decade with a cut-off frequency of 1 kHz.</p>
-
-<p>We also tried to spend some time on telemetry but the transcievers we selected did not have sufficient range. For all the readers I would recommend using Maxstream 9XTend or Microhard n920 if they wish to have telemetry. We used MATLAB to develop GUI for analyzing the logged data, but with the car manufacturing being delayed we did not have much time to record/analyze/tune vehicle performance. From my experience I now feel that a benchmark DAQ would have been useful to test and tune the module better because whatever data we captured, there was no way of concluding that it was accurate enough. You can find the <a href="/blog/2012/wiring-diagrams/">wiring layouts for these modules here</a>.</p>]]></content><author><name></name></author><category term="Embedded Systems" /><category term="FSAE" /><summary type="html"><![CDATA[Formula SAE is a student design competition in which a prototype race car is evaluated for its potential as a production item. In 2010, I got the chance to lead the electronics team of Orion Racing India (the FSAE team from K. J. Somaiya College of Engineering). Our joint efforts resulted in a DAQ (Data Acquisition System) and a Color LCD driver interface which was selected among the top 8 out of 78 international teams for the “Most Innovative use of Electronics Award” at FSG 2010.]]></summary></entry><entry><title type="html">PCB design pointers/checklist</title><link href="https://k45v.github.io/blog/2013/pcb-design/" rel="alternate" type="text/html" title="PCB design pointers/checklist" /><published>2013-05-05T00:00:00+00:00</published><updated>2013-05-05T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/pcb-design</id><content type="html" xml:base="https://k45v.github.io/blog/2013/pcb-design/"><![CDATA[<p>Pointers/Checklist to keep in mind while designing a new PCB.</p>
+<p>Here, I provide my version of the installation procedure to get a simple “Hello World” program up and running using GPGPU emulator.</p>
 
 <ol>
-  <li>Include “Power ON” LED and LEDs for debug</li>
-  <li>Include critical test points and extra VCC/GND railing/points</li>
-  <li>Holes for Wire to hold xtal</li>
-  <li>One way connectors only (RMC connectors)</li>
-  <li>Easy access reset and other switch (check size of nearby components).</li>
-  <li>Check if through hole components (especially 90 degree connectors) interfere with SMD/other components.</li>
-  <li>Holes on corners for spacers (3mm-5mm dia)</li>
-  <li>Space below and above ICs for removing IC from socket (if using an IC socket). Space for soldering iron, near bigger components like inductors and capacitors of power circuit</li>
-  <li>0.1uF ceramic caps between VCC and GND</li>
-  <li>Everything on bottom layer should be mirror image (EAGLE top view)</li>
-  <li>Through hole connectors offer more strength</li>
-  <li>The rule of thumb for trace width is .010″[.0254] per 1 Amp external (normally 1.5 oz or .0021″[.0533]) and .040″[.1016] per 1 Amp internally (for 1/2 oz of copper)</li>
-  <li>Check component availability before incorporating in design</li>
-  <li>Use filled vias for heat dissipation in power circuits</li>
-  <li>Are all IC inputs terminated as required?</li>
-  <li>Do IC/components have necessary filter caps?</li>
-  <li>Are main circuit and branch circuits clearly identified?</li>
-  <li>Define board dimensions</li>
-  <li>Define top and bottom board clearance for stacked/hierarchical PCB assembly</li>
-  <li>Draw board border using .040″ line</li>
-  <li>Define/determine a fixed component direction</li>
-  <li>Add text to plane layer and to net names (GND, +5V, etc.).</li>
-  <li>Board part number in copper on bottom side. Board revision (in copper or manually marking).</li>
-  <li>For high current circuits, note current of branch circuits.</li>
-  <li>Defining branch circuits and their current requirements is important if the main branch is of very high current. If the main branch requires a .050″[1.27] trace and the branches only require a .008″[.2032] width, it makes no sense to route all branches with a .050″[1.27] trace.</li>
+  <li>Download the “CUDA Toolkit for Ubuntu Linux 10.10” from <a href="https://developer.nvidia.com/cuda-toolkit-40">here</a> (v 4.0). Now start terminal (using ctrl + alt + t) and navigate to your Downloads directory. Change permissions for the installation file (mine was for 32bit) and install it. Hit enter if it asks for a change of destination directory.
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +x ./cudatoolkit_4.0.17_linux_32_ubuntu10.10.run
+<span class="nb">sudo</span> ./cudatoolkit_4.0.17_linux_32_ubuntu10.10.run
+</code></pre></div>    </div>
+  </li>
+  <li>Next install gcc and g++ v4.4 and update alternatives and priorities for gcc versions
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>gcc-4.4
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>g++-4.4
+<span class="nb">sudo </span>update-alternatives <span class="se">\</span>
+<span class="nt">--install</span> /usr/bin/gcc gcc /usr/bin/gcc-4.6 40 <span class="se">\</span>
+<span class="nt">--slave</span> /usr/bin/g++ g++ /usr/bin/g++-4.6
+<span class="nb">sudo </span>update-alternatives <span class="se">\</span>
+<span class="nt">--install</span> /usr/bin/gcc gcc /usr/bin/gcc-4.4 60 <span class="se">\</span>
+<span class="nt">--slave</span> /usr/bin/g++ g++ /usr/bin/g++-4.4
+<span class="nb">sudo </span>update-alternatives <span class="nt">--config</span> gcc
+</code></pre></div>    </div>
+    <p>Now select the version 4.4 (usually item 0). Check the current version using</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gcc <span class="nt">--version</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Now you need to update the paths in your bashrc file
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi ~/.bashrc
+</code></pre></div>    </div>
+    <p>In vi editor enter “G” to go to the end of file, then “i” to add data. Copy paste the lines below</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/local/cuda/bin
+<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:/usr/local/cuda/lib:/usr/local/lib
+<span class="nb">export </span><span class="nv">CPLUS_INCLUDE_PATH</span><span class="o">=</span>/usr/local/cuda/include
+</code></pre></div>    </div>
+    <p>Now enter “:wq” to save and exit. Update the sources using</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
+</code></pre></div>    </div>
+    <p>The CUDA setup is completed now and you can check using the command</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvcc <span class="nt">--version</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Next download the following files:<br />
+libboost-filesystem1.42.0_1.42.0-4ubuntu2_i386.deb from <a href="https://launchpad.net/ubuntu/oneiric/+package/libboost-filesystem1.42.0">here</a><br />
+libboost-system1.42.0_1.42.0-4ubuntu2_i386.deb from <a href="https://launchpad.net/ubuntu/precise/+package/libboost-system1.42.0">here</a> and<br />
+libboost-thread1.42.0_1.42.0-4ubuntu2_i386.deb from <a href="https://launchpad.net/ubuntu/oneiric/+package/libboost-thread1.42.0">here</a>.<br />
+I selected libboost-* in i386 (Release) and then downloaded the *.deb file below the Downloadable files section. Install by double clicking (it should open in the ubuntu software center, select install there).</p>
+  </li>
+  <li>Finally, download gpuocelot from <a href="http://code.google.com/p/gpuocelot/downloads/list">here</a>. I chose ocelot_2.1.1272_i386.deb. Install by double clicking.</li>
 </ol>
 
-<div class="text-center">
-<figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/daq-top-view-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/daq-top-view-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/daq-top-view-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/daq-top-view.jpg" class="img-fluid rounded w-50" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>]]></content><author><name></name></author><category term="Circuit Design" /><summary type="html"><![CDATA[Pointers/Checklist to keep in mind while designing a new PCB.]]></summary></entry><entry><title type="html">Vim, Ctags and Cscope</title><link href="https://k45v.github.io/blog/2013/vim/" rel="alternate" type="text/html" title="Vim, Ctags and Cscope" /><published>2013-04-20T00:00:00+00:00</published><updated>2013-04-20T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/vim</id><content type="html" xml:base="https://k45v.github.io/blog/2013/vim/"><![CDATA[<p>You have been given a project folder with the code spread over multiple files (maybe even nested in sub-folders). Now, you wish to add a new feature to this project. But before you can start scribbling down your algorithm and making changes, you need to understand the code. Vim coupled with Ctags and Cscope can help you do exactly that. Ctags helps you jump from function/symbol instances to their definitions and Cscope does the opposite i.e. you can see the entire call hierarchy of a particular function (where all the function is called). The tutorials for setting up Cscope were a bit tricky and I wanted to document my set of steps here. So here is how to set up your tools:</p>
+<h2 id="hello-world">Hello World</h2>
+<ol>
+  <li>
+    <p>Navigate to your home directory and create a folder hellocuda. Download the configuration file from <a href="https://docs.google.com/file/d/0B5Ve5IFK3KWxeHdsQzM2MGdtOW8/edit">here</a> and the Hello World program from <a href="https://docs.google.com/file/d/0B5Ve5IFK3KWxY0dWMXZ6b0hoZWc/edit">here</a>. Place both these files in the hellocuda directory. You may go through <a href="http://code.google.com/p/gpuocelot/wiki/OcelotConfigFile">this page</a> to understand the configuration file.</p>
+  </li>
+  <li>
+    <p>Now compile the code</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvcc <span class="nt">-c</span> hello.cu <span class="nt">-arch</span><span class="o">=</span>sm_20
+g++ <span class="nt">-o</span> hello.out hello.o <span class="sb">`</span>OcelotConfig <span class="nt">-l</span><span class="sb">`</span>
+</code></pre></div>    </div>
+    <p>Next run it using</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./hello.out
+</code></pre></div>    </div>
+    <p>This code computes the dot product of two vectors a and b using the GPU (in our case on the CPU using emulation) and stores the result in c. The final output shows the result of the computation performed using GPU and CPU respectively.</p>
+  </li>
+</ol>]]></content><author><name></name></author><category term="Parallel Computing" /><summary type="html"><![CDATA[Computation intensive applications which have high degree of data-level parallelism can very well harness the hardware capabilities provided a GPU. Enter the term GPGPU.]]></summary></entry><entry><title type="html">Vim, Ctags and Cscope</title><link href="https://k45v.github.io/blog/2013/vim/" rel="alternate" type="text/html" title="Vim, Ctags and Cscope" /><published>2013-04-20T00:00:00+00:00</published><updated>2013-04-20T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/vim</id><content type="html" xml:base="https://k45v.github.io/blog/2013/vim/"><![CDATA[<p>You have been given a project folder with the code spread over multiple files (maybe even nested in sub-folders). Now, you wish to add a new feature to this project. But before you can start scribbling down your algorithm and making changes, you need to understand the code. Vim coupled with Ctags and Cscope can help you do exactly that. Ctags helps you jump from function/symbol instances to their definitions and Cscope does the opposite i.e. you can see the entire call hierarchy of a particular function (where all the function is called). The tutorials for setting up Cscope were a bit tricky and I wanted to document my set of steps here. So here is how to set up your tools:</p>
 
 <ol>
   <li>The Vim editor<br />
@@ -402,7 +174,7 @@ Cut a section of words:- v to begin selecting, d to end and cut, p to paste
 </figure>
 
 </div>
-<p>It has been quite some time since I participated in a competition (2010 was the last time @ <a href="/blog/2013/daq/">FSG</a>). I had been waiting for the <a href="https://sites.google.com/a/ncsu.edu/xcdc2013/home">XCDC2013</a> and what an amazing experience it was!!!</p>
+<p>It has been quite some time since I participated in a competition (2010 was the last time @ <a href="/blog/2010/daq/">FSG</a>). I had been waiting for the <a href="https://sites.google.com/a/ncsu.edu/xcdc2013/home">XCDC2013</a> and what an amazing experience it was!!!</p>
 
 <p>I learn’t a lot and thoroughly enjoyed the team work. It was like a symphony. Spending hours with my team mates Bharat and Roshan, sprouting new approaches and bouncing ideas off each other. I can never forget that moment when at 2am in the Hunt library we managed to Overclock the Snapdragon S3 (APQ8060) on the <a href="https://developer.qualcomm.com/mobile-development/development-devices/snapdragon-mdp-legacy-devices">MSM8660</a> (Dragonboard) and there were high fives all around. In this blog post I will try to cover everything what we did/tried for this event. (The <a href="#appendix">Appendix section</a> has all the detailed procedures)</p>
 
@@ -828,202 +600,7 @@ M49WC0OT   /dev/ttyUSB0     Moteiv tmote sky
   </li>
 </ol>
 
-<p>References: <a href="http://docs.tinyos.net/tinywiki/index.php/Main_Page">TinyOS Documentation</a></p>]]></content><author><name></name></author><category term="Embedded Systems" /><summary type="html"><![CDATA[Recently I got my hands on the TelosB mote and as the tradition goes, I had to test blinking LEDs on it. (If you want to compare this mote with few others out there then this is a good paper to refer).]]></summary></entry><entry><title type="html">Soldering Pointers</title><link href="https://k45v.github.io/blog/2013/soldering/" rel="alternate" type="text/html" title="Soldering Pointers" /><published>2013-02-17T00:00:00+00:00</published><updated>2013-02-17T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/soldering</id><content type="html" xml:base="https://k45v.github.io/blog/2013/soldering/"><![CDATA[<p>Pointers to keep in mind while soldering:</p>
-
-<ol>
-  <li>
-    <p>Set temperature to 320°C (608°F). (if you have some experience, else bring it down to about 270°C)</p>
-  </li>
-  <li>
-    <p>After real temperature reaches the set temperature, use a damp sponge to
-clean the tip and check for damages. The sponge also helps in thermally shocking the iron, i.e. forces the iron into maximum heat cycle.</p>
-  </li>
-  <li>
-    <p>If you have brass wool or metal brushes on your solder stand then use them for cleaning instead of the sponge, since tiny blobs of solder might get trapped in the sponge and start accumulating at the bottom.</p>
-  </li>
-  <li>
-    <p>If the tip has oxidation, apply solder and wipe using the damp sponge, repeat these steps until oxidation is removed.</p>
-  </li>
-  <li>
-    <p>Apply some soldering flux to get better finish (also useful when desoldering)</p>
-  </li>
-  <li>
-    <p>After cleaning, coat tip with a layer of solder and set it aside ready for the
-next usage. You may leave a lump of solder on the tip, this helps the tip last much longer.</p>
-  </li>
-  <li>
-    <p>If the tip shows dis-figuration or has rust on it. Change the tip.</p>
-  </li>
-</ol>
-<div class="float-left mr-3 w-25">
-  <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/soldering-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/soldering-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/soldering-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/soldering.jpg" class="img-fluid rounded" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>
-
-<p><strong>Tinning:</strong> Tin wire NOT till the insulation but till 1.6mm before insulation as bending might cause breakage of insulation!!!</p>
-
-<p>Take care so as not to damage the meniscus of ceramic/button capacitors.</p>
-
-<p>Use wood/toothpick to hold down wires in board repair</p>
-
-<p>SMD soldering simplified <a href="http://www.sparkfun.com/tutorials/category/2">http://www.sparkfun.com/tutorials/category/2</a></p>
-
-<p>Always check your work using a magnifying glass (Better safe than sorry).</p>]]></content><author><name></name></author><category term="Circuit Design" /><summary type="html"><![CDATA[Pointers to keep in mind while soldering:]]></summary></entry><entry><title type="html">Resizing the Ubuntu paritition in a Dual Boot Windows7 and Ubuntu 12.04 system</title><link href="https://k45v.github.io/blog/2013/resize-ubuntu/" rel="alternate" type="text/html" title="Resizing the Ubuntu paritition in a Dual Boot Windows7 and Ubuntu 12.04 system" /><published>2013-02-04T00:00:00+00:00</published><updated>2013-02-04T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/resize-ubuntu</id><content type="html" xml:base="https://k45v.github.io/blog/2013/resize-ubuntu/"><![CDATA[<p>I have a Dual boot system (Ubuntu 12.04 LTS and Windows7) with the GRUB as my bootloader. Lately, I have been using a lot of tools offered for Linux and I wanted to expand the partition size for my Ubuntu. I remember the last time when I tried to do this, using a partition manager in Windows; It did not end well. So this time I tried a different approach and it proved to be so easy that I decided to document it.</p>
-
-<ol>
-  <li>Boot into your Ubuntu OS. Then download the Ubuntu image file from <a href="http://www.ubuntu.com/download/desktop">here</a>. It would be an “ISO” file.</li>
-</ol>
-<div class="text-center">
-  <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/download_ubuntu-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/download_ubuntu-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/download_ubuntu-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/download_ubuntu.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-  </div>
-
-<ol start="2">
-  <li>
-    <p>Create a bootable USB stick using the instructions given <a href="http://www.ubuntu.com/download/help/create-a-usb-stick-on-ubuntu">here</a></p>
-  </li>
-  <li>
-    <p>Restart your PC and hit Esc or F12 (whatever takes you into boot menu) and select boot from USB device.</p>
-  </li>
-  <li>Click on Try Ubuntu. Now install gparted using the command below:
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">sudo </span>apt-get <span class="nb">install </span>gparted
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Resize the windows partition which is at the end of the Windows file system to create un-allocated free space(in my case the partition did not hold the OS).</p>
-  </li>
-  <li>
-    <p>Resize the Ubuntu partition to use the created free space. (Now, GRUB stage 1 is no longer at the beginning of the parition).</p>
-  </li>
-  <li>
-    <p>Apply changes. It should take roughly 1.5min per GB of space allotted.</p>
-  </li>
-  <li>Now use Boot repair to fix the problems in the GRUB Bootloader (Instructions were borrowed from <a href="http://www.howtogeek.com/114884/how-to-repair-grub2-when-ubuntu-wont-boot/">How-To Geek</a>) :
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:yannubuntu/boot-repair
-<span class="nb">sudo </span>apt-get update
-<span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> boot-repair
-boot-repair
-</code></pre></div>    </div>
-    <p>Click on recommended repair.</p>
-  </li>
-  <li>Restart your computer and enjoy the expanded disk space in your Ubuntu OS.</li>
-</ol>
-<div class="text-center">
-<figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/resize_ubuntu-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/resize_ubuntu-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/resize_ubuntu-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/resize_ubuntu.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>]]></content><author><name></name></author><category term="Linux" /><summary type="html"><![CDATA[I have a Dual boot system (Ubuntu 12.04 LTS and Windows7) with the GRUB as my bootloader. Lately, I have been using a lot of tools offered for Linux and I wanted to expand the partition size for my Ubuntu. I remember the last time when I tried to do this, using a partition manager in Windows; It did not end well. So this time I tried a different approach and it proved to be so easy that I decided to document it.]]></summary></entry><entry><title type="html">GPGPU simulator installation on Ubuntu 12.04 for a system without NVIDIA Graphics card</title><link href="https://k45v.github.io/blog/2013/gpuocelot/" rel="alternate" type="text/html" title="GPGPU simulator installation on Ubuntu 12.04 for a system without NVIDIA Graphics card" /><published>2013-01-28T00:00:00+00:00</published><updated>2013-01-28T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/gpuocelot</id><content type="html" xml:base="https://k45v.github.io/blog/2013/gpuocelot/"><![CDATA[<p>Computation intensive applications which have high degree of data-level parallelism can very well harness the hardware capabilities provided a GPU. Enter the term <a href="http://en.wikipedia.org/wiki/GPGPU">GPGPU</a>.</p>
-
-<p>You might want to try out the Parallel Computing platform <a href="http://www.nvidia.com/object/cuda_home_new.html">CUDA</a> to gauge what kind of speed-up you can achieve in you current code by running it on a GPU. I wanted to use CUDA for one of my class projects but I do not have a compatible graphics card. Mine is an Intel Mobile 4 Series Chipset Integrated Graphics Controller, you can check yours using the command:</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lspci | <span class="nb">grep </span>VGA
-</code></pre></div></div>
-<p>I spent a lot of time trying to install a GPU emulator but either I got stuck in some library dependency, or some of the downloaded packages were dependent on older gcc versions. The documentation online for installing emulators in systems which do not have a graphics card was insufficient. Finally, using few magical keywords in my Google search I located this <a href="http://barefeg.wordpress.com/2012/06/16/how-to-install-gpuocelot-in-ubuntu-12-04/">blog entry</a> which provided detailed installation procedure for the <a href="http://code.google.com/p/gpuocelot/">gpuocelot</a>.</p>
-
-<p>Here, I provide my version of the installation procedure to get a simple “Hello World” program up and running using GPGPU emulator.</p>
-
-<ol>
-  <li>Download the “CUDA Toolkit for Ubuntu Linux 10.10” from <a href="https://developer.nvidia.com/cuda-toolkit-40">here</a> (v 4.0). Now start terminal (using ctrl + alt + t) and navigate to your Downloads directory. Change permissions for the installation file (mine was for 32bit) and install it. Hit enter if it asks for a change of destination directory.
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +x ./cudatoolkit_4.0.17_linux_32_ubuntu10.10.run
-<span class="nb">sudo</span> ./cudatoolkit_4.0.17_linux_32_ubuntu10.10.run
-</code></pre></div>    </div>
-  </li>
-  <li>Next install gcc and g++ v4.4 and update alternatives and priorities for gcc versions
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>gcc-4.4
-<span class="nb">sudo </span>apt-get <span class="nb">install </span>g++-4.4
-<span class="nb">sudo </span>update-alternatives <span class="se">\</span>
-<span class="nt">--install</span> /usr/bin/gcc gcc /usr/bin/gcc-4.6 40 <span class="se">\</span>
-<span class="nt">--slave</span> /usr/bin/g++ g++ /usr/bin/g++-4.6
-<span class="nb">sudo </span>update-alternatives <span class="se">\</span>
-<span class="nt">--install</span> /usr/bin/gcc gcc /usr/bin/gcc-4.4 60 <span class="se">\</span>
-<span class="nt">--slave</span> /usr/bin/g++ g++ /usr/bin/g++-4.4
-<span class="nb">sudo </span>update-alternatives <span class="nt">--config</span> gcc
-</code></pre></div>    </div>
-    <p>Now select the version 4.4 (usually item 0). Check the current version using</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gcc <span class="nt">--version</span>
-</code></pre></div>    </div>
-  </li>
-  <li>Now you need to update the paths in your bashrc file
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi ~/.bashrc
-</code></pre></div>    </div>
-    <p>In vi editor enter “G” to go to the end of file, then “i” to add data. Copy paste the lines below</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/local/cuda/bin
-<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:/usr/local/cuda/lib:/usr/local/lib
-<span class="nb">export </span><span class="nv">CPLUS_INCLUDE_PATH</span><span class="o">=</span>/usr/local/cuda/include
-</code></pre></div>    </div>
-    <p>Now enter “:wq” to save and exit. Update the sources using</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
-</code></pre></div>    </div>
-    <p>The CUDA setup is completed now and you can check using the command</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvcc <span class="nt">--version</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Next download the following files:<br />
-libboost-filesystem1.42.0_1.42.0-4ubuntu2_i386.deb from <a href="https://launchpad.net/ubuntu/oneiric/+package/libboost-filesystem1.42.0">here</a><br />
-libboost-system1.42.0_1.42.0-4ubuntu2_i386.deb from <a href="https://launchpad.net/ubuntu/precise/+package/libboost-system1.42.0">here</a> and<br />
-libboost-thread1.42.0_1.42.0-4ubuntu2_i386.deb from <a href="https://launchpad.net/ubuntu/oneiric/+package/libboost-thread1.42.0">here</a>.<br />
-I selected libboost-* in i386 (Release) and then downloaded the *.deb file below the Downloadable files section. Install by double clicking (it should open in the ubuntu software center, select install there).</p>
-  </li>
-  <li>Finally, download gpuocelot from <a href="http://code.google.com/p/gpuocelot/downloads/list">here</a>. I chose ocelot_2.1.1272_i386.deb. Install by double clicking.</li>
-</ol>
-
-<h2 id="hello-world">Hello World</h2>
-<ol>
-  <li>
-    <p>Navigate to your home directory and create a folder hellocuda. Download the configuration file from <a href="https://docs.google.com/file/d/0B5Ve5IFK3KWxeHdsQzM2MGdtOW8/edit">here</a> and the Hello World program from <a href="https://docs.google.com/file/d/0B5Ve5IFK3KWxY0dWMXZ6b0hoZWc/edit">here</a>. Place both these files in the hellocuda directory. You may go through <a href="http://code.google.com/p/gpuocelot/wiki/OcelotConfigFile">this page</a> to understand the configuration file.</p>
-  </li>
-  <li>
-    <p>Now compile the code</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvcc <span class="nt">-c</span> hello.cu <span class="nt">-arch</span><span class="o">=</span>sm_20
-g++ <span class="nt">-o</span> hello.out hello.o <span class="sb">`</span>OcelotConfig <span class="nt">-l</span><span class="sb">`</span>
-</code></pre></div>    </div>
-    <p>Next run it using</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./hello.out
-</code></pre></div>    </div>
-    <p>This code computes the dot product of two vectors a and b using the GPU (in our case on the CPU using emulation) and stores the result in c. The final output shows the result of the computation performed using GPU and CPU respectively.</p>
-  </li>
-</ol>]]></content><author><name></name></author><category term="Parallel Computing" /><summary type="html"><![CDATA[Computation intensive applications which have high degree of data-level parallelism can very well harness the hardware capabilities provided a GPU. Enter the term GPGPU.]]></summary></entry><entry><title type="html">Top 10 things I did after installing Ubuntu 12.04 LTS alongside Windows7</title><link href="https://k45v.github.io/blog/2013/ubuntu/" rel="alternate" type="text/html" title="Top 10 things I did after installing Ubuntu 12.04 LTS alongside Windows7" /><published>2013-01-18T00:00:00+00:00</published><updated>2013-01-18T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/ubuntu</id><content type="html" xml:base="https://k45v.github.io/blog/2013/ubuntu/"><![CDATA[<p>I installed Ubuntu on my computer a few years ago, and then… I installed it again 🙂</p>
+<p>References: <a href="http://docs.tinyos.net/tinywiki/index.php/Main_Page">TinyOS Documentation</a></p>]]></content><author><name></name></author><category term="Embedded Systems" /><summary type="html"><![CDATA[Recently I got my hands on the TelosB mote and as the tradition goes, I had to test blinking LEDs on it. (If you want to compare this mote with few others out there then this is a good paper to refer).]]></summary></entry><entry><title type="html">Top 10 things I did after installing Ubuntu 12.04 LTS alongside Windows7</title><link href="https://k45v.github.io/blog/2013/ubuntu/" rel="alternate" type="text/html" title="Top 10 things I did after installing Ubuntu 12.04 LTS alongside Windows7" /><published>2013-01-18T00:00:00+00:00</published><updated>2013-01-18T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/ubuntu</id><content type="html" xml:base="https://k45v.github.io/blog/2013/ubuntu/"><![CDATA[<p>I installed Ubuntu on my computer a few years ago, and then… I installed it again 🙂</p>
 
 <p>I like to have both Ubuntu and Windows on my system (Dual boot). Here is the list of things I usually do to setup Ubuntu, on a computer which already has a Windows OS :-</p>
 
@@ -1146,4 +723,189 @@ Click apply. Now click on disabled and then ctrl + alt + k . This is your shortc
 
 <p>sudo apt-get install virtualbox-ose-guest-utils</p>
 
-<p>P.S: Some information drawn from <a href="http://www.techdrivein.com/2012/06/25-things-i-did-after-installing-ubuntu.html">techdrivein</a> and <a href="http://www.noobslab.com/2012/04/important-things-to-do-after-install_26.html">noobslab</a></p>]]></content><author><name></name></author><category term="Linux" /><summary type="html"><![CDATA[I installed Ubuntu on my computer a few years ago, and then… I installed it again 🙂]]></summary></entry></feed>
+<p>P.S: Some information drawn from <a href="http://www.techdrivein.com/2012/06/25-things-i-did-after-installing-ubuntu.html">techdrivein</a> and <a href="http://www.noobslab.com/2012/04/important-things-to-do-after-install_26.html">noobslab</a></p>]]></content><author><name></name></author><category term="Linux" /><summary type="html"><![CDATA[I installed Ubuntu on my computer a few years ago, and then… I installed it again 🙂]]></summary></entry><entry><title type="html">The MOESISm (MOESIF) cache coherence protocol</title><link href="https://k45v.github.io/blog/2012/MOESISm/" rel="alternate" type="text/html" title="The MOESISm (MOESIF) cache coherence protocol" /><published>2012-10-31T00:00:00+00:00</published><updated>2012-10-31T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2012/MOESISm</id><content type="html" xml:base="https://k45v.github.io/blog/2012/MOESISm/"><![CDATA[<p>In one of the courses I took this semester, we were asked to modify an existing invalidation based cache coherence protocol to reduce the off-chip Bandwidth usage. The motivation for this problem statement was limited off-chip bandwidth due to constrained number of pins that a chip can have.</p>
+
+<p>Initially I had used the given benchmarks to determine off-chip bandwidth usage for MSI, MESI and MOESI protocols and among them, MESI seemed to perform the best. The MOESI protocol, in spite of having fewer writebacks (because it allows dirty sharing) lost out on cache-to-cache transfers because the shared state is not allowed to Flush. Hence, although MOESI accounts for Flush in a read after write operation ( ‘M’ to ‘O’ state transition and ‘O’ can Flush), a read after read will cause a block to be brought in from memory (on a miss) even if the cache on same level has a copy. In order to accommodate this request I decided to introduce a new state namely ‘Sm’ (shared master, which I later found to be similar to the Forward state in Intel MESIF protocol) and the results were quite interesting. Below is the explanation for the MOESISm protocol: (the terminology is based on what had been taught in class)</p>
+
+<p>Processor requests to the cache:</p>
+<ul>
+  <li>PrRd: Processor request to read to a cache block</li>
+  <li>PrWr: Processor request to write to a cache block</li>
+</ul>
+
+<p>Bus-side requests:</p>
+<ul>
+  <li>BusRd: Snooped request that some other processor has requested to read a cache block</li>
+  <li>BusRdX: Snooped request that some other processor has requested a read exclusive (write) to a cache block. The requesting processor does not have the block yet.</li>
+  <li>BusUpgr: Snooped request that some other processor has requested a write to a cache block that it already has.</li>
+  <li>Flush: Snooped request that indicates that entire cache block has been placed on the bus for cache to cache transfer</li>
+  <li>FlushOpt: Snooped request that indicates that entire cache block has been placed on the bus for cache to cache transfer. It’s called FlushOpt because  it offers performance enhancement and it is not really a correctness requirement.</li>
+</ul>
+
+<p><strong>NOTE:</strong> For a BusRd transaction, if a copy is found by other snoopers, they assert the COPIES-EXIST line (C) else the line is low (!C).</p>
+
+<div class="text-center">
+  <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/proc_init-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/proc_init-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/proc_init-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/proc_init.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture><figcaption class="caption">Processor Side</figcaption>
+
+</figure>
+
+  <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/bus_init-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/bus_init-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/bus_init-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/bus_init.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture><figcaption class="caption">Bus Side</figcaption>
+
+</figure>
+
+</div>
+
+<p>For the processor side, the state diagram uses the notation Processor_request/Resulting_bus_transaction and for the bus side it is snooped_transaction/resulting_action.</p>
+
+<p>The advantages of this protocol??? Well it allows dirty sharing and reduces traffic due to writebacks. It saves power when compared to MESI protocol. How? Well in case of MESI, the FlushOpt is generated by multiple caches in ‘S’ state, but only one is selected for cache-to-cache transfer. So, power is spent in reading the cache, trying to obtain bus access and then cancelling it when a cache senses that someone else has supplied the block earlier. This is avoided because FlushOpt will only be sent by the cache block in ‘Sm’ state. Hence, read after read requests will also get cache-to-cache transfers. The resulting off-chip bandwidth usage was the least for the same benchmark using MOESISm protocol.Yayyy!!!</p>
+
+<p>The only drawback which I can notice for this protocol is that, for MESIF the ‘F’ state migrates to a newer copy as mentioned here and the newer copy has lesser chances of getting evicted (temporal locality). However, in the protocol I have suggested, the migration of ‘Sm’ state is not possible because with the current hardware we only have one Copies exists line. Now, if the newer copy has to go into ‘Sm’ state, then the older copy may either be in ‘E’ state OR in ‘O’ state OR in ‘Sm’ state. Here, all these intial states should transition into ‘S’ state but if the ‘O’ state moves into ‘S’ state then what happens to the writeback??? Well, I guess if we change the protocol so that the ‘O’ state performs a writeback when it moves into ‘S’ state, then this can be achieved. I just thought of this last part now 😀 I guess blogging really helps!!!</p>]]></content><author><name></name></author><category term="Parallel Computing" /><summary type="html"><![CDATA[In one of the courses I took this semester, we were asked to modify an existing invalidation based cache coherence protocol to reduce the off-chip Bandwidth usage. The motivation for this problem statement was limited off-chip bandwidth due to constrained number of pins that a chip can have.]]></summary></entry><entry><title type="html">Resizing the Ubuntu paritition in a Dual Boot Windows7 and Ubuntu 12.04 system</title><link href="https://k45v.github.io/blog/2012/resize-ubuntu/" rel="alternate" type="text/html" title="Resizing the Ubuntu paritition in a Dual Boot Windows7 and Ubuntu 12.04 system" /><published>2012-08-29T00:00:00+00:00</published><updated>2012-08-29T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2012/resize-ubuntu</id><content type="html" xml:base="https://k45v.github.io/blog/2012/resize-ubuntu/"><![CDATA[<p>I have a Dual boot system (Ubuntu 12.04 LTS and Windows7) with the GRUB as my bootloader. Lately, I have been using a lot of tools offered for Linux and I wanted to expand the partition size for my Ubuntu. I remember the last time when I tried to do this, using a partition manager in Windows; It did not end well. So this time I tried a different approach and it proved to be so easy that I decided to document it.</p>
+
+<ol>
+  <li>Boot into your Ubuntu OS. Then download the Ubuntu image file from <a href="http://www.ubuntu.com/download/desktop">here</a>. It would be an “ISO” file.</li>
+</ol>
+<div class="text-center">
+  <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/download_ubuntu-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/download_ubuntu-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/download_ubuntu-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/download_ubuntu.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+  </div>
+
+<ol start="2">
+  <li>
+    <p>Create a bootable USB stick using the instructions given <a href="http://www.ubuntu.com/download/help/create-a-usb-stick-on-ubuntu">here</a></p>
+  </li>
+  <li>
+    <p>Restart your PC and hit Esc or F12 (whatever takes you into boot menu) and select boot from USB device.</p>
+  </li>
+  <li>Click on Try Ubuntu. Now install gparted using the command below:
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">sudo </span>apt-get <span class="nb">install </span>gparted
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Resize the windows partition which is at the end of the Windows file system to create un-allocated free space(in my case the partition did not hold the OS).</p>
+  </li>
+  <li>
+    <p>Resize the Ubuntu partition to use the created free space. (Now, GRUB stage 1 is no longer at the beginning of the parition).</p>
+  </li>
+  <li>
+    <p>Apply changes. It should take roughly 1.5min per GB of space allotted.</p>
+  </li>
+  <li>Now use Boot repair to fix the problems in the GRUB Bootloader (Instructions were borrowed from <a href="http://www.howtogeek.com/114884/how-to-repair-grub2-when-ubuntu-wont-boot/">How-To Geek</a>) :
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:yannubuntu/boot-repair
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> boot-repair
+boot-repair
+</code></pre></div>    </div>
+    <p>Click on recommended repair.</p>
+  </li>
+  <li>Restart your computer and enjoy the expanded disk space in your Ubuntu OS.</li>
+</ol>
+<div class="text-center">
+<figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/resize_ubuntu-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/resize_ubuntu-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/resize_ubuntu-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/resize_ubuntu.jpg" class="img-fluid rounded w-75" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+</div>]]></content><author><name></name></author><category term="Linux" /><summary type="html"><![CDATA[I have a Dual boot system (Ubuntu 12.04 LTS and Windows7) with the GRUB as my bootloader. Lately, I have been using a lot of tools offered for Linux and I wanted to expand the partition size for my Ubuntu. I remember the last time when I tried to do this, using a partition manager in Windows; It did not end well. So this time I tried a different approach and it proved to be so easy that I decided to document it.]]></summary></entry><entry><title type="html">Soldering Pointers</title><link href="https://k45v.github.io/blog/2011/soldering/" rel="alternate" type="text/html" title="Soldering Pointers" /><published>2011-04-11T00:00:00+00:00</published><updated>2011-04-11T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2011/soldering</id><content type="html" xml:base="https://k45v.github.io/blog/2011/soldering/"><![CDATA[<p>Pointers to keep in mind while soldering:</p>
+
+<ol>
+  <li>
+    <p>Set temperature to 320°C (608°F). (if you have some experience, else bring it down to about 270°C)</p>
+  </li>
+  <li>
+    <p>After real temperature reaches the set temperature, use a damp sponge to
+clean the tip and check for damages. The sponge also helps in thermally shocking the iron, i.e. forces the iron into maximum heat cycle.</p>
+  </li>
+  <li>
+    <p>If you have brass wool or metal brushes on your solder stand then use them for cleaning instead of the sponge, since tiny blobs of solder might get trapped in the sponge and start accumulating at the bottom.</p>
+  </li>
+  <li>
+    <p>If the tip has oxidation, apply solder and wipe using the damp sponge, repeat these steps until oxidation is removed.</p>
+  </li>
+  <li>
+    <p>Apply some soldering flux to get better finish (also useful when desoldering)</p>
+  </li>
+  <li>
+    <p>After cleaning, coat tip with a layer of solder and set it aside ready for the
+next usage. You may leave a lump of solder on the tip, this helps the tip last much longer.</p>
+  </li>
+  <li>
+    <p>If the tip shows dis-figuration or has rust on it. Change the tip.</p>
+  </li>
+</ol>
+<div class="float-left mr-3 w-25">
+  <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/soldering-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/soldering-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/soldering-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/soldering.jpg" class="img-fluid rounded" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+</div>
+
+<p><strong>Tinning:</strong> Tin wire NOT till the insulation but till 1.6mm before insulation as bending might cause breakage of insulation!!!</p>
+
+<p>Take care so as not to damage the meniscus of ceramic/button capacitors.</p>
+
+<p>Use wood/toothpick to hold down wires in board repair</p>
+
+<p>SMD soldering simplified <a href="http://www.sparkfun.com/tutorials/category/2">http://www.sparkfun.com/tutorials/category/2</a></p>
+
+<p>Always check your work using a magnifying glass (Better safe than sorry).</p>]]></content><author><name></name></author><category term="Circuit Design" /><summary type="html"><![CDATA[Pointers to keep in mind while soldering:]]></summary></entry></feed>
