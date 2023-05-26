@@ -23,7 +23,7 @@ I am an engineering leader who enjoys doing meaningful work alongside smart peop
 * In the avionics space, I worked with a smaller group handling pretty much everything from circuit design, to soldering, to firmware, for an autopilot system of a small fixed-wing aircraft.
 * I also had a fun run as a Formula SAE electronics team captain, doing everything I did above for avionics, but this time in the [automotive space]({% post_url 2010-07-30-daq %}).
 
-You can find some of my writings in the [blog section](/blog/index.html), and [my CV](/assets/pdf/cv.pdf) has more details on my experience and work history.
+You can find some of my writings in the [blog section](/blog/index.html), and [my CV](/cv/index.html) has more details on my experience and work history.
 
 I maintain a bucket list and enjoy checking items off of it. I've run two half-marathons pre-COVID and would like to do more of those.
 
