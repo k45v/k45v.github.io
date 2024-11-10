@@ -205,7 +205,7 @@ jekyll-archives:
     tag: '/blog/tag/:name/'
     category: '/blog/category/:name/'
 
-display_categories: ['Circuit Design', 'Embedded Systems', 'FSAE', 'Linux', 'Papers', 'Parallel Computing'] # these categories will be displayed on the front page of your blog
+display_categories: ['booknotes', 'Circuit Design', 'Embedded Systems', 'FSAE', 'Linux', 'Papers', 'Parallel Computing'] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Link Attributes
