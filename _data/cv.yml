@@ -26,12 +26,12 @@
         - I implemented the software stack for securely provisioning the identity key and other keys on the Secure Enclave for the A9, A9X, A10, and S2 chips. I also had the opportunity to work on the TRNG, PKA, AES, and SHA2 device drivers. I took some of my learnings into a new key provisioning framework, which was eventually used to enable Apple authorized service providers to perform secure screen replacements (thereby improving worldwide repair capabilities and driving down wait times).
         - During the annual Week-of-Code events, I proposed and prototyped ideas that were later productized as <a href="https://support.apple.com/en-us/HT212614">iCloud Private Relay</a> and <a href="https://support.apple.com/en-us/HT211303">iMessage thread reply</a>. I occasionally contributed to the public-facing iOS Security guides. I also worked on some other products that I cannot talk about here.
 
-    - title: Embedded Systems Engineer
+    - title: Research Engineer
       institution: AUS
       city: Sharjah
       year: Nov 2010–Jul 2012
       description:
-        - Our group was trying to take a research autopilot system for a small-scale fixed-wing aircraft to production. As the only embedded system engineer on the team, I worked on pretty much everything, including circuit design, SMD soldering, firmware development, sensor calibration/signal conditioning, power supply design, RF transceiver UART interface, Simulink modeling, embedded MATLAB scripts, s-functions, and Stateflow charts.
+        - Our group was trying to take a research autopilot system for a small-scale fixed-wing aircraft to production. As the only embedded systems engineer on the team, I worked on pretty much everything, including circuit design, SMD soldering, firmware development, sensor calibration/signal conditioning, power supply design, RF transceiver UART interface, Simulink modeling, embedded MATLAB scripts, s-functions, and Stateflow charts.
         - We added features such as runtime PID-gains/waypoint update, manual override, waypoint navigation, pitch hold, bank angle hold, heading hold, altitude hold and airspeed hold. We regularly used MIL, SIL, and HIL simulation (using dSPACE 1103 systems) to help with rapid prototyping
 
     - title: Higher Education Work
@@ -64,7 +64,7 @@
       institution: North Carolina State University
       city: Raleigh
       year: Aug 2012-Dec 2013
-      grade: GPA 4.0/4.0
+      grade: GPA 4.22/4.0
     - title: Bachelor of Electronics Engineering
       institution: University of Mumbai
       city: Mumbai
