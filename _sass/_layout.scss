@@ -1,0 +1,29 @@
+/******************************************************************************
+ * Content
+ ******************************************************************************/
+
+body {
+  padding-bottom: 70px;
+  color: var(--global-text-color);
+  background-color: var(--global-bg-color);
+
+  h1, h2, h3, h4, h5, h6 {
+    scroll-margin-top: 66px;
+  }
+}
+
+body.fixed-top-nav {
+  // Add some padding for the nav-bar.
+  padding-top: 56px;
+}
+
+.container {
+  max-width: $max-content-width;
+}
+
+// Profile
+.profile {
+  img {
+    width: 100%;
+  }
+}

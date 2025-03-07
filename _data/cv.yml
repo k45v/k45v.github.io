@@ -1,0 +1,94 @@
+- contents: I am an embedded operating systems engineer who currently finds joy at the intersection of people, systems, and security. My journey through systems software has taken me across the consumer electronics, avionics, and automotive spaces. During this time, I have had the chance to touch the lives of billions of people and contribute to projects at Apple, Facebook, and Google.
+
+- title: Professional Experience
+  type: time_table
+  contents:
+    - title: Software Engineering Manager
+      institution: Google
+      city: Mountain View
+      year: Jul 2022–Present
+      text: I’m working with a brilliant group trying to take embedded systems security into the future!
+
+    - title: Staff Software Engineer
+      institution: Facebook Reality Labs
+      city: Burlingame
+      year: Jan 2021–Jul 2022
+      text: I joined Facebook during the COVID-19 pandemic to explore the AR/VR landscape. During my time there, I helped to set technical direction for the Android Service Foundations team and investigated ways to reduce memory footprint, improve security, and developer experience. I also wrote a proposal for architecting and deploying a new operating system.
+
+    - title: Senior Software Engineer
+      institution: Apple
+      city: Cupertino
+      year: Feb 2014–Jan 2021
+      text: I was a part of the Core OS group at Apple, where I worked on the OS, kernel (xnu, L4), userspace utilities, security, applied cryptography, performance, memory, power management, device drivers, testing, tooling, and triage. My work catered to an ecosystem of over one billion devices, including the iPhone, iPad, Mac, Apple TV, Apple Watch, and HomePod
+      description:
+        - I architected and led a 7+ people, 5+ team XFN effort to deploy a state-of-the-art, <a href="https://support.apple.com/guide/security/volume-encryption-with-filevault-sec4c6dc1b6e/1/web/1">scalable</a>, fault-tolerant, multi-user, multi-OS anti-replay software stack. The service runs on the <a href="https://support.apple.com/guide/security/secure-enclave-sec59b0b31ff/1/web/1">Secure Enclave</a> (secure coprocessor) and the main application processor, and provides replay protection to all user data, including biometrics and Apple Pay data. I revised the iOS boot, shutdown, and restore (tethered/OTA) flows to be able to migrate to the new setup, and integrated cryptographic effacement with the <a href="https://support.apple.com/guide/personal-safety/how-to-erase-all-content-and-settings-ips4603248a8/web">“Erase All Content and Settings”</a> path.
+        - I lobbied to address a physical attack vector by introducing a novel secure storage IC. Once this was approved, I worked with the Silicon Engineering Group on the architecture, interface definition, and security of the IC and its revision. I then led a team of three to deliver the device drivers, wear leveling, and factory test support, bringing this idea to production.
+        - I implemented the software stack for securely provisioning the identity key and other keys on the Secure Enclave for the A9, A9X, A10, and S2 chips. I also had the opportunity to work on the TRNG, PKA, AES, and SHA2 device drivers. I took some of my learnings into a new key provisioning framework, which was eventually used to enable Apple authorized service providers to perform secure screen replacements (thereby improving worldwide repair capabilities and driving down wait times).
+        - During the annual Week-of-Code events, I proposed and prototyped ideas that were later productized as <a href="https://support.apple.com/en-us/HT212614">iCloud Private Relay</a> and <a href="https://support.apple.com/en-us/HT211303">iMessage thread reply</a>. I occasionally contributed to the public-facing iOS Security guides. I also worked on some other products that I cannot talk about here.
+
+    - title: Research Engineer
+      institution: AUS
+      city: Sharjah
+      year: Nov 2010–Jul 2012
+      description:
+        - Our group was trying to take a research autopilot system for a small-scale fixed-wing aircraft to production. As the only embedded systems engineer on the team, I worked on pretty much everything, including circuit design, SMD soldering, firmware development, sensor calibration/signal conditioning, power supply design, RF transceiver UART interface, Simulink modeling, embedded MATLAB scripts, s-functions, and Stateflow charts.
+        - We added features such as runtime PID-gains/waypoint update, manual override, waypoint navigation, pitch hold, bank angle hold, heading hold, altitude hold and airspeed hold. We regularly used MIL, SIL, and HIL simulation (using dSPACE 1103 systems) to help with rapid prototyping
+
+    - title: Higher Education Work
+      description:
+        - title: Software Engineering Intern
+          institution: Qualcomm
+          city: San Diego
+          year: May 2013–Aug 2013
+          contents:
+            - I worked with the Global Terrestrial Positioning (GTP) Wi-Fi team on an indoor positioning project, where I prototyped a motion state estimator algorithm.
+        - title: Research Assistant
+          institution: North Carolina State University
+          city: Raleigh
+          year: Sep 2012–Apr 2013
+          contents:
+            - Worked on reproducing failed executions from console log traces for Hadoop.
+        - title: Electronics Team Captain
+          institution: Orion Racing India
+          city: Mumbai
+          year: May 2009-Sep 2010
+          contents:
+            - I led a team of six electronics engineers to develop a <a href="https://k45v.github.io/blog/2010/daq/">Data Acquisition Unit (DAQ)</a>, Color LCD based steering wheel display, <a href="https://k45v.github.io/blog/2010/switching-supplies/">power supply</a>, engine cooling control board, and <a href="https://k45v.github.io/blog/2010/wiring-diagrams/">electrical wiring harness</a> for a Formula SAE spec race car. We also created a project plan, budget, and secured sponsorships.
+            - The DAQ captures data from 18 sensors (accelerometer, inductive proximity sensors, various resistor based sensors), GPS (over UART), and RTC (over I2C), and logs them to a MMC/SD card (over SPI). Critical data is relayed from DAQ to Color LCD via CAN bus. We used 4th order Sallen key based filters along with transient voltage suppressors to suppress noise and prevent aliasing.
+            - After the Formula Student Germany event, our group didn’t feel like we were quite done, so we brought up an electric race car prototype using 18kW PMDC motor in a month.
+
+- title: Education
+  type: time_table
+  contents:
+    - title: Master of Science in Computer Engineering
+      institution: North Carolina State University
+      city: Raleigh
+      year: Aug 2012-Dec 2013
+      grade: GPA 4.22/4.0
+    - title: Bachelor of Electronics Engineering
+      institution: University of Mumbai
+      city: Mumbai
+      year: Jul 2006-May 2010
+      grade: First class 
+
+- title: Patents
+  type: list
+  contents:
+    - Kumar Saurav et al., <a href="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/10320563">Cryptographic entropy tree</a>, 10320563, filed September 2016
+
+- title: Papers
+  type: list
+  contents:
+    - <a href="https://k45v.github.io/assets/pdf/gpgpusim.pdf">Extending Cache Replacement Policies of GPGPU-Sim</a> (SRRIP, BRRIP, LFU), April 2013
+    - <a href="https://k45v.github.io/assets/pdf/scheduling.pdf">An Overview of Scheduling Policies Targeted at Improving Performance/Efficiency in Multi-cores</a>, March 2013
+
+- title: Selected Awards
+  type: list
+  contents:
+    - Second place in Hack the Q, hackathon at Qualcomm, San Diego, 2013.
+    - Third place at XCDC (<a href="https://k45v.github.io/blog/2013/xcdc/">eXtreme Computer Design Competition</a>) 2013 (made kernel modifications to overclock the Dragonboard for speedup).
+    - Made it to the final 8 out of 78 international teams at <a href="https://www.formulastudent.de/fsg/">Formula Student Germany</a> 2010 for the “Most Innovative use of Electronics” award.
+    - First position in Open Hardware project display, IEEE, Shah and Anchor College of Engineering, 2010.
+    - Narotam Sekhsaria foundation scholarship for academic excellence, 2009.
+    - Second place in autonomous robotics, IEEE, Shah and Anchor College of engineering, 2008.
+    - Full tuition waiver in eleventh and twelfth grade due to academic excellence.
