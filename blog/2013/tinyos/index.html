@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- Head -->
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    <!-- Metadata, OpenGraph and Schema.org -->
+    
+    <!-- Website verification -->
+    <meta name="google-site-verification" content="xRlThgNzCzfRY8XKsahsru2gLV-Cc284pbsdHHnr2oY">
+<meta name="msvalidate.01" content="">
+<!-- Avoid warning on Google Chrome
+        Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'interest-cohort'.
+        see https://stackoverflow.com/a/75119417
+    -->
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Install TinyOS 2.1.2 on Ubuntu 12.04 and blink LEDs on TelosB mote | Saurav  Kumar</title>
+    <meta name="author" content="Saurav  Kumar">
+    <meta name="description" content="">
+    <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website">
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="" id="highlight_theme_light">
+
+    <!-- Styles -->
+    
+    <link rel="shortcut icon" href="/assets/img/pcb.jpg">
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://k45v.github.io/blog/2013/tinyos/">
+    
+    <!-- Dark Mode -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark">
+
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+    
+
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav">
+
+    <!-- Header -->
+    <header>
+
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand title font-weight-lighter" href="/"><span class="font-weight-bold">Saurav </span>Kumar</a>
+          <!-- Navbar Toggle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+
+              <!-- About -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/">about</a>
+              </li>
+              
+              <!-- Blog -->
+              <li class="nav-item active">
+                <a class="nav-link" href="/blog/">blog<span class="sr-only">(current)</span></a>
+              </li>
+
+              <!-- Other pages -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/cv/">cv</a>
+              </li>
+
+              <!-- Toogle theme mode -->
+              <li class="toggle-container">
+                <button id="light-toggle" title="Change theme">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Scrolling Progress Bar -->
+      <progress id="progress" value="0">
+        <div class="progress-container">
+          <span class="progress-bar"></span>
+        </div>
+      </progress>
+    </header>
+
+
+    <!-- Content -->
+    <div class="container mt-5">
+      <!-- _layouts/post.html -->
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Install TinyOS 2.1.2 on Ubuntu 12.04 and blink LEDs on TelosB mote</h1>
+    <p class="post-meta">February 22, 2013</p>
+       
+  </header>
+
+  <article class="post-content">
+    <div class="float-left mr-3 w-50">
+  <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/img_2387-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/img_2387-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/img_2387-1400.webp"></source>
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/img_2387.jpg" class="img-fluid rounded" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+
+  </picture>
+
+</figure>
+
+</div>
+<p>Recently I got my hands on the TelosB mote and as the tradition goes, I had to test blinking LEDs on it. (If you want to compare this mote with few others out there then this is a <a href="http://www.vsrdjournals.com/EEC/Issue/2012_02_Feb/Web/3_Vini_Madan_582_Review_Article_Feb_2012.pdf" rel="external nofollow noopener" target="_blank">good paper to refer</a>).</p>
+
+<p>Initially, I went to the TinyOS <a href="http://docs.tinyos.net/tinywiki/index.php/Getting_started" rel="external nofollow noopener" target="_blank">getting started</a> page which provides instructions for <a href="http://docs.tinyos.net/tinywiki/index.php/Installing_TinyOS_2.1.1#Two-step_install_on_your_host_OS_with_Debian_packages" rel="external nofollow noopener" target="_blank">installing TinyOS 2.1.1</a>. It had few steps missing and one can run “tos-check-env” and google for the errors which show up. However, when I went on to make the blinking LED project (make telosb), it spewed out a host of errors similar to this line “/opt/tinyos-2.1.1/tos/platforms/telosa/PlatformLedsC.nc:54: cannot find `Port56′”. Apparently the msp430 packages did not jive with this TinyOS version 2.1.1 and multiple posts online suggested rolling back to legacy versions.</p>
+
+<p>I decided to give TinyOS 2.1.2 a shot and it worked!!! So well here is the entire procedure for you:</p>
+
+<ol>
+  <li>Remove brltty package to avoid FTDI to serial conflicts
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get autoremove brltty
+</code></pre></div>    </div>
+    <p>Make sure you have the build-essentials package</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>build-essential
+</code></pre></div>    </div>
+  </li>
+  <li>Execute the following command,
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi /etc/apt/sources.list
+</code></pre></div>    </div>
+    <p>Hit “G” to go to end of file and then hit “A”. Paste the line given below at the end of this file</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>add deb http://tinyos.stanford.edu/tinyos/dists/ubuntu lucid main
+</code></pre></div>    </div>
+    <p>In case you had previous repositories for TinyOS in source, then remove them.
+Hit ESC, then enter “:wq” to save and quit</p>
+  </li>
+  <li>Now install TinyOS 2.1.2 using
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>tinyos-2.1.2
+</code></pre></div>    </div>
+  </li>
+  <li>Now you need to configure the environment for TinyOS. Do
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi ~/.bashrc
+</code></pre></div>    </div>
+    <p>Add the lines given below at the end of this file</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="c"># Sourcing the tinyos environment variable setup script</span>
+<span class="nb">source</span> /opt/tinyos-2.1.2/tinyos.sh
+<span class="nb">export </span><span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$CLASSPATH</span>:.
+</code></pre></div>    </div>
+    <p>Create the setup script using:</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi /opt/tinyos-2.1.2/tinyos.sh
+</code></pre></div>    </div>
+    <p>Now enter the following contents into this file (use “i” to insert, ctrl+shift+v to paste)</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="c">#! /usr/bin/env bash</span>
+<span class="c"># Here we setup the environment</span>
+<span class="c"># variables needed by the tinyos </span>
+<span class="c"># make system</span>
+   
+<span class="c"># echo "Setting up for TinyOS 2.1.2"</span>
+<span class="nb">export </span><span class="nv">TOSROOT</span><span class="o">=</span>
+<span class="nb">export </span><span class="nv">TOSDIR</span><span class="o">=</span>
+<span class="nb">export </span><span class="nv">MAKERULES</span><span class="o">=</span>
+   
+<span class="nv">TOSROOT</span><span class="o">=</span><span class="s2">"/opt/tinyos-2.1.2"</span>
+<span class="nv">TOSDIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TOSROOT</span><span class="s2">/tos"</span>
+<span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$CLASSPATH</span>:<span class="nv">$TOSROOT</span>/support/sdk/java:<span class="nv">$TOSROOT</span>/support/sdk/java/tinyos.jar
+<span class="nv">MAKERULES</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TOSROOT</span><span class="s2">/support/make/Makerules"</span>
+   
+<span class="nb">export </span>TOSROOT
+<span class="nb">export </span>TOSDIR
+<span class="nb">export </span>CLASSPATH
+<span class="nb">export </span>MAKERULES
+</code></pre></div>    </div>
+    <p>Run the command below to allow this script to execute</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>755 /opt/tinyos-2.1.2/tinyos.sh
+</code></pre></div>    </div>
+  </li>
+  <li>Now close and start a new terminal or alternatively
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
+</code></pre></div>    </div>
+  </li>
+  <li>Run the command
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>tos-check-env
+</code></pre></div>    </div>
+    <p>If it gives warnings related to Java version then do</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>java <span class="nt">-version</span>
+</code></pre></div>    </div>
+    <p>If your version is above 1.5, then ignore this warning else upgrade to a newer java version. Ignore the warning related to graphviz.</p>
+  </li>
+  <li>Now insert Telos mote in your USB slot. You may run the command
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>motelist
+</code></pre></div>    </div>
+    <p>to check if it was detected. The output will be</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$motelist</span>
+Reference  Device           Description
+<span class="nt">----------</span> <span class="nt">----------------</span> <span class="nt">---------------------------------------------</span>
+M49WC0OT   /dev/ttyUSB0     Moteiv tmote sky
+</code></pre></div>    </div>
+    <p>Allow writing to the USB port using (substitute your device name as per the previous output)</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>666 /dev/ttyUSB0
+</code></pre></div>    </div>
+    <p>Navigate to the blinking led project folder</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>bash
+<span class="nb">cd</span> /opt/tinyos-2.1.2/apps/Blink
+</code></pre></div>    </div>
+    <p>Execute the command below and the code should get compiled</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>make telosb
+</code></pre></div>    </div>
+    <p>Install the blinking LED application on the mote using</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>make telosb reinstall
+</code></pre></div>    </div>
+    <p>The command above assumes you have only one Telos mote on USB. Else use the command</p>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>make telosb reinstall bsl,/dev/ttyUSB0
+</code></pre></div>    </div>
+    <p>You should see the LEDs come to life.</p>
+  </li>
+</ol>
+
+<p>References: <a href="http://docs.tinyos.net/tinywiki/index.php/Main_Page" rel="external nofollow noopener" target="_blank">TinyOS Documentation</a></p>
+
+  </article>
+  <p class="post-tags">
+    <a href="/blog/2013"> <i class="fas fa-calendar fa-sm"></i> 2013 </a>
+      ·  
+    <a href="/blog/category/embedded-systems">
+      <i class="fas fa-tag fa-sm"></i> Embedded Systems</a>
+    
+  </p>
+
+</div>
+
+    </div>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha256-fgLAgv7fyCGopR/gBNq2iW3ZKIdqIcyshnUULC4vex8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    <!-- Masonry & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="/assets/js/masonry.js" type="text/javascript"></script>
+    
+  <!-- Medium Zoom JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script defer src="/assets/js/zoom.js"></script><!-- Load Common JS -->
+  <script defer src="/assets/js/common.js"></script>
+  <script defer src="/assets/js/copy_code.js" type="text/javascript"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    
+    
+
+<!-- Scrolling Progress Bar -->
+<script type="text/javascript">
+  /*
+   * This JavaScript code has been adapted from the article 
+   * https://css-tricks.com/reading-position-indicator/ authored by Pankaj Parashar, 
+   * published on the website https://css-tricks.com on the 7th of May, 2014.
+   * Couple of changes were made to the original code to make it compatible 
+   * with the `al-foio` theme.
+   */
+  const progressBar = $("#progress");
+  /*
+   * We set up the bar after all elements are done loading.
+   * In some cases, if the images in the page are larger than the intended
+   * size they'll have on the page, they'll be resized via CSS to accomodate
+   * the desired size. This mistake, however, breaks the computations as the
+   * scroll size is computed as soon as the elements finish loading.
+   * To account for this, a minimal delay was introduced before computing the
+   * values.
+   */
+  window.onload = function () {
+    setTimeout(progressBarSetup, 50);
+  };
+  /*
+   * We set up the bar according to the browser.
+   * If the browser supports the progress element we use that.
+   * Otherwise, we resize the bar thru CSS styling
+   */
+  function progressBarSetup() {
+    if ("max" in document.createElement("progress")) {
+      initializeProgressElement();
+      $(document).on("scroll", function() {
+        progressBar.attr({ value: getCurrentScrollPosition() });
+      });
+      $(window).on("resize", initializeProgressElement);
+    } else {
+      resizeProgressBar();
+      $(document).on("scroll", resizeProgressBar);
+      $(window).on("resize", resizeProgressBar);
+    }
+  }
+  /*
+   * The vertical scroll position is the same as the number of pixels that
+   * are hidden from view above the scrollable area. Thus, a value > 0 is
+   * how much the user has scrolled from the top
+   */
+  function getCurrentScrollPosition() {
+    return $(window).scrollTop();
+  }
+
+  function initializeProgressElement() {
+    let navbarHeight = $("#navbar").outerHeight(true);
+    $("body").css({ "padding-top": navbarHeight });
+    $("progress-container").css({ "padding-top": navbarHeight });
+    progressBar.css({ top: navbarHeight });
+    progressBar.attr({
+      max: getDistanceToScroll(),
+      value: getCurrentScrollPosition(),
+    });
+  }
+  /*
+   * The offset between the html document height and the browser viewport
+   * height will be greater than zero if vertical scroll is possible.
+   * This is the distance the user can scroll
+   */
+  function getDistanceToScroll() {
+    return $(document).height() - $(window).height();
+  }
+
+  function resizeProgressBar() {
+    progressBar.css({ width: getWidthPercentage() + "%" });
+  }
+  // The scroll ratio equals the percentage to resize the bar
+  function getWidthPercentage() {
+    return (getCurrentScrollPosition() / getDistanceToScroll()) * 100;
+  }
+</script>
+
+  </body>
+</html>
