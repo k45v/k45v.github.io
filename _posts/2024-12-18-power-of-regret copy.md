@@ -3,6 +3,8 @@ layout: post
 title:  Book Notes - The Power of Regret (Daniel H. Pink)
 date: 2024-12-18
 categories: [booknotes]
+toc:
+  beginning: true
 ---
 
 I was reading this book while traveling through Paris. One of my walking tours had mentioned Edith Piaf, so when this book mentioned “Non, je ne regrette rien,” sung by her, I got curious, and now I have a new favorite song :)

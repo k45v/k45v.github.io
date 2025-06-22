@@ -3,6 +3,8 @@ layout: post
 title:  Book Notes - How the Internet Happened (Brian McCullough)
 date: 2025-03-06
 categories: [booknotes]
+toc:
+  beginning: true
 ---
 
 This book really flowed like a story, and I had a hard time putting it down. Here are some of my key takeaways
