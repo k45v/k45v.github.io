@@ -1,4 +1,113 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://k45v.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://k45v.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-03-07T03:02:59+00:00</updated><id>https://k45v.github.io/feed.xml</id><title type="html">blank</title><entry><title type="html">Book Notes - How the Internet Happened (Brian McCullough)</title><link href="https://k45v.github.io/blog/2025/how-internet-happened/" rel="alternate" type="text/html" title="Book Notes - How the Internet Happened (Brian McCullough)" /><published>2025-03-06T00:00:00+00:00</published><updated>2025-03-06T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2025/how-internet-happened</id><content type="html" xml:base="https://k45v.github.io/blog/2025/how-internet-happened/"><![CDATA[<p>This book really flowed like a story, and I had a hard time putting it down. Here are some of my key takeaways</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://k45v.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://k45v.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-06-22T01:54:14+00:00</updated><id>https://k45v.github.io/feed.xml</id><title type="html">blank</title><entry><title type="html">Book Notes - The Good Life (Robert Waldinger, Marc Schulz)</title><link href="https://k45v.github.io/blog/2025/the-good-life/" rel="alternate" type="text/html" title="Book Notes - The Good Life (Robert Waldinger, Marc Schulz)" /><published>2025-06-21T00:00:00+00:00</published><updated>2025-06-21T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2025/the-good-life</id><content type="html" xml:base="https://k45v.github.io/blog/2025/the-good-life/"><![CDATA[<p>I’m grateful that the authors took the time to publish this book. While I’ve explored this topic through other books and podcasts, they often blended opinion with data. ‘The Good Life’ stands out because it heavily relies on over 80 years of survey data collected by the research group. That’s truly remarkable, and as expected, I gained many valuable insights I’d like to share.</p>
+
+<p>TL;DR The ultimate takeaway from their 84-year study was that good relationships make life healthier and happier.</p>
+
+<h3 id="john-and-leo">John and Leo</h3>
+<p>One of the things which struck me was the book’s discussion around John and Leo. Both graduated from Harvard, volunteered to serve in the military and were from wealthy (John) or upper middle class (Leo) families. Both had similar alcohol use and similar religious practice. Here’s a table comparing their characteristics and their answers to some of the questions in the survey.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><br /><br /></th>
+      <th style="text-align: center">John (Lawyer)</th>
+      <th style="text-align: center">Leo (High school teacher)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Characteristics <br /><br /></td>
+      <td style="text-align: center">Diligent student who attributed his success more to hard work than any special intelligence. His main motivation was fear of failure. He intentionally avoided dating to reduce distractions. After the war, John had a choice to either take over fathers business or accept law school admit (dream). Picked law school and graduated near the top of class. Had multiple job offers and decided to work for the federal government and teach at the law school. Parents are proud irrespective of his choices, John loves his family.</td>
+      <td style="text-align: center">Leo dreamed of becoming a writer. Kept diaries during war. Parents fell sick, so he lived close to help and started teaching at a high school. Continued teaching high school for 40 years and never pursued his writing dream.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Annual wages at 55 years old (1975) <br /><br /></td>
+      <td style="text-align: center">$52,000</td>
+      <td style="text-align: center">$18,000</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Life has more pain than pleasure ? <br /><br /></td>
+      <td style="text-align: center">True</td>
+      <td style="text-align: center">False</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">I often feel starved for affection ? <br /><br /></td>
+      <td style="text-align: center">True</td>
+      <td style="text-align: center">False</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">A man feels good when ? <br /><br /></td>
+      <td style="text-align: center">He’s able to respond to inner drive</td>
+      <td style="text-align: center">His family loves him despite everything</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Being with other people ? <br /><br /></td>
+      <td style="text-align: center">Is pleasant</td>
+      <td style="text-align: center">Is pleasant up to a point</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">On Happiness <br /><br /></td>
+      <td style="text-align: center">One of the most successful in the survey cohort yet one of the least happy. Consistently reported feelings of sadness and disconnection throughout life. Remarried at 62 and described that relationship as loveless (though it lasted to the end of his life).</td>
+      <td style="text-align: center">One of the studies happiest men.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Ways to achieve happiness <br /><br /></td>
+      <td style="text-align: center">John tried hard to make himself happy and to do that he largely focused on himself (what he called his inner drives). He began his career hoping to help others but over time prioritized professional success more. He was never able to find a path to joy.</td>
+      <td style="text-align: center">Leo primarily thought of himself in relation to others, his family, his school and his friends appear often in his reports. He derived happiness from the benefits that other people got from his work.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />Like John, I used to be driven by the fear of failure early in my education. However, I eventually discovered that pursuing my inner drive was far more enjoyable. Today, my answers to the same set of questions are a mix of what John and Leo shared. I think my answers which align with Leo’s are partly because I’ve worked on it, and partly because I’ve been lucky enough to meet some great people along the way. This comparison was truly eye-opening.</p>
+
+<p>Another interesting data point was from a 2007 survey of millennials (then aged 15-25). Among the respondents, 76% wanted to be rich and 50% famous. A decade later (aged 25-35) fame ranked lower, but money and career stayed high (becoming debt-free also emerged). While discussing this data, the authors cited (IIRC) a study suggesting that beyond a certain threshold, money doesn’t significantly impact happiness. I had encountered this study earlier, but newer findings indicate something different: for most people (excluding a consistently unhappy 15%), happiness actually increases at a faster rate after reaching that threshold, as their income grows. Because of this updated research, I’d probably put less emphasis on the threshold number. While there might be a correlation between money and happiness in the newer study, I wouldn’t go so far as to call it causation.</p>
+
+<h3 id="journey-through-life">Journey Through Life</h3>
+<p>In this section, I’ll discuss different topics from the book, organized by their relevance to specific age groups.</p>
+
+<h4 id="adolescence-and-early-adulthood">Adolescence and early adulthood</h4>
+<p>One in three people of all ages report often feeling lonely. The 16-to-24 age group was found to be the loneliest. In the US three out of four adults experience moderate to high levels of loneliness. This isn’t just about feeling sad; lonelier individuals are more prone to mental health issues, risky physical health behaviors, and unhealthy coping mechanisms for stress.</p>
+
+<p>Well-off societies, including the US, are seeing a trend of extended adolescence, where young adults remain dependent on their parents into their twenties. Similar patterns are seen in countries like Spain, the UK, and Australia with “NEETs” (Not in Education, Employment, or Training), and Japan with “hikikomori” (extreme social withdrawal). These groups often show stunted social growth, social aversion, and sometimes internet addiction through gaming and social media. While excessive social media use can be harmful, I’d argue that some interaction through these platforms might actually help those with social aversion reconnect. The authors did find though that remote friendships were difficult to maintain.</p>
+
+<p>It’s not about the number of people in your life, or even your marital status, that determines loneliness. In fact, high-conflict marriages with little affection can be worse for your health than divorce. What truly matters is the quality of your relationships. Living amidst warm, supportive connections protects both your mind and body. The frequency and quality of your interactions with others are major predictors of happiness. Even experts in psychology and psychiatry sometimes overlook this without focused reflection.</p>
+
+<p>When it comes to marriage, very few intimate relationships provide both partners with everything they need. One of the major reasons here is because western expectations of marriage have become unrealistic in the 21st century. Before 1850: marriage was a partnership for survival (health, money); 1850-1965: companionship and love were added to the mix; 21st century: adds friendship, counsel, conversations, make us laugh, and make us our best selves!</p>
+
+<p>To demonstrate more realistic expectations, the authors shared a story about Henry. Henry started his career as an assembler at GM. But he had to take leave to care for his sick son (polio). This led to a demotion, and eventually, he was laid off, all while still needing to support his three children. He changed careers three times, eventually returning to GM and working his way up to a floor manager. Throughout these difficult times, Henry’s strongest connections (with his wife and children) provided him happiness and longevity.</p>
+
+<h4 id="middle-age">Middle age</h4>
+<p>The purpose of working for most people is primarily to provide for themselves and their families. This was news to me because while I do get paid for my work, I’d have tinkered with technology for free.</p>
+
+<p>Research also showed that people who have a best friend at work are more engaged and productive than those who don’t. Soldiers who had more positive friendships with fellow servicemen and who served in more cohesive and connected units were less likely to experience PTSD.</p>
+
+<p>Around this time is also when people tend to have children. The authors found that new parents are more stressed and often feel unsupported by their partners. This is perfectly normal. Studies showed that there is a decline in relationship satisfaction after the birth of a child.</p>
+
+<p>Researchers also found that regular family dinners are associated with children’s higher gpa, higher self esteem, lower substance abuse, teen pregnancies and depression. Something as simple as holding a loved one’s hands was found to have the same effect as a mild anesthetic.</p>
+
+<p>Midlife, (between 41 and 65) often has an inflection point for many individuals. During this period, people shift from a self-focused perspective to a more generous, outward-looking way of living. Those who found the most happiness were individuals who asked, “What can I do for the world beyond me?” rather than prioritizing personal gain.</p>
+
+<p>A tendency to avoid thinking or talking about challenges in middle age was linked to negative consequences over three decades later. Specifically, individuals who suppressed discussions about their difficulties often experienced poorer memory and reported less satisfaction with their lives.</p>
+
+<p>Reflection can be a valuable tool, particularly during the 10% of life when you feel stuck or observe yourself acting in unhelpful ways. However, it’s not necessary for the other 90% of your life. It’s also important to remember that the very act of recalling an event can subtly alter your memory of it.</p>
+
+<p>Around the time children reach 18 years of age, partners often experience a noticeable increase in their relationship satisfaction.</p>
+
+<h4 id="late-adulthood">Late adulthood</h4>
+<p>When survey participants over 70 shared their regrets, many of them were about not doing enough or procrastinating in mid life. When it came to their health, loneliness proved to be twice as unhealthy for them compared to obesity.</p>
+
+<h3 id="on-attention">On attention</h3>
+<p>One reason people feel busy isn’t due to the number of tasks, but the sheer volume of things competing for their attention. The authors found that a wandering mind is often an unhappy mind. While the ability to think beyond our immediate reality is a cognitive feat, it comes with an emotional price. In their surveys, respondents reported being distracted about 50% of the time!</p>
+
+<p>Neuroscience reveals that our conscious minds simply cannot do more than one thing at a time. Trying to multitask is neurologically costly, adds time overhead, and reduces the quality of our attention. The consequence? We end up in a state of continuous partial attention.</p>
+
+<p>When we focus on one thing, that’s when we’re at our most thoughtful, creative, and productive.</p>
+
+<p>Another scenario from the book: a 1946 Look magazine photo showing a New York subway car full of commuters, all absorbed in their newspapers. Sound familiar? Even then, many Harvard families reported feeling overwhelmed by work, worried about their children’s futures, and anxious about “the world going crazy.” This was a time when 89% of the population had served in World Wars. Parents worried about television’s impact on their kids and society. While the scale and speed of these challenges might change, the effective solution for nurturing relationships remains constant: attention.</p>
+
+<h3 id="on-social-media">On Social media</h3>
+<p>Social media can be a helpful tool, but how you use it really matters. The authors found that people who use social media to communicate with others tend to feel more positive. On the other hand, those who just passively scroll or observe often feel negative. So when you’re on social media, it’s important to pay attention to how you’re using it and how it makes you feel.</p>
+
+<p>Observing others likely leads to negative emotions because people on social media (and sometimes in work friendships) often show an idealized version of themselves. This unrealistic view can make you compare your inner self to someone else’s outer life, leading to a feeling that you’re missing out. Studies generally show that the more someone compares themselves to others, the less happy they become, even if the comparison seems to favor them.</p>]]></content><author><name></name></author><category term="booknotes" /><summary type="html"><![CDATA[I’m grateful that the authors took the time to publish this book. While I’ve explored this topic through other books and podcasts, they often blended opinion with data. ‘The Good Life’ stands out because it heavily relies on over 80 years of survey data collected by the research group. That’s truly remarkable, and as expected, I gained many valuable insights I’d like to share.]]></summary></entry><entry><title type="html">Book Notes - How the Internet Happened (Brian McCullough)</title><link href="https://k45v.github.io/blog/2025/how-internet-happened/" rel="alternate" type="text/html" title="Book Notes - How the Internet Happened (Brian McCullough)" /><published>2025-03-06T00:00:00+00:00</published><updated>2025-03-06T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2025/how-internet-happened</id><content type="html" xml:base="https://k45v.github.io/blog/2025/how-internet-happened/"><![CDATA[<p>This book really flowed like a story, and I had a hard time putting it down. Here are some of my key takeaways</p>
 
 <h3 id="north-star">North Star</h3>
 <ul>
@@ -713,127 +822,4 @@ M49WC0OT   /dev/ttyUSB0     Moteiv tmote sky
   </li>
 </ol>
 
-<p>References: <a href="http://docs.tinyos.net/tinywiki/index.php/Main_Page">TinyOS Documentation</a></p>]]></content><author><name></name></author><category term="Embedded Systems" /><summary type="html"><![CDATA[Recently I got my hands on the TelosB mote and as the tradition goes, I had to test blinking LEDs on it. (If you want to compare this mote with few others out there then this is a good paper to refer).]]></summary></entry><entry><title type="html">Top 10 things I did after installing Ubuntu 12.04 LTS alongside Windows7</title><link href="https://k45v.github.io/blog/2013/ubuntu/" rel="alternate" type="text/html" title="Top 10 things I did after installing Ubuntu 12.04 LTS alongside Windows7" /><published>2013-01-18T00:00:00+00:00</published><updated>2013-01-18T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/ubuntu</id><content type="html" xml:base="https://k45v.github.io/blog/2013/ubuntu/"><![CDATA[<p>I installed Ubuntu on my computer a few years ago, and then… I installed it again 🙂</p>
-
-<p>I like to have both Ubuntu and Windows on my system (Dual boot). Here is the list of things I usually do to setup Ubuntu, on a computer which already has a Windows OS :-</p>
-
-<ol>
-  <li>
-    <p>While logged in Windows, create disk space for Ubuntu using <a href="http://www.partition-tool.com/download.htm">EaseUs partition Manager</a> (anywhere between 25-40GB of disk space should be good). The free space will be shown as unallocated space.</p>
-  </li>
-  <li>
-    <p>Create a <a href="http://www.ubuntu.com/download/help/create-a-usb-stick-on-windows">bootable USB stick</a> for the version on Ubuntu which you want to install. Boot from it  (restart windows and hit ESC or F12 to select USB as your boot device) and select “Install beside Windows7”. (it will automatically detect the unallocated space you had created)</p>
-  </li>
-  <li>Now run the following commands from terminal (launch terminal using ctrl+alt+t):
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get upgrade
-</code></pre></div>    </div>
-    <p>This updates the Ubuntu repositories.</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>vim
-</code></pre></div>    </div>
-    <p>This installs Vim text editor (extremely powerful tool to use while coding)</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository <span class="s2">"deb http://archive.canonical.com/ </span><span class="si">$(</span>lsb_release <span class="nt">-sc</span><span class="si">)</span><span class="s2"> partner"</span>
-<span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>skype
-</code></pre></div>    </div>
-    <p>This installs Skype</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>p7zip-full
-</code></pre></div>    </div>
-    <p>This installs 7zip (compression/uncompression tool)</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>gparted
-</code></pre></div>    </div>
-    <p>The gparted partition tool</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>ubuntu-restricted-extras
-</code></pre></div>    </div>
-    <p>This allows Ubuntu to play file formats like mp3, avi, etc.</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>lo-menubar
-</code></pre></div>    </div>
-    <p>This gives global menu for Libre office</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:diesch/testing
-<span class="nb">sudo </span>apt-get update
-<span class="nb">sudo </span>apt-get <span class="nb">install </span>unsettings
-</code></pre></div>    </div>
-    <p>An application to tweak the Ubuntu 12.04 which has Reset to Default option.</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:ubuntu-wine/ppa
-<span class="nb">sudo </span>apt-get update
-<span class="nb">sudo </span>apt-get <span class="nb">install </span>wine1.4
-<span class="nb">sudo </span>apt-get <span class="nb">install </span>winetricks
-</code></pre></div>    </div>
-    <p>This installs Wine 1.4 (stable) which allows you to use windows applications.</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:mozillateam/thunderbird-stable
-<span class="nb">sudo </span>apt-get update
-<span class="nb">sudo </span>apt-get <span class="nb">install </span>thunderbird
-</code></pre></div>    </div>
-    <p>Install the Mozilla Thunderbird email client</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:yannubuntu/boot-repair
-<span class="nb">sudo </span>apt-get update
-<span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> boot-repair
-</code></pre></div>    </div>
-    <p>This installs boot-repair, a handy tool to fix any bootloader problems</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>gedit-plugins
-</code></pre></div>    </div>
-    <p>Now you may launch gedit and go to → edit → preferences → plugins → now select the plugins as per your requirement.</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>openjdk-7-jdk icedtea-7-plugin
-</code></pre></div>    </div>
-    <p>JDK is needed for applications requiring Java support</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>nautilus-open-terminal
-nautilus <span class="nt">-q</span> <span class="o">&amp;&amp;</span> <span class="nb">sleep </span>1 <span class="o">&amp;&amp;</span> nautilus <span class="nt">-n</span>
-</code></pre></div>    </div>
-    <p>This installs the nautilus open in terminal feature, which you’ll find useful once you start frequently using Ubuntu.
-If using a laptop:</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:webupd8team/jupiter
-<span class="nb">sudo </span>apt-get update
-<span class="nb">sudo </span>apt-get <span class="nb">install </span>jupiter
-</code></pre></div>    </div>
-    <p>Install Jupiter, the power management client which can help enhance your battery life!</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>powertop
-</code></pre></div>    </div>
-    <p>Another utility for power management, launch after install using</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>powertop
-</code></pre></div>    </div>
-    <p>Then use arrow keys to move to the tunable tab and use ENTER key to adjust parameters to good, then exit using ESC.</p>
-  </li>
-  <li>
-    <p>Launch the Ubuntu Software Center from Unity Dash and search and install the following: GIMP Image Editor, VLC media player, Synaptic Package Manager, Wine, Okular (similar to Foxit pdf reader for windows, allows comments and highlighting), redshift.</p>
-  </li>
-  <li>
-    <p>Launch firefox and search and install (using double click) <a href="https://www.google.com/intl/en/chrome/browser/">Google chrome</a> since Flash is not supported in firefox.</p>
-  </li>
-  <li>Re-enable hibernate using following commands (note that your swap memory should be equal to RAM):
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudoedit /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
-</code></pre></div>    </div>
-    <p>Right click and paste the following in the file opened:</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Re-enable hibernate by default]
-<span class="nv">Identity</span><span class="o">=</span>unix-user:<span class="k">*</span>
-<span class="nv">Action</span><span class="o">=</span>org.freedesktop.upower.hibernate
-<span class="nv">ResultActive</span><span class="o">=</span><span class="nb">yes</span>
-</code></pre></div>    </div>
-    <p>Hit ESC to go into command mode and then type :wq to save and quit. Restart your computer and you should see Hibernate as one of the options.</p>
-  </li>
-  <li>
-    <p>Open your Home folder and then do → view → status bar</p>
-  </li>
-  <li>
-    <p>Modify privacy under system settings, then change Icon size and wallpaper under appearance.</p>
-  </li>
-  <li>
-    <p>Under System Settings select Keyboard → Shortcuts → custom shortcuts → +
-Name: Kill Processes     Command: gnome-system-monitor
-Click apply. Now click on disabled and then ctrl + alt + k . This is your shortcut to launch the system monitor.</p>
-  </li>
-  <li>(For Acer aspire 5738z) In your chrome browser go to <a href="https://help.ubuntu.com/community/AspireTimeline/Fixes">https://help.ubuntu.com/community/AspireTimeline/Fixes</a> and apply Touchpad On/Off fix given for 9.10. Then add acpi_backlight=vendor after splash to enable brightness control, change timeout, save and do sudo update-grub.</li>
-</ol>
-
-<p>[Advanced] For displaying only current directory in terminal and not the entire path:</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim ~/.bashrc
-</code></pre></div></div>
-<p>Find the lines</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">else
-    </span><span class="nv">PS1</span><span class="o">=</span><span class="s1">'${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '</span>
-<span class="k">fi</span>
-</code></pre></div></div>
-<p>and change the w to W.</p>
-
-<p>If you are installing Ubuntu as a VM and need to share folders then <a href="http://ubuntuexperiment.wordpress.com/2008/11/12/sharing-folders-between-host-and-guest-os-in-virtualbox/">this is a good link</a> to refer. Also install guest utils using before attempting to mount.</p>
-
-<p>sudo apt-get install virtualbox-ose-guest-utils</p>
-
-<p>P.S: Some information drawn from <a href="http://www.techdrivein.com/2012/06/25-things-i-did-after-installing-ubuntu.html">techdrivein</a> and <a href="http://www.noobslab.com/2012/04/important-things-to-do-after-install_26.html">noobslab</a></p>]]></content><author><name></name></author><category term="Linux" /><summary type="html"><![CDATA[I installed Ubuntu on my computer a few years ago, and then… I installed it again 🙂]]></summary></entry></feed>
+<p>References: <a href="http://docs.tinyos.net/tinywiki/index.php/Main_Page">TinyOS Documentation</a></p>]]></content><author><name></name></author><category term="Embedded Systems" /><summary type="html"><![CDATA[Recently I got my hands on the TelosB mote and as the tradition goes, I had to test blinking LEDs on it. (If you want to compare this mote with few others out there then this is a good paper to refer).]]></summary></entry></feed>
