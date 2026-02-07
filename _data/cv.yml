@@ -1,4 +1,4 @@
-- contents: I am an embedded operating systems engineer who currently finds joy at the intersection of people, systems, and security. My journey through systems software has taken me across the consumer electronics, avionics, and automotive spaces. During this time, I have had the chance to touch the lives of billions of people and contribute to projects at Apple, Facebook, and Google.
+- contents: I am a systems software engineer who finds joy in bringing research ideas to production and solving relatable, real-world problems. My journey has spanned the consumer electronics, avionics, and automotive industries. Along the way, I’ve had the opportunity to touch the lives of billions of people through my work at Apple, Facebook, and Google.
 
 - title: Professional Experience
   type: time_table
@@ -7,7 +7,7 @@
       institution: Google
       city: Mountain View
       year: Jul 2022–Present
-      text: I’m working with a brilliant group trying to take embedded systems security into the future!
+      text:
 
     - title: Staff Software Engineer
       institution: Facebook Reality Labs

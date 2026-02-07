@@ -15,7 +15,7 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I am an engineering leader who enjoys doing meaningful work alongside smart people.
+I am a systems software engineer who finds joy in bringing research ideas to production and solving relatable, real-world problems.
 
 * Currently, I am a Security Engineering Manager at Google, where I am focused on making a step-function improvement in defensive security along the software/hardware boundary.
 * Prior to this, I was a Staff Software Engineer at Facebook, where I explored the AR/VR landscape.

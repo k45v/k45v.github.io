@@ -19,7 +19,7 @@ This book really flowed like a story, and I had a hard time putting it down. Her
 * Users tend to stick with familiar services (as long as they continue to work), creating a significant first-mover advantage.
 * When Google discovered the value of search advertising (2000-2002), it became obsessed with keeping it a secret because it feared tipping off Microsoft.
 * Yahoo's initial launch of ads faced angry emails from users. But the protests subsided in a few weeks, and since the service was as useful as always, users stayed loyal.
-* As startups scale, experienced VCs often mandate bringing in seasoned engineering leadership (including CEOs). Google's recruitment of Eric Schmidt, with his experience managing Microsoft as an adversary at Sun and Novell, was a strategic move.
+* As startups scale, experienced VCs often mandate bringing in seasoned engineering leadership (including CEOs). Google's recruitment of Eric Schmidt, with his experience managing Microsoft as an adversary at Sun and Novell, was a strategic move. Eric had built software operations at Sun Microsystems and served as CEO & chairman at Novell.
 
 ### Adaptation and innovation
 * Jobs asked a team to work on DRM not because he liked copy protection (he didn’t, he felt it needlessly complicated the user experience). It’s because he knew that was the only way to get music executives to the negotiating table. Still, it was pretty hard to convince the record companies, and the main reasons Jobs could convince them were:
