@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://k45v.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://k45v.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-02-07T04:38:06+00:00</updated><id>https://k45v.github.io/feed.xml</id><title type="html">blank</title><entry><title type="html">Book Notes - The Good Life (Robert Waldinger, Marc Schulz)</title><link href="https://k45v.github.io/blog/2025/the-good-life/" rel="alternate" type="text/html" title="Book Notes - The Good Life (Robert Waldinger, Marc Schulz)" /><published>2025-06-21T00:00:00+00:00</published><updated>2025-06-21T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2025/the-good-life</id><content type="html" xml:base="https://k45v.github.io/blog/2025/the-good-life/"><![CDATA[<p>I’m grateful that the authors took the time to publish this book. While I’ve explored this topic through other books and podcasts, they often blended opinion with data. ‘The Good Life’ stands out because it heavily relies on over 80 years of survey data collected by the research group. That’s truly remarkable, and as expected, I gained many valuable insights I’d like to share.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://k45v.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://k45v.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-10-18T05:22:10+00:00</updated><id>https://k45v.github.io/feed.xml</id><title type="html">blank</title><entry><title type="html">Book Notes - The Good Life (Robert Waldinger, Marc Schulz)</title><link href="https://k45v.github.io/blog/2025/the-good-life/" rel="alternate" type="text/html" title="Book Notes - The Good Life (Robert Waldinger, Marc Schulz)" /><published>2025-06-21T00:00:00+00:00</published><updated>2025-06-21T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2025/the-good-life</id><content type="html" xml:base="https://k45v.github.io/blog/2025/the-good-life/"><![CDATA[<p>I’m grateful that the authors took the time to publish this book. While I’ve explored this topic through other books and podcasts, they often blended opinion with data. ‘The Good Life’ stands out because it heavily relies on over 80 years of survey data collected by the research group. That’s truly remarkable, and as expected, I gained many valuable insights I’d like to share.</p>
 
 <p>TL;DR The ultimate takeaway from their 84-year study was that good relationships make life healthier and happier.</p>
 
@@ -220,7 +220,95 @@ I feel that the <strong>A</strong> would be heuristically correct most of the ti
   <li>
     <p>Baldwin effect: when evolving programs, if evolution relies on multiple steps being performed to achieve an outcome (e.g. bird building a nest), then the program should be given partial credit for being able to do one of the steps otherwise the probability of an evolving program figuring out all the steps is very low.</p>
   </li>
-</ol>]]></content><author><name></name></author><category term="booknotes" /><summary type="html"><![CDATA[The book presents computer engineering concepts in engaging ways. The reference to Logo brought back fond memories. Here are a few discussions that I found particularly interesting:]]></summary></entry><entry><title type="html">Extending Cache Replacement Policies OF GPGPU-Sim (SRRIP, BRRIP, LFU)</title><link href="https://k45v.github.io/blog/2013/gpgpusim/" rel="alternate" type="text/html" title="Extending Cache Replacement Policies OF GPGPU-Sim (SRRIP, BRRIP, LFU)" /><published>2013-04-28T00:00:00+00:00</published><updated>2013-04-28T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/gpgpusim</id><content type="html" xml:base="https://k45v.github.io/blog/2013/gpgpusim/"><![CDATA[]]></content><author><name></name></author><category term="Papers" /><category term="Parallel Computing" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">GPGPU simulator installation on Ubuntu 12.04 for a system without NVIDIA Graphics card</title><link href="https://k45v.github.io/blog/2013/gpuocelot/" rel="alternate" type="text/html" title="GPGPU simulator installation on Ubuntu 12.04 for a system without NVIDIA Graphics card" /><published>2013-04-25T00:00:00+00:00</published><updated>2013-04-25T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/gpuocelot</id><content type="html" xml:base="https://k45v.github.io/blog/2013/gpuocelot/"><![CDATA[<p>Computation intensive applications which have high degree of data-level parallelism can very well harness the hardware capabilities provided a GPU. Enter the term <a href="http://en.wikipedia.org/wiki/GPGPU">GPGPU</a>.</p>
+</ol>]]></content><author><name></name></author><category term="booknotes" /><summary type="html"><![CDATA[The book presents computer engineering concepts in engaging ways. The reference to Logo brought back fond memories. Here are a few discussions that I found particularly interesting:]]></summary></entry><entry><title type="html">Book Notes - Money: The True Story of a Made-Up Thing (Jacob Goldstein)</title><link href="https://k45v.github.io/blog/2024/money/" rel="alternate" type="text/html" title="Book Notes - Money: The True Story of a Made-Up Thing (Jacob Goldstein)" /><published>2024-10-05T00:00:00+00:00</published><updated>2024-10-05T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2024/money</id><content type="html" xml:base="https://k45v.github.io/blog/2024/money/"><![CDATA[<h2 id="how-money-works"><strong>How Money Works</strong></h2>
+
+<p>At its core, money is a system built on trust. When an economy functions properly, finance and the real economy support one another. For example, a bank provides a loan to a homebuyer, which funds the carpenter who builds the house.</p>
+
+<h3 id="the-self-correcting-nature-of-money"><strong>The Self-Correcting Nature of Money</strong></h3>
+
+<p>In 1750, philosopher David Hume proposed a thought experiment: if three-quarters of the gold in Britain suddenly vanished, people would simply spend less. Producers would lower prices to match what buyers could pay, eventually dropping overall price levels by that same three-quarters. British goods would become cheaper globally, prompting other nations to buy them, which would ultimately restore Britain’s gold supply. Hume’s point was that the absolute quantity of money matters less than the economic activity it represents, and attempting to artificially hoard wealth through tariffs and quotas merely suppresses global innovation.</p>
+
+<p>While this thought experiment is compelling, its logic relies on an ideal market model with a distributed manufacturing base. Present economic dynamics are different. Today, state-backed policies heavily subsidize key industries, leading to undervalued goods, economies of scale, and the consolidation of manufacturing. This centralization introduces national security and supply chain risks. In a crisis, price adjustments might eventually help address capital gaps, but rebuilding critical infrastructure also takes time and expertise—and depending on the severity of the crisis, delays can be costly.</p>
+
+<h3 id="modern-central-banking"><strong>Modern Central Banking</strong></h3>
+
+<p>Today, central banks manage economic cycles by adjusting the cost of borrowing.</p>
+
+<ul>
+  <li><strong>During downturns:</strong> The Federal Reserve prints money and lowers interest rates. This helps debtors stay afloat and encourages companies to hire and invest.</li>
+  <li><strong>During inflation:</strong> The Fed raises interest rates to cool the economy down. A standard rule of thumb is to cut rates if unemployment is over 4%, and raise rates if inflation is over 2%.</li>
+  <li><strong>The power of credibility:</strong> The most effective tool a central bank has is public trust. For example, former European Central Bank President Mario Draghi successfully stabilized the euro simply by making a credible promise to save it. Notice how this ties back to money being a system built on trust!</li>
+</ul>
+
+<h2 id="incidents-which-introduced-deviation"><strong>Incidents Which Introduced Deviation</strong></h2>
+
+<p>Money and finance sometimes disconnect from the real economy. When finance lags, there is insufficient capital to fund real economic activity. When finance races ahead, speculation takes over.</p>
+
+<h3 id="the-importance-of-institutional-tension"><strong>The Importance of Institutional Tension</strong></h3>
+
+<p>In 1705, Scottish economist John Law observed the economic prosperity of the Dutch. Despite lacking territory, resources, and a good climate, the Dutch thrived because they solved the money problem. They established the Bank of Amsterdam, which maintained a reliable ledger system backed by silver. The ledger system was immune to debasement of physical coins, and trade became easier because instead of moving heavy bags of coins, you just updated an entry in the ledger. Inspired by that, Law attempted to bring a paper money system to France. However, because he tied the stability of the currency directly to shares of a speculative trading company (the Mississippi Company), and because an absolute monarchy lacked independent institutional constraints to stop runaway money-printing during a panic, the system triggered a speculative bubble, hyperinflation, and a collapse of public trust.</p>
+
+<p>Modern Monetary Theory (MMT) shares some of these gaps. MMT suggests that a government that issues its own currency cannot run out of money. Based on concepts popularized by investor Warren Mosler, MMT argues that governments should print money to guarantee employment for anyone who wants to work. Printing money will not cause inflation as long as there is unused capacity (unemployed workers) in the economy. Under MMT, inflation is managed by raising taxes to cool the economy. That presents a practical challenge because lawmakers are rewarded for spending, but punished for raising taxes. So it’s highly unlikely they’ll do the latter.</p>
+
+<p>For modern money to remain stable, the central bank must be operationally independent from short-term political pressures, and there must be tension and debate among investors, activists, and the government.</p>
+
+<h3 id="the-flaws-of-the-gold-standard"><strong>The Flaws of the Gold Standard</strong></h3>
+
+<p>Tying currency to a physical commodity like gold caused severe economic fluctuations.</p>
+
+<ul>
+  <li><strong>1900:</strong> Changes in gold mining output directly altered the purchasing power of the dollar. For example, less gold output would limit the amount of money in circulation, which makes it difficult for borrowers to pay off fixed-rate debts (existing money could buy more stuff in the short term, but borrowers would get paid less going forward. So they have to work a lot more to pay that same amount back) while leading to profits for lenders. These fluctuations, unrelated to fundamental goods/services a business may be offering, caused perfectly sound businesses to go bankrupt if they were on the wrong side of a debt arrangement.</li>
+  <li><strong>1933:</strong> President Franklin D. Roosevelt issued an executive order to return gold to banks and took the U.S. off the gold standard. Once the dollar was unpegged from gold, prices and incomes rose, easing the burden on debtors and sparking recovery from the Great Depression. There was a similar correlation in Britain, Japan, France, and other countries.</li>
+</ul>
+
+<h3 id="bank-runs-and-shadow-banking"><strong>Bank runs and Shadow Banking</strong></h3>
+
+<ul>
+  <li>Bank runs are an inherent vulnerability of fractional-reserve banking. Whenever public trust breaks down (due to an economic crisis, rumors, or actual bad investments) and a large number of depositors demand “money” (whatever people trust is money, e.g. gold, paper notes), the bank runs out of physical reserves. This has been happening ever since the 17th century when fractional reserve banking first originated. In England, goldsmiths began issuing paper receipts for stored metal and lending out more receipts than the gold they actually held. Sweden created a central bank that operated similarly, laying the groundwork for modern fractional reserve banking.</li>
+  <li>In 1907, a bank run forced J.P. Morgan to privately organize a bank bailout, leading to the eventual creation of the Federal Reserve to prevent future crises.</li>
+  <li>In 1933, when a bank run happened, the Federal Reserve sat idle and raised interest rates instead of printing money to meet the demand. This created a deflationary spiral and triggered the Great Depression.</li>
+  <li>“Shadow banking” is a system that acts like a bank (i.e. take money from people for short term and use that to make long-term investments) but lacks federal backing. In the early 1990s, money market funds were created as safe investments backed by Treasury bills. Over time, financial institutions began directing this money into highly risky investments, such as overvalued mortgages. When investors panicked and asked for their money back in late 2006, it triggered a bank run on this shadow banking system. The U.S. government had to step in and guarantee these funds to prevent a broader economic collapse.</li>
+</ul>
+
+<h2 id="innovation-and-its-impact-on-the-economy"><strong>Innovation and Its Impact on the Economy</strong></h2>
+
+<p>Technological innovation consistently drives down the cost of goods and improves living standards, though it often displaces skilled workers in the short term.</p>
+
+<h3 id="the-falling-cost-of-light"><strong>The Falling Cost of Light</strong></h3>
+
+<p>The cost of artificial light illustrates the scale of economic progress:</p>
+
+<ul>
+  <li><strong>2000 BC:</strong> A day’s wages bought 10 minutes of light (using sesame oil).</li>
+  <li><strong>1700s:</strong> A day’s wages bought 1 hour of light.</li>
+  <li><strong>1800s:</strong> Following the extraction of kerosene, a day’s wages bought 5 hours of light.</li>
+  <li><strong>Late 20th Century:</strong> A day’s wages bought 20,000 hours of light.</li>
+</ul>
+
+<h3 id="the-industrial-revolution"><strong>The Industrial Revolution</strong></h3>
+
+<p>Beginning in the 1800s with steam power, mechanization made manufacturing cheaper. While factory owners grew wealthy and macroeconomic productivity soared, skilled artisans were displaced. Textile workers, whose jobs were automated by looms, protested by destroying machinery—an act the government made punishable by death. This dynamic continues today, as technology (like booking websites or autonomous vehicles) replaces specific professions while lowering costs for society.</p>
+
+<h3 id="the-commercialization-of-invention"><strong>The Commercialization of Invention</strong></h3>
+
+<p>In the 1870s, Thomas Edison built an “invention factory”. He employed a team of mechanics and machinists. He was already rich from his earlier inventions, but he knew he couldn’t invent the light bulb on his own. Within a year of forming his company (which later became General Electric), Edison secured the patent for the light bulb.</p>
+
+<h3 id="digital-currencies"><strong>Digital Currencies</strong></h3>
+
+<ul>
+  <li><strong>Digicash (1997):</strong> An early attempt at private digital payments. Despite consumers claiming to value privacy, they prioritized the convenience of credit cards, leading Digicash to bankruptcy.</li>
+  <li><strong>Bitcoin (2010s):</strong> Initially designed as a digital currency, Bitcoin’s network limitations (processing roughly 5 transactions per second compared to Visa’s 24,000) and wild value fluctuations make it impractical as money. It functions primarily as a speculative investment. Historically, successful currencies were used in trade before people realized they were “money”; Bitcoin has operated in reverse.</li>
+</ul>
+
+<h2 id="other-interesting-facts-and-historical-anecdotes"><strong>Other Interesting Facts and Historical Anecdotes</strong></h2>
+
+<ul>
+  <li><strong>The Myth of Barter:</strong> The idea that money was invented to solve the inefficiencies of barter (the “double coincidence of wants”) is an economic theory with no historical evidence.</li>
+  <li><strong>The First Writers:</strong> In ancient Mesopotamia (5,000 years ago), the first writing systems were developed by accountants tracking debts with clay tokens (e.g., cones for barley, discs for sheep).</li>
+  <li><strong>Moneyless Empires:</strong> The Incan empire operated without money. Central authorities controlled production and distributed goods directly to citizens. Gold and silver were used strictly for art and worship.</li>
+  <li><strong>The Social Cost of Wages:</strong> In ancient Greece (around the 6th century BC), standardized silver coins facilitated a shift from feudal agreements to a market economy. Poor Greeks became wage laborers. While this offered them freedom from wealthy landowners and required less working time than slavery, it also introduced economic isolation and vulnerability.</li>
+  <li><strong>China’s Economic Revolution:</strong> Between 710 and 1450 AD, the Chinese government shifted from collecting taxes in grain and cloth to accepting coins and paper money. This freed citizens to pursue specialized professions, sparking an economic revolution centuries before Europe. China invented paper printing, the magnetic compass, and advanced agriculture. Two Chinese cities reached populations of one million while London and Paris hovered around 100,000. Marco Polo observed that China was the world’s richest and most technologically advanced civilization during this time. The Ming Dynasty ousted the Mongols and banned overseas trade, returning China to a tribute and redistribution system based on cloth and grains. This shift led to a decline in the standard of living for the average person, reversing the gains made during the previous era.</li>
+</ul>]]></content><author><name></name></author><category term="booknotes" /><summary type="html"><![CDATA[How Money Works]]></summary></entry><entry><title type="html">Extending Cache Replacement Policies OF GPGPU-Sim (SRRIP, BRRIP, LFU)</title><link href="https://k45v.github.io/blog/2013/gpgpusim/" rel="alternate" type="text/html" title="Extending Cache Replacement Policies OF GPGPU-Sim (SRRIP, BRRIP, LFU)" /><published>2013-04-28T00:00:00+00:00</published><updated>2013-04-28T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/gpgpusim</id><content type="html" xml:base="https://k45v.github.io/blog/2013/gpgpusim/"><![CDATA[]]></content><author><name></name></author><category term="Papers" /><category term="Parallel Computing" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">GPGPU simulator installation on Ubuntu 12.04 for a system without NVIDIA Graphics card</title><link href="https://k45v.github.io/blog/2013/gpuocelot/" rel="alternate" type="text/html" title="GPGPU simulator installation on Ubuntu 12.04 for a system without NVIDIA Graphics card" /><published>2013-04-25T00:00:00+00:00</published><updated>2013-04-25T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/gpuocelot</id><content type="html" xml:base="https://k45v.github.io/blog/2013/gpuocelot/"><![CDATA[<p>Computation intensive applications which have high degree of data-level parallelism can very well harness the hardware capabilities provided a GPU. Enter the term <a href="http://en.wikipedia.org/wiki/GPGPU">GPGPU</a>.</p>
 
 <p>You might want to try out the Parallel Computing platform <a href="http://www.nvidia.com/object/cuda_home_new.html">CUDA</a> to gauge what kind of speed-up you can achieve in you current code by running it on a GPU. I wanted to use CUDA for one of my class projects but I do not have a compatible graphics card. Mine is an Intel Mobile 4 Series Chipset Integrated Graphics Controller, you can check yours using the command:</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lspci | <span class="nb">grep </span>VGA
@@ -699,127 +787,4 @@ Place it in the directory “kernel/scripts/mod”
 Include the correct header file in the two files mk_elfconfig.c and modpost.h.
 Do include “elf.h” instead of &lt;elh.h&gt;</p>
   </li>
-</ol>]]></content><author><name></name></author><category term="Embedded Systems" /><summary type="html"><![CDATA[It has been quite some time since I participated in a competition (2010 was the last time @ FSG). I had been waiting for the XCDC2013 and what an amazing experience it was!!!]]></summary></entry><entry><title type="html">An Overview of Scheduling Policies Targeted at Improving Performance/Efficiency in Multi-cores</title><link href="https://k45v.github.io/blog/2013/scheduling/" rel="alternate" type="text/html" title="An Overview of Scheduling Policies Targeted at Improving Performance/Efficiency in Multi-cores" /><published>2013-03-10T00:00:00+00:00</published><updated>2013-03-10T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/scheduling</id><content type="html" xml:base="https://k45v.github.io/blog/2013/scheduling/"><![CDATA[]]></content><author><name></name></author><category term="Papers" /><category term="Parallel Computing" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Install TinyOS 2.1.2 on Ubuntu 12.04 and blink LEDs on TelosB mote</title><link href="https://k45v.github.io/blog/2013/tinyos/" rel="alternate" type="text/html" title="Install TinyOS 2.1.2 on Ubuntu 12.04 and blink LEDs on TelosB mote" /><published>2013-02-22T00:00:00+00:00</published><updated>2013-02-22T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/tinyos</id><content type="html" xml:base="https://k45v.github.io/blog/2013/tinyos/"><![CDATA[<div class="float-left mr-3 w-50">
-  <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/img_2387-480.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/img_2387-800.webp" />
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/img_2387-1400.webp" />
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/img_2387.jpg" class="img-fluid rounded" width="auto" height="auto" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-</div>
-<p>Recently I got my hands on the TelosB mote and as the tradition goes, I had to test blinking LEDs on it. (If you want to compare this mote with few others out there then this is a <a href="http://www.vsrdjournals.com/EEC/Issue/2012_02_Feb/Web/3_Vini_Madan_582_Review_Article_Feb_2012.pdf">good paper to refer</a>).</p>
-
-<p>Initially, I went to the TinyOS <a href="http://docs.tinyos.net/tinywiki/index.php/Getting_started">getting started</a> page which provides instructions for <a href="http://docs.tinyos.net/tinywiki/index.php/Installing_TinyOS_2.1.1#Two-step_install_on_your_host_OS_with_Debian_packages">installing TinyOS 2.1.1</a>. It had few steps missing and one can run “tos-check-env” and google for the errors which show up. However, when I went on to make the blinking LED project (make telosb), it spewed out a host of errors similar to this line “/opt/tinyos-2.1.1/tos/platforms/telosa/PlatformLedsC.nc:54: cannot find `Port56′”. Apparently the msp430 packages did not jive with this TinyOS version 2.1.1 and multiple posts online suggested rolling back to legacy versions.</p>
-
-<p>I decided to give TinyOS 2.1.2 a shot and it worked!!! So well here is the entire procedure for you:</p>
-
-<ol>
-  <li>Remove brltty package to avoid FTDI to serial conflicts
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get autoremove brltty
-</code></pre></div>    </div>
-    <p>Make sure you have the build-essentials package</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>build-essential
-</code></pre></div>    </div>
-  </li>
-  <li>Execute the following command,
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi /etc/apt/sources.list
-</code></pre></div>    </div>
-    <p>Hit “G” to go to end of file and then hit “A”. Paste the line given below at the end of this file</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>add deb http://tinyos.stanford.edu/tinyos/dists/ubuntu lucid main
-</code></pre></div>    </div>
-    <p>In case you had previous repositories for TinyOS in source, then remove them.
-Hit ESC, then enter “:wq” to save and quit</p>
-  </li>
-  <li>Now install TinyOS 2.1.2 using
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
-<span class="nb">sudo </span>apt-get <span class="nb">install </span>tinyos-2.1.2
-</code></pre></div>    </div>
-  </li>
-  <li>Now you need to configure the environment for TinyOS. Do
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi ~/.bashrc
-</code></pre></div>    </div>
-    <p>Add the lines given below at the end of this file</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Sourcing the tinyos environment variable setup script</span>
-<span class="nb">source</span> /opt/tinyos-2.1.2/tinyos.sh
-<span class="nb">export </span><span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$CLASSPATH</span>:.
-</code></pre></div>    </div>
-    <p>Create the setup script using:</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi /opt/tinyos-2.1.2/tinyos.sh
-</code></pre></div>    </div>
-    <p>Now enter the following contents into this file (use “i” to insert, ctrl+shift+v to paste)</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /usr/bin/env bash</span>
-<span class="c"># Here we setup the environment</span>
-<span class="c"># variables needed by the tinyos </span>
-<span class="c"># make system</span>
-   
-<span class="c"># echo "Setting up for TinyOS 2.1.2"</span>
-<span class="nb">export </span><span class="nv">TOSROOT</span><span class="o">=</span>
-<span class="nb">export </span><span class="nv">TOSDIR</span><span class="o">=</span>
-<span class="nb">export </span><span class="nv">MAKERULES</span><span class="o">=</span>
-   
-<span class="nv">TOSROOT</span><span class="o">=</span><span class="s2">"/opt/tinyos-2.1.2"</span>
-<span class="nv">TOSDIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TOSROOT</span><span class="s2">/tos"</span>
-<span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$CLASSPATH</span>:<span class="nv">$TOSROOT</span>/support/sdk/java:<span class="nv">$TOSROOT</span>/support/sdk/java/tinyos.jar
-<span class="nv">MAKERULES</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TOSROOT</span><span class="s2">/support/make/Makerules"</span>
-   
-<span class="nb">export </span>TOSROOT
-<span class="nb">export </span>TOSDIR
-<span class="nb">export </span>CLASSPATH
-<span class="nb">export </span>MAKERULES
-</code></pre></div>    </div>
-    <p>Run the command below to allow this script to execute</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>755 /opt/tinyos-2.1.2/tinyos.sh
-</code></pre></div>    </div>
-  </li>
-  <li>Now close and start a new terminal or alternatively
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
-</code></pre></div>    </div>
-  </li>
-  <li>Run the command
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tos-check-env
-</code></pre></div>    </div>
-    <p>If it gives warnings related to Java version then do</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-version</span>
-</code></pre></div>    </div>
-    <p>If your version is above 1.5, then ignore this warning else upgrade to a newer java version. Ignore the warning related to graphviz.</p>
-  </li>
-  <li>Now insert Telos mote in your USB slot. You may run the command
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>motelist
-</code></pre></div>    </div>
-    <p>to check if it was detected. The output will be</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$motelist</span>
-Reference  Device           Description
-<span class="nt">----------</span> <span class="nt">----------------</span> <span class="nt">---------------------------------------------</span>
-M49WC0OT   /dev/ttyUSB0     Moteiv tmote sky
-</code></pre></div>    </div>
-    <p>Allow writing to the USB port using (substitute your device name as per the previous output)</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>666 /dev/ttyUSB0
-</code></pre></div>    </div>
-    <p>Navigate to the blinking led project folder</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>bash
-<span class="nb">cd</span> /opt/tinyos-2.1.2/apps/Blink
-</code></pre></div>    </div>
-    <p>Execute the command below and the code should get compiled</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make telosb
-</code></pre></div>    </div>
-    <p>Install the blinking LED application on the mote using</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make telosb reinstall
-</code></pre></div>    </div>
-    <p>The command above assumes you have only one Telos mote on USB. Else use the command</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make telosb reinstall bsl,/dev/ttyUSB0
-</code></pre></div>    </div>
-    <p>You should see the LEDs come to life.</p>
-  </li>
-</ol>
-
-<p>References: <a href="http://docs.tinyos.net/tinywiki/index.php/Main_Page">TinyOS Documentation</a></p>]]></content><author><name></name></author><category term="Embedded Systems" /><summary type="html"><![CDATA[Recently I got my hands on the TelosB mote and as the tradition goes, I had to test blinking LEDs on it. (If you want to compare this mote with few others out there then this is a good paper to refer).]]></summary></entry></feed>
+</ol>]]></content><author><name></name></author><category term="Embedded Systems" /><summary type="html"><![CDATA[It has been quite some time since I participated in a competition (2010 was the last time @ FSG). I had been waiting for the XCDC2013 and what an amazing experience it was!!!]]></summary></entry><entry><title type="html">An Overview of Scheduling Policies Targeted at Improving Performance/Efficiency in Multi-cores</title><link href="https://k45v.github.io/blog/2013/scheduling/" rel="alternate" type="text/html" title="An Overview of Scheduling Policies Targeted at Improving Performance/Efficiency in Multi-cores" /><published>2013-03-10T00:00:00+00:00</published><updated>2013-03-10T00:00:00+00:00</updated><id>https://k45v.github.io/blog/2013/scheduling</id><content type="html" xml:base="https://k45v.github.io/blog/2013/scheduling/"><![CDATA[]]></content><author><name></name></author><category term="Papers" /><category term="Parallel Computing" /><summary type="html"><![CDATA[]]></summary></entry></feed>
