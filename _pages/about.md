@@ -26,3 +26,5 @@ I am a systems software engineer who finds joy in bringing research ideas to pro
 You can find some of my writings in the [blog section](/blog/index.html), and [my CV](/cv/index.html) has more details on my experience and work history.
 
 I maintain a bucket list and enjoy checking items off of it. I've run two half-marathons so far.
+
+Views expressed here are my own and do not reflect the views of my employer.
